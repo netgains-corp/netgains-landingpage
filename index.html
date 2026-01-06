@@ -35,6 +35,7 @@
             --primary-blue: #1e3a8a; /* Strong Blue for Text headers */
             --success-cyan: #06b6d4;
             --danger-red: #d50000; /* Stärkeres Rot für Preise */
+            --price-green: #00E676; /* Knalliges Grün für den Hauptpreis */
         }
 
         * {
@@ -148,7 +149,7 @@
         .hero {
             background: var(--hero-gradient);
             color: white;
-            padding: 80px 0 100px 0;
+            padding: 40px 0 100px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -200,7 +201,7 @@
             text-decoration-color: var(--danger-red);
             text-decoration-thickness: 5px;
             text-underline-offset: 8px;
-            -webkit-text-fill-color: white; /* Make text white again to ensure contrast */
+            -webkit-text-fill-color: white; 
         }
 
         .hero-sub {
@@ -215,7 +216,7 @@
 
         .video-wrapper {
             max-width: 850px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto 20px auto;
             border-radius: 20px;
             background: rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.1);
@@ -241,6 +242,21 @@
         .play-btn:hover { background: #67e8f9; transform: scale(1.1); border-color: #67e8f9; }
         .play-btn i { color: white; margin-left: 5px; }
         .play-btn:hover i { color: #1e3a8a; }
+
+        .hero-scarcity {
+            color: #ffcc00; /* Yellow for high contrast on dark bg */
+            font-weight: 700;
+            margin-top: 15px;
+            font-size: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
         /* --- PROBLEM SECTION --- */
         .problem-section { padding: 80px 0; position: relative; }
@@ -282,67 +298,77 @@
         .authority-text h2 { color: var(--primary-blue); font-size: 2.5rem; }
         .highlight-box { background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%); border-left: 5px solid #3b82f6; padding: 20px; border-radius: 10px; margin-top: 20px; color: #1e3a8a; }
 
-        /* --- DEEP DIVE FEATURE SECTIONS (NEW) --- */
+        /* --- DEEP DIVE FEATURE SECTIONS (VERTICAL & CENTERED) --- */
         .features-detail-section {
             padding: 80px 0;
-            background: #fff; /* Clean white background for reading */
-        }
-        
-        .feature-row {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            margin-bottom: 120px;
-        }
-        
-        .feature-row:last-child { margin-bottom: 0; }
-        
-        /* Zig-Zag Layout */
-        .feature-row:nth-child(even) {
-            flex-direction: row-reverse;
+            background: #fff;
         }
 
-        .feature-img {
-            flex: 1;
-            min-width: 300px;
+        /* NEW MASSIVE CARD STYLE */
+        .feature-card {
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 80px 40px;
+            margin-bottom: 100px;
+            /* Knalliger Drop Shadow: Blue/Purple Glow */
+            box-shadow: 0 20px 60px rgba(79, 70, 229, 0.25), 0 10px 20px rgba(79, 70, 229, 0.2);
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center; /* Center everything */
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
-        
-        .feature-img img {
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(79, 70, 229, 0.4);
+        }
+
+        .feature-title-large {
+            font-size: 3.5rem; /* RIESIG */
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .feature-value-large {
+            font-size: 3rem; /* RIESIG ROT */
+            font-weight: 900;
+            color: var(--danger-red);
+            margin-bottom: 40px;
+            display: block;
+            text-shadow: 0 2px 10px rgba(213, 0, 0, 0.1);
+        }
+
+        .feature-img-container {
+            margin: 0 auto 50px auto;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .feature-img-container img {
             width: 100%;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            transition: transform 0.3s;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            transition: transform 0.4s ease;
         }
-        
-        .feature-img img:hover { transform: scale(1.02); }
 
-        .feature-text {
-            flex: 1;
-            min-width: 300px;
+        .feature-img-container img:hover {
+            transform: scale(1.02);
         }
-        
-        .feature-text h3 {
-            font-size: 2rem;
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-        }
-        
-        .feature-text p {
-            font-size: 1.1rem;
+
+        .feature-description {
+            font-size: 1.4rem;
+            line-height: 1.8;
             color: var(--text-light);
-            margin-bottom: 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
-
-        .feature-value-display {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--danger-red);
-            background: #ffebee;
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: 2px solid var(--danger-red);
-            margin-top: 10px;
+        
+        .feature-description b {
+            color: var(--text-dark);
         }
 
         /* --- STACK SECTION --- */
@@ -357,11 +383,19 @@
         .stack-desc { font-size: 0.95rem; color: #64748b; margin-left: 32px; margin-top: 5px; }
         
         /* Red Value in Stack */
-        .stack-value { font-size: 1.5rem; font-weight: 800; color: var(--danger-red); background: #fff1f2; padding: 5px 15px; border-radius: 8px; min-width: 140px; text-align: right; }
+        .stack-value { font-size: 1.8rem; font-weight: 800; color: var(--danger-red); background: #fff1f2; padding: 5px 15px; border-radius: 8px; min-width: 140px; text-align: right; }
 
         .total-value-row { margin-top: 40px; text-align: center; background: var(--hero-gradient); color: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3); }
         .total-value-amount { font-size: 3rem; background: linear-gradient(to right, #ffffff, #67e8f9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: line-through; font-weight: 800; display: block; }
+        
+        /* Updated Real Price: GREEN and BIGGER */
         .real-price { text-align: center; margin-top: 30px; font-size: 2.2rem; font-weight: 800; color: var(--primary-blue); }
+        .real-price span {
+            color: var(--price-green) !important;
+            font-size: 3.5rem;
+            text-decoration: none !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
         /* --- SCARCITY & FOOTER --- */
         .scarcity-box { background: #e0f2fe; border: 2px solid #0ea5e9; color: #0369a1; padding: 20px; text-align: center; font-weight: 600; margin: 30px auto; max-width: 800px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 15px; }
@@ -372,7 +406,8 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
-            .feature-row, .feature-row:nth-child(even) { flex-direction: column; text-align: center; }
+            .feature-title-large { font-size: 2.2rem; }
+            .feature-value-large { font-size: 2.5rem; }
             .stack-item { flex-direction: column; text-align: center; align-items: center;}
             .stack-value { margin-top: 15px; width: 100%; text-align: center; }
             .stack-desc { margin-left: 0; }
@@ -380,6 +415,7 @@
             .comparison-grid { grid-template-columns: 1fr; gap: 30px; }
             .new-way { transform: scale(1); }
             .stack-box { padding: 20px; }
+            .feature-card { padding: 30px; }
         }
     </style>
 </head>
@@ -390,12 +426,10 @@
         <div class="container">
             <div class="pre-headline">⚠️ ACHTUNG: FÜR UNTERNEHMER OHNE (ODER MIT VERALTETER) WEBSITE</div>
             
-            <!-- ROTE UNTERSTREICHUNG -->
             <h1>Wie Sie Ihre Firmen-Website in eine <span class="text-highlight">"Smart-Website"</span> verwandeln, die <span class="red-underline">automatisch Kunden gewinnt</span></h1>
             
             <p class="hero-sub">Egal ob Sie bei Null starten oder einen Relaunch brauchen: Ohne Technik-Frust, ohne 10.000 € Kosten und mit der <b>Sicherheits-Garantie</b> eines Cybersecurity-Experten.</p>
 
-            <!-- VSL VIDEO WRAPPER (GLASS EFFECT) -->
             <div class="video-wrapper">
                 <div class="video-placeholder-text">
                     <div class="play-btn">
@@ -405,11 +439,14 @@
                 </div>
             </div>
 
-            <!-- CTA IN ROT -->
             <a href="#offer" class="btn-cta btn-cta-red">
                 Ja! Ich will die kostenlose Analyse
                 <span class="btn-subtext">100% Kostenfrei • Kein Vertrag • Sofortiges Ergebnis</span>
             </a>
+            
+            <p class="hero-scarcity">
+                <i class="fas fa-hourglass-half"></i> ACHTUNG: Nur noch 1 Slot für diesen Monat verfügbar!
+            </p>
         </div>
     </section>
 
@@ -420,19 +457,16 @@
             <p class="text-center" style="color: var(--text-light);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
             
             <div class="problem-grid">
-                <!-- Problem 1 -->
                 <div class="glass-card problem-card">
                     <i class="fas fa-history"></i>
                     <h3>Der "2008"-Effekt</h3>
                     <p>Ihre Website sieht aus wie aus der Zeit vor dem iPhone? Kunden schließen daraus leider sofort: <i>"Dieses Unternehmen ist veraltet und arbeitet langsam."</i> Sie verlieren Vertrauen in Sekunden.</p>
                 </div>
-                <!-- Problem 2 -->
                 <div class="glass-card problem-card">
                     <i class="fas fa-store-slash"></i>
                     <h3>Der "Unsichtbare"-Status</h3>
                     <p><b>Sie haben noch gar keine Website?</b> Oder eine Seite, die niemand findet? Dann existieren Sie für Kunden unter 40 Jahren praktisch nicht. Konkurrenten ziehen an Ihnen vorbei.</p>
                 </div>
-                <!-- Problem 3 -->
                 <div class="glass-card problem-card">
                     <i class="fas fa-cogs"></i>
                     <h3>Die Technik-Falle</h3>
@@ -442,57 +476,31 @@
         </div>
     </section>
 
-    <!-- EPIPHANY BRIDGE SECTION (MODERN DARK THEME) -->
+    <!-- EPIPHANY BRIDGE SECTION -->
     <section class="epiphany-section">
         <div class="container">
             <h2 class="text-center" style="font-size: 2.5rem; color: #fff;">Warum klassische Websites ausgedient haben</h2>
             <p class="text-center" style="max-width: 700px; margin: 0 auto; color: #cbd5e1;">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
 
             <div class="comparison-grid">
-                <!-- Alte Art -->
                 <div class="old-way">
                     <h3 style="color: #f87171; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
                     <ul class="comparison-list">
-                        <li>
-                            <span class="icon-emoji">❌</span>
-                            <span class="text-content"><b>Statische "Visitenkarte":</b> Wartet passiv darauf, dass Kunden anrufen. Passiert aber nie.</span>
-                        </li>
-                        <li>
-                            <span class="icon-emoji">❌</span>
-                            <span class="text-content"><b>Sicherheits-Risiko:</b> Veraltete Plugins machen die Seite zum leichten Ziel für Hacker.</span>
-                        </li>
-                        <li>
-                            <span class="icon-emoji">❌</span>
-                            <span class="text-content"><b>Teure Abhängigkeit:</b> Jede kleine Textänderung kostet Geld bei der Agentur.</span>
-                        </li>
-                        <li>
-                            <span class="icon-emoji">❌</span>
-                            <span class="text-content"><b>Unsichtbar:</b> Wird von Google ignoriert und landet auf Seite 10.</span>
-                        </li>
+                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Statische "Visitenkarte":</b> Wartet passiv darauf, dass Kunden anrufen. Passiert aber nie.</span></li>
+                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Sicherheits-Risiko:</b> Veraltete Plugins machen die Seite zum leichten Ziel für Hacker.</span></li>
+                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Teure Abhängigkeit:</b> Jede kleine Textänderung kostet Geld bei der Agentur.</span></li>
+                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Unsichtbar:</b> Wird von Google ignoriert und landet auf Seite 10.</span></li>
                     </ul>
                 </div>
 
-                <!-- Neue Art -->
                 <div class="new-way">
                     <div class="new-way-badge">Das NetGains System</div>
                     <h3 style="color: #67e8f9; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px; margin-bottom: 20px;">Die "Smart-Website"</h3>
                     <ul class="comparison-list">
-                        <li>
-                            <span class="icon-emoji">✅</span>
-                            <span class="text-content"><b>Digitaler Vertriebler:</b> Arbeitet 24/7 und konvertiert Besucher aktiv in echte Leads.</span>
-                        </li>
-                        <li>
-                            <span class="icon-emoji">✅</span>
-                            <span class="text-content"><b>Fort Knox Sicherheit:</b> Cybersecurity auf Universitäts-Niveau und SSL-Verschlüsselung.</span>
-                        </li>
-                        <li>
-                            <span class="icon-emoji">✅</span>
-                            <span class="text-content"><b>Atomare Updates:</b> Die Seite repariert sich selbst und ist immer online (99,9% Uptime).</span>
-                        </li>
-                        <li>
-                            <span class="icon-emoji">✅</span>
-                            <span class="text-content"><b>Google Dominanz:</b> Technisch so sauber, dass Suchmaschinen sie lieben (SEO-Boost).</span>
-                        </li>
+                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Digitaler Vertriebler:</b> Arbeitet 24/7 und konvertiert Besucher aktiv in echte Leads.</span></li>
+                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Fort Knox Sicherheit:</b> Cybersecurity auf Universitäts-Niveau und SSL-Verschlüsselung.</span></li>
+                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Atomare Updates:</b> Die Seite repariert sich selbst und ist immer online (99,9% Uptime).</span></li>
+                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Google Dominanz:</b> Technisch so sauber, dass Suchmaschinen sie lieben (SEO-Boost).</span></li>
                     </ul>
                 </div>
             </div>
@@ -528,86 +536,86 @@
         </div>
     </section>
 
-    <!-- DEEP DIVE FEATURE SECTIONS (NEW) -->
+    <!-- DEEP DIVE FEATURE SECTIONS (NEW VERTICAL LAYOUT) -->
     <section class="features-detail-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 60px;">Lassen Sie uns einen Blick in den Maschinenraum werfen:</h2>
+            <h2 class="text-center" style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 80px;">Lassen Sie uns einen Blick in den Maschinenraum werfen:</h2>
 
-            <!-- Feature 1: Design -->
-            <div class="feature-row">
-                <div class="feature-img">
+            <!-- Feature Card 1 -->
+            <div class="feature-card">
+                <h3 class="feature-title-large">1. "Smart-Architektur" Design</h3>
+                <div class="feature-value-large">WERT: 3.500 €</div>
+                <div class="feature-img-container">
                     <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Mobile Smart Design">
                 </div>
-                <div class="feature-text">
-                    <h3>1. Maßgeschneidertes "Smart-Architektur" Design</h3>
-                    <p>Templates sind der Tod jeder Marke. Wir bauen Ihnen eine digitale Architektur, die genau auf Ihre Kunden zugeschnitten ist. Das Design ist "Mobile-First" – das bedeutet, es sieht auf dem Smartphone (wo 80% Ihrer Kunden sind) noch besser aus als auf dem PC.</p>
-                    <p><b>Der Vorteil:</b> Daumenfreundliche Navigation und ultraschnelle Ladezeiten.</p>
-                    <div class="feature-value-display">WERT: 3.500 €</div>
+                <div class="feature-description">
+                    <p>Templates sind der Tod jeder Marke. Wir bauen Ihnen eine digitale Architektur, die genau auf Ihre Kunden zugeschnitten ist. Das Design ist <b>"Mobile-First"</b> – das bedeutet, es sieht auf dem Smartphone (wo 80% Ihrer Kunden sind) noch besser aus als auf dem PC.</p>
+                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Daumenfreundliche Navigation und ultraschnelle Ladezeiten.</p>
                 </div>
             </div>
 
-            <!-- Feature 2: Copywriting -->
-            <div class="feature-row">
-                <div class="feature-img">
+            <!-- Feature Card 2 -->
+            <div class="feature-card">
+                <h3 class="feature-title-large">2. Verkaufspsychologie (Copywriting)</h3>
+                <div class="feature-value-large">WERT: 1.000 €</div>
+                <div class="feature-img-container">
                     <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Verkaufspsychologie Copywriting">
                 </div>
-                <div class="feature-text">
-                    <h3>2. Verkaufspsychologische Texte (Copywriting)</h3>
-                    <p>Hübsche Bilder verkaufen nicht. Worte verkaufen. Wir schreiben Texte, die die tiefsten Bedürfnisse Ihrer Kunden ansprechen. Keine langweiligen "Wir über uns"-Texte, sondern messerscharfe Verkaufsargumente, die Einwände vorwegnehmen und Vertrauen aufbauen.</p>
-                    <p><b>Der Vorteil:</b> Besucher werden emotional abgeholt und wollen bei Ihnen kaufen.</p>
-                    <div class="feature-value-display">WERT: 1.000 €</div>
+                <div class="feature-description">
+                    <p>Hübsche Bilder verkaufen nicht. <b>Worte verkaufen.</b> Wir schreiben Texte, die die tiefsten Bedürfnisse Ihrer Kunden ansprechen. Keine langweiligen "Wir über uns"-Texte, sondern messerscharfe Verkaufsargumente, die Einwände vorwegnehmen und Vertrauen aufbauen.</p>
+                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Besucher werden emotional abgeholt und wollen bei Ihnen kaufen.</p>
                 </div>
             </div>
 
-            <!-- Feature 3: Security -->
-            <div class="feature-row">
-                <div class="feature-img">
+            <!-- Feature Card 3 -->
+            <div class="feature-card">
+                <h3 class="feature-title-large">3. Hochsicherheits-Paket</h3>
+                <div class="feature-value-large">WERT: 500 €</div>
+                <div class="feature-img-container">
                     <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cybersecurity Shield">
                 </div>
-                <div class="feature-text">
-                    <h3>3. Hochsicherheits-Paket (Cybersecurity)</h3>
-                    <p>Als angehender Doktor der Cybersecurity überlasse ich nichts dem Zufall. Ihre Website wird mit Firewalls, SSL-Verschlüsselung und Anti-Bot-Systemen ausgestattet, die sonst nur große Konzerne nutzen.</p>
-                    <p><b>Der Vorteil:</b> Sie schlafen ruhig, während Ihre Konkurrenz gehackt wird.</p>
-                    <div class="feature-value-display">WERT: 500 €</div>
+                <div class="feature-description">
+                    <p>Als angehender Doktor der Cybersecurity überlasse ich nichts dem Zufall. Ihre Website wird mit <b>Firewalls, SSL-Verschlüsselung und Anti-Bot-Systemen</b> ausgestattet, die sonst nur große Konzerne nutzen.</p>
+                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Sie schlafen ruhig, während Ihre Konkurrenz gehackt wird.</p>
                 </div>
             </div>
 
-            <!-- Feature 4: Updates -->
-            <div class="feature-row">
-                <div class="feature-img">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef526b0042a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Server Updates">
+            <!-- Feature Card 4 -->
+            <div class="feature-card">
+                <h3 class="feature-title-large">4. "Atomare Updates" Protokoll</h3>
+                <div class="feature-value-large">WERT: 400 €</div>
+                <div class="feature-img-container">
+                    <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Server Updates">
                 </div>
-                <div class="feature-text">
-                    <h3>4. Das "Atomare Updates" Protokoll</h3>
-                    <p>Kennen Sie das: "Seite wird gewartet"? Das gibt es bei uns nicht. Wir nutzen atomare Deployments. Das bedeutet: Neue Versionen gehen erst live, wenn sie zu 100% geladen sind. Es gibt keine Sekunde Ausfallzeit.</p>
-                    <p><b>Der Vorteil:</b> 99,99% Verfügbarkeit für Ihre Kunden.</p>
-                    <div class="feature-value-display">WERT: 400 €</div>
+                <div class="feature-description">
+                    <p>Kennen Sie das: "Seite wird gewartet"? Das gibt es bei uns nicht. Wir nutzen atomare Deployments. Das bedeutet: Neue Versionen gehen erst live, wenn sie zu 100% geladen sind. Es gibt <b>keine Sekunde Ausfallzeit</b>.</p>
+                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> 99,99% Verfügbarkeit für Ihre Kunden.</p>
                 </div>
             </div>
 
-            <!-- Feature 5: Recht -->
-            <div class="feature-row">
-                <div class="feature-img">
+            <!-- Feature Card 5 -->
+            <div class="feature-card">
+                <h3 class="feature-title-large">5. Rechtstexte & DSGVO-Schutz</h3>
+                <div class="feature-value-large">WERT: 300 €</div>
+                <div class="feature-img-container">
                     <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Rechtstexte Vertrag">
                 </div>
-                <div class="feature-text">
-                    <h3>5. Rechtstexte & DSGVO-Schutz</h3>
-                    <p>Deutschland ist das Land der Abmahnungen. Wir integrieren wasserdichte Impressums-Generatoren und Cookie-Consent-Tools, die den aktuellen deutschen Gesetzen entsprechen.</p>
-                    <p><b>Der Vorteil:</b> Kein Brief vom Anwalt im Briefkasten.</p>
-                    <div class="feature-value-display">WERT: 300 €</div>
+                <div class="feature-description">
+                    <p>Deutschland ist das Land der Abmahnungen. Wir integrieren wasserdichte <b>Impressums-Generatoren und Cookie-Consent-Tools</b>, die den aktuellen deutschen Gesetzen entsprechen.</p>
+                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Kein Brief vom Anwalt im Briefkasten.</p>
                 </div>
             </div>
 
-            <!-- Feature 6: Bonus -->
-            <div class="feature-row">
-                <div class="feature-img">
+            <!-- Feature Card 6 -->
+            <div class="feature-card">
+                <h3 class="feature-title-large">BONUS: Buch "Dominanz auf Google"</h3>
+                <div class="feature-value-large">WERT: 97 €</div>
+                <div class="feature-img-container">
                     <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ebook Bonus">
                 </div>
-                <div class="feature-text">
-                    <h3>BONUS: Buch "Dominanz auf Google"</h3>
-                    <p>Mein persönliches Playbook. Wie ich Universitäts-Websites auf Platz 1 gebracht habe. Sie erhalten die exklusive digitale Edition, da die gedruckte Version restlos vergriffen ist.</p>
-                    <p><b>Der Vorteil:</b> Insider-Wissen, das Sie bei keiner Agentur bekommen.</p>
-                    <div class="feature-value-display">WERT: 97 €</div>
+                <div class="feature-description">
+                    <p>Mein persönliches Playbook. Wie ich Universitäts-Websites auf Platz 1 gebracht habe. Sie erhalten die <b>exklusive digitale Edition</b>, da die gedruckte Version restlos vergriffen ist.</p>
+                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Insider-Wissen, das Sie bei keiner Agentur bekommen.</p>
                 </div>
             </div>
 
@@ -621,16 +629,15 @@
             <p class="text-center" style="margin-bottom: 20px; color: #64748b;">Hier sehen Sie schwarz auf weiß, warum dieses Angebot ein "No-Brainer" ist.</p>
 
             <div class="stack-box">
-                <!-- Item 1 -->
+                <!-- Stack Items ... -->
                 <div class="stack-item">
                     <div>
                         <div class="stack-name"><i class="fas fa-layer-group"></i> Maßgeschneidertes "Smart-Architektur" Design</div>
-                        <div class="stack-desc">Kein Template. 100% mobil-optimiert für Daumen-Scrolling (Handy).</div>
+                        <div class="stack-desc">Kein Template. 100% mobil-optimiert für Daumen-Scrolling.</div>
                     </div>
                     <div class="stack-value">3.500 €</div>
                 </div>
 
-                <!-- Item 2 -->
                 <div class="stack-item">
                     <div>
                         <div class="stack-name"><i class="fas fa-pen-nib"></i> Verkaufspsychologische Texte</div>
@@ -639,16 +646,14 @@
                     <div class="stack-value">1.000 €</div>
                 </div>
 
-                <!-- Item 3 -->
                 <div class="stack-item">
                     <div>
-                        <div class="stack-name"><i class="fas fa-shield-alt"></i> Hochsicherheits-Paket (Cybersecurity)</div>
+                        <div class="stack-name"><i class="fas fa-shield-alt"></i> Hochsicherheits-Paket</div>
                         <div class="stack-desc">Sicherheit auf Universitäts-Niveau. SSL, Firewall & Backups.</div>
                     </div>
                     <div class="stack-value">500 €</div>
                 </div>
 
-                <!-- Item 4 -->
                 <div class="stack-item">
                     <div>
                         <div class="stack-name"><i class="fas fa-sync-alt"></i> Das "Atomare Updates" Protokoll</div>
@@ -657,7 +662,6 @@
                     <div class="stack-value">400 €</div>
                 </div>
 
-                 <!-- Item 5 -->
                  <div class="stack-item">
                     <div>
                         <div class="stack-name"><i class="fas fa-file-contract"></i> Rechtstexte & DSGVO-Schutz</div>
@@ -666,7 +670,6 @@
                     <div class="stack-value">300 €</div>
                 </div>
 
-                <!-- BONUS -->
                 <div class="stack-item" style="background: linear-gradient(to right, #fff1f2, #fff);">
                     <div>
                         <div class="stack-name" style="color: var(--danger-red);"><i class="fas fa-gift"></i> BONUS: Buch "Dominanz auf Google"</div>
@@ -682,7 +685,7 @@
                 </div>
 
                 <div class="real-price">
-                    Ihr Preis heute: <span style="color: var(--danger-red); text-decoration: underline;">899 € + 39 € / mtl.</span>
+                    Ihr Preis heute: <span>899 € + 39 € / mtl.</span>
                     <div style="font-size: 1rem; color: #64748b; font-weight: normal; margin-top: 5px;">(Boutique-Agentur: Festpreis + Wartung & Hosting)</div>
                 </div>
             </div>
