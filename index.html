@@ -87,7 +87,7 @@
             border-radius: 24px;
             padding: 40px;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            overflow: visible; /* Important for pop-out effects */
+            overflow: visible;
         }
         .glass-panel::before {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -95,11 +95,6 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
         .glass-panel > * { position: relative; z-index: 1; }
-        .glass-panel:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(79, 70, 229, 0.2);
-        }
 
         /* --- BUTTONS --- */
         .btn-cta {
@@ -107,7 +102,9 @@
             color: white; padding: 22px 45px; font-size: 1.4rem; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; text-decoration: none; display: block; margin: 25px auto 0 auto; box-shadow: 0 10px 30px rgba(219, 39, 119, 0.3); transition: all 0.3s ease; width: 100%; max-width: 650px; text-align: center; font-family: 'Oswald', sans-serif; text-transform: uppercase; position: relative; overflow: hidden; z-index: 2;
         }
         .btn-cta:hover { transform: scale(1.02); box-shadow: 0 15px 40px rgba(219, 39, 119, 0.5); }
-        .btn-cta-red { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3); }
+        .btn-cta-red {
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+        }
         .btn-cta-red:hover { box-shadow: 0 15px 40px rgba(239, 68, 68, 0.5); }
         .hero-btn-compact { padding: 16px 45px !important; }
         .btn-subtext { display: block; font-size: 0.85rem; font-weight: 600; opacity: 0.9; text-transform: none; margin-top: 5px; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; }
@@ -136,74 +133,77 @@
         @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; text-shadow: 0 0 30px rgba(34, 211, 238, 0.8); } 100% { opacity: 0.7; } }
 
         /* --- SECTIONS --- */
-        .problem-section, .features-detail-section, .stack-section, .showcase-section { padding: 120px 0; position: relative; }
+        .problem-section, .authority-section, .stack-section { padding: 120px 0; position: relative; }
         
-        /* Problem */
-        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .problem-card { border-left: 4px solid var(--danger-red); }
-        .problem-card h3 { color: var(--text-primary); margin-bottom: 15px; }
-        .problem-card p { color: var(--text-secondary); }
-        .problem-card > i { font-size: 2.5rem; background: -webkit-linear-gradient(45deg, #ef4444, #be123c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
-
-        /* Epiphany */
-        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 60px; position: relative; z-index: 2; }
-        .old-way { background: rgba(255, 23, 68, 0.15); border: 2px solid rgba(255, 23, 68, 0.3); padding: 40px; border-radius: 20px; color: var(--text-secondary); box-shadow: inset 0 0 50px rgba(0,0,0,0.5); }
-        .new-way { position: relative; background: rgba(34, 211, 238, 0.15); backdrop-filter: blur(var(--glass-blur)); border: 2px solid var(--accent-cyan); box-shadow: 0 0 60px rgba(34, 211, 238, 0.25), inset 0 0 20px rgba(34, 211, 238, 0.1); padding: 40px; border-radius: 20px; color: var(--text-primary); transform: scale(1.05); }
-        .new-way-badge { position: absolute; top: -20px; right: 30px; background: var(--accent-cyan); color: #000; padding: 8px 20px; font-weight: 700; border-radius: 30px; text-transform: uppercase; font-size: 0.85rem; box-shadow: 0 0 20px rgba(34, 211, 238, 0.5); }
-        .comparison-list { list-style: none; margin-top: 30px; }
-        .comparison-list li { margin-bottom: 25px; display: flex; align-items: flex-start; font-size: 1.1rem; }
-        .icon-emoji { font-size: 1.8rem; margin-right: 15px; line-height: 1.2; min-width: 40px; text-align: center; }
-
-        /* Authority */
-        .authority-flex { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 40px; }
-        .authority-img { flex: 0 0 350px; width: 350px; max-width: 100%; }
-        .authority-img img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid var(--glass-border); }
-        .authority-text { flex: 1; min-width: 300px; }
-        .authority-text h2 { color: var(--text-primary); font-size: 2.5rem; }
-        .authority-text p { color: var(--text-secondary); }
-        .highlight-box { background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%); border-left: 4px solid var(--accent-cyan); padding: 20px; border-radius: 10px; margin-top: 20px; color: var(--text-primary); border: 1px solid var(--glass-border); }
-
-        /* Showcase */
-        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; margin-top: 60px; }
-        .laptop-wrapper { perspective: 1000px; transition: transform 0.4s ease; }
-        .laptop-wrapper:hover { transform: translateY(-10px); }
-        .laptop-mockup { background-color: #1e1e1e; border-radius: 12px 12px 0 0; padding: 3% 3% 0 3%; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid #444; }
-        .laptop-screen { width: 100%; padding-top: 62.5%; position: relative; overflow: hidden; background: #000; border: 1px solid #000; }
-        .laptop-screen img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-        .laptop-base { height: 14px; background: #2d2d2d; border-radius: 0 0 15px 15px; position: relative; margin-top: -1px; border-top: 1px solid #444; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .laptop-base::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 15%; height: 4px; background: #1a1a1a; border-radius: 0 0 4px 4px; }
-        .showcase-caption { margin-top: 25px; text-align: center; }
-        .showcase-caption h4 { color: var(--accent-cyan); margin-bottom: 5px; font-size: 1.2rem; }
-        .showcase-caption p { color: var(--text-secondary); font-size: 0.95rem; }
-
-        /* Features */
-        .feature-card { margin-bottom: 100px; text-align: center; }
-        .feature-title-large { font-size: 3rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--text-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; text-transform: uppercase; }
-        .feature-value-large { font-size: 2.5rem; font-weight: 900; color: var(--danger-red); margin-bottom: 40px; display: block; text-shadow: 0 0 30px rgba(255, 23, 68, 0.4); }
-        .feature-img-container { margin: 0 auto 50px auto; max-width: 900px; width: 100%; }
-        .feature-img-container img { width: 100%; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); transition: transform 0.4s ease; border: 1px solid var(--glass-border); }
-        .feature-img-container img:hover { transform: scale(1.02); }
-        .feature-description { font-size: 1.3rem; line-height: 1.8; color: var(--text-secondary); max-width: 800px; margin: 0 auto; }
-        .feature-description b { color: var(--text-primary); font-weight: 700; }
-
-        /* --- STACK SECTION & VISUALS (FIXED) --- */
-        .stack-box { 
-            margin-top: 200px; /* Space for the floating visuals inside */
-            padding: 220px 60px 60px 60px; /* Big top padding ensures text starts BELOW the image */
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            position: relative; /* Base for absolute children */
+        /* Authority Restructured */
+        .authority-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .authority-img {
+            flex: 0 0 350px;
+            width: 350px;
+            max-width: 100%;
+        }
+        .authority-img img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid var(--glass-border);
+        }
+        .authority-content-frame {
+            flex: 1;
+            min-width: 300px;
         }
 
-        /* The Container for the Visuals - Now absolutely positioned INSIDE the box but pushed UP */
+        /* Profile Frames */
+        .profile-frame {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        .profile-frame:hover {
+            transform: translateY(-5px);
+            border-color: rgba(34, 211, 238, 0.3);
+        }
+        .profile-frame h3 {
+            color: var(--accent-cyan);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+            padding-bottom: 10px;
+        }
+        .profile-frame p, .profile-frame ul { color: var(--text-secondary); }
+        .profile-frame b { color: var(--text-primary); }
+
+        .highlight-box { background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%); border-left: 4px solid var(--accent-cyan); padding: 20px; border-radius: 10px; margin-top: 40px; color: var(--text-primary); border: 1px solid var(--glass-border); text-align: center; }
+
+        /* --- STACK SECTION & VISUALS --- */
+        .stack-box { 
+            margin-top: 200px; 
+            padding: 220px 60px 60px 60px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative; 
+        }
+
         .stack-visual-wrapper {
             position: absolute;
-            top: -180px; /* Pull it up OUT of the box */
+            top: -180px; 
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
             max-width: 800px;
-            height: 400px; /* Fixed height for the composition */
+            height: 400px;
             z-index: 10;
             pointer-events: none;
         }
@@ -226,19 +226,15 @@
             transform: rotate(-5deg);
         }
 
-        /* Improved Laptop/Phone CSS */
         .laptop-mockup { background-color: #1a1a1a; border-radius: 12px 12px 0 0; padding: 12px 12px 0 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid #333; }
-        .laptop-mockup::before { content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; background: #555; border-radius: 50%; box-shadow: 0 0 2px rgba(255,255,255,0.2); }
         .laptop-screen { width: 100%; padding-top: 62.5%; position: relative; overflow: hidden; background: #050505; }
         .laptop-screen img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
         .laptop-base { height: 16px; background: linear-gradient(to bottom, #2a2a2a, #1a1a1a); border-radius: 0 0 16px 16px; position: relative; margin-top: -1px; border-top: 1px solid #000; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        .laptop-base::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 12%; height: 4px; background: #111; border-radius: 0 0 6px 6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.5); }
         
         .phone-mockup { background-color: #111; border-radius: 18px; padding: 8px 4px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); border: 2px solid #333; }
         .phone-screen { width: 100%; padding-top: 216%; position: relative; background: #000; border-radius: 12px; overflow: hidden; }
         .phone-screen img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
 
-        /* Floating Icons */
         .floating-icon {
             position: absolute;
             background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px;
@@ -251,63 +247,33 @@
         .icon-3 { width: 80px; height: 80px; top: 180px; left: 2%; font-size: 32px; color: var(--price-green); animation-delay: 2.5s; }
         .icon-4 { width: 70px; height: 70px; top: 200px; right: 5%; font-size: 28px; color: #fbbf24; animation-delay: 3.5s; }
 
-        /* Stack Content */
         .stack-item { display: flex; justify-content: space-between; align-items: center; padding: 25px 0; border-bottom: 1px solid var(--glass-border); transition: all 0.3s; }
-        .stack-item:hover { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding-left: 20px; padding-right: 20px; transform: scale(1.01); }
-        .stack-item:last-child { border-bottom: none; }
         .stack-name { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); }
         .stack-name i { color: var(--accent-cyan); margin-right: 15px; }
         .stack-desc { font-size: 1rem; color: var(--text-secondary); margin-left: 38px; margin-top: 5px; }
-        
-        .stack-value { 
-            font-size: 1.8rem; font-weight: 800; color: var(--danger-red); 
-            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 23, 68, 0.3); padding: 8px 20px; border-radius: 12px; min-width: 150px; text-align: right; 
-            box-shadow: 0 0 25px rgba(255, 23, 68, 0.5); 
-        }
+        .stack-value { font-size: 1.8rem; font-weight: 800; color: var(--danger-red); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 23, 68, 0.3); padding: 8px 20px; border-radius: 12px; min-width: 150px; text-align: right; box-shadow: 0 0 25px rgba(255, 23, 68, 0.3); }
 
         .total-value-row { margin-top: 50px; text-align: center; background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid var(--glass-border); color: white; padding: 40px; border-radius: 20px; }
         .total-value-amount { font-size: 4rem; color: var(--danger-red); text-decoration: line-through; font-weight: 800; display: block; margin-top: 10px; opacity: 1; text-shadow: 0 0 20px rgba(255, 23, 68, 0.6); }
         
         .real-price { text-align: center; margin-top: 40px; font-size: 2.5rem; font-weight: 800; color: var(--text-primary); }
         .real-price span.main-price { color: var(--price-green) !important; font-size: 5rem; text-decoration: none !important; text-shadow: 0 0 40px rgba(0, 230, 118, 0.6); display: block; margin-top: 10px; letter-spacing: -0.025em; }
-        .secondary-cost { font-size: 1.25rem; color: var(--text-secondary); font-weight: 700; display: block; margin-top: 5px; text-shadow: none; }
 
-        .scarcity-box { background: rgba(34, 211, 238, 0.1); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); padding: 20px; text-align: center; font-weight: 600; margin: 30px auto; max-width: 800px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 15px; box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); }
-        .scarcity-box i { font-size: 1.5rem; }
-        
+        .scarcity-box { background: rgba(34, 211, 238, 0.1); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); padding: 20px; text-align: center; font-weight: 600; margin: 30px auto; max-width: 800px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 15px; }
+
         .footer { background: #000; color: var(--text-secondary); padding: 60px 0; text-align: center; font-size: 0.9rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 10; }
         .footer a { color: var(--text-primary); text-decoration: none; transition: color 0.3s; opacity: 0.7; }
         .footer a:hover { opacity: 1; color: var(--accent-cyan); }
 
-        /* --- RESPONSIVE FIXES --- */
         @media (max-width: 900px) {
             .hero h1 { font-size: 2.2rem; }
-            .feature-title-large { font-size: 2rem; }
-            .feature-value-large { font-size: 2.2rem; }
+            .authority-row { flex-direction: column; align-items: center; text-align: center; }
+            .authority-img { flex: 0 0 auto; width: 100%; max-width: 450px; }
             .stack-item { flex-direction: column; text-align: center; align-items: center;}
             .stack-value { margin-top: 15px; width: 100%; text-align: center; }
-            .stack-desc { margin-left: 0; }
-            
-            /* Authority Section Fix */
-            .authority-flex { flex-direction: column-reverse; text-align: center; flex-wrap: wrap; }
-            .authority-text { min-width: 100%; }
-            .authority-img { max-width: 100%; margin-bottom: 30px; width: 80%; flex: 0 0 auto; }
-            
-            .comparison-grid { grid-template-columns: 1fr; gap: 30px; }
-            .new-way { transform: scale(1); }
-            .glass-panel { padding: 25px; }
-            .real-price span.main-price { font-size: 2.5rem; }
-
-            /* STACK VISUAL MOBILE FIX: Hide fancy stack, show simple image or just padding */
-            .stack-visual-wrapper {
-                display: none; /* Hide complex absolute layout on mobile to prevent crashes */
-            }
-            .stack-box {
-                margin-top: 50px;
-                padding-top: 40px; /* Reset padding since image is gone */
-            }
-            /* Optional: Add a simple static image here if needed, but for now clean layout is priority */
+            .stack-visual-wrapper { display: none; }
+            .stack-box { margin-top: 50px; padding-top: 40px; }
+            .real-price span.main-price { font-size: 3rem; }
         }
     </style>
 </head>
@@ -338,265 +304,67 @@
                 </div>
             </div>
 
-            <!-- COMPACT HERO BUTTON -->
+            <!-- HERO CTA -->
             <a href="https://netgains-pactum.pages.dev/" class="btn-cta btn-cta-red hero-btn-compact">
-                Ja! Ich will die kostenlose Analyse
-                <span class="btn-subtext">100% Kostenfrei • Kein Vertrag • Sofortiges Ergebnis</span>
+                JETZT ANGEBOT SICHERN & DEAL FIXIEREN
+                <span class="btn-subtext">Sofortiger Zugang zum Vorzugspreis • Limitiert • Sicherer Checkout</span>
             </a>
             
             <p class="hero-scarcity">
-                <i class="fas fa-hourglass-half"></i> ACHTUNG: Nur noch 1 Slot für diesen Monat verfügbar!
+                <i class="fas fa-hourglass-half"></i> ACHTUNG: Nur noch begrenzte Kapazitäten für diesen Monat verfügbar!
             </p>
-        </div>
-    </section>
-
-    <!-- PROBLEM SECTION -->
-    <section class="problem-section">
-        <div class="container">
-            <h2 class="text-center" style="font-size: 2.2rem; margin-bottom: 10px; color: var(--text-primary);">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
-            <p class="text-center" style="color: var(--text-secondary);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
-            
-            <div class="problem-grid">
-                <div class="glass-panel problem-card">
-                    <i class="fas fa-history"></i>
-                    <h3>Der "2008"-Effekt</h3>
-                    <p>Ihre Website sieht aus wie aus der Zeit vor dem iPhone? Kunden schließen daraus leider sofort: <i>"Dieses Unternehmen ist veraltet und arbeitet langsam."</i> Sie verlieren Vertrauen in Sekunden.</p>
-                </div>
-                <div class="glass-panel problem-card">
-                    <i class="fas fa-store-slash"></i>
-                    <h3>Der "Unsichtbare"-Status</h3>
-                    <p><b>Sie haben noch gar keine Website?</b> Oder eine Seite, die niemand findet? Dann existieren Sie für Kunden unter 40 Jahren praktisch nicht. Konkurrenten ziehen an Ihnen vorbei.</p>
-                </div>
-                <div class="glass-panel problem-card">
-                    <i class="fas fa-cogs"></i>
-                    <h3>Die Technik-Falle</h3>
-                    <p>Haben Sie schon mal erlebt, dass eine Seite nicht lädt ("Fehler 404")? Das passiert bei billigem Hosting ständig. Kunden kommen nie wieder, wenn die digitale Tür klemmt.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EPIPHANY BRIDGE SECTION -->
-    <section class="epiphany-section">
-        <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem;">Warum klassische Websites ausgedient haben</h2>
-            <p class="text-center" style="max-width: 700px; margin: 0 auto; color: var(--text-secondary);">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
-
-            <div class="comparison-grid">
-                <div class="old-way">
-                    <h3 style="color: #f87171; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
-                    <ul class="comparison-list">
-                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Statische "Visitenkarte":</b> Wartet passiv darauf, dass Kunden anrufen. Passiert aber nie.</span></li>
-                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Sicherheits-Risiko:</b> Veraltete Plugins machen die Seite zum leichten Ziel für Hacker.</span></li>
-                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Teure Abhängigkeit:</b> Jede kleine Textänderung kostet Geld bei der Agentur.</span></li>
-                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Unsichtbar:</b> Wird von Google ignoriert und landet auf Seite 10.</span></li>
-                    </ul>
-                </div>
-
-                <div class="new-way">
-                    <div class="new-way-badge">Das NetGains System</div>
-                    <h3 style="color: var(--accent-cyan); font-size: 1.5rem; border-bottom: 1px solid var(--accent-cyan); padding-bottom: 15px; margin-bottom: 20px;">Die "Smart-Website"</h3>
-                    <ul class="comparison-list">
-                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Digitaler Vertriebler:</b> Arbeitet 24/7 und konvertiert Besucher aktiv in echte Leads.</span></li>
-                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Fort Knox Sicherheit:</b> Cybersecurity auf Universitäts-Niveau und SSL-Verschlüsselung.</span></li>
-                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Atomare Updates:</b> Die Seite repariert sich selbst und ist immer online (99,9% Uptime).</span></li>
-                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Google Dominanz:</b> Automatische Anpassung von Keywords & Metatexten für Top-Rankings.</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW PORTFOLIO SHOWCASE SECTION -->
-    <section class="showcase-section">
-        <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px; color: var(--text-primary);">Übersichtlichkeit, die verkauft</h2>
-            <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary); margin-bottom: 50px;">
-                Unsere Design-Philosophie: Wichtige Informationen (Adresse, Öffnungszeiten, Anruf-Button) gehören nach ganz oben. 
-                Keine unnötigen Klicks – der Kunde findet sofort, was er sucht.
-            </p>
-
-            <div class="showcase-grid">
-                <!-- Example 1 -->
-                <div class="laptop-wrapper">
-                    <div class="laptop-mockup">
-                        <div class="laptop-screen">
-                            <img src="ex1.jpg" alt="Website Screenshot mit klaren Kontaktinfos" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
-                    <div class="showcase-caption">
-                        <h4>Beispiel A: KFZ-Meisterbetrieb</h4>
-                        <p>Integrierte Terminbuchung spart täglich 2 Stunden Telefonzeit.</p>
-                    </div>
-                </div>
-
-                <!-- Example 2 -->
-                <div class="laptop-wrapper">
-                    <div class="laptop-mockup">
-                        <div class="laptop-screen">
-                            <img src="ex2.jpg" alt="Website Screenshot mit Öffnungszeiten" onerror="this.src='https://images.unsplash.com/photo-1481487484168-9b930d55208d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
-                    <div class="showcase-caption">
-                        <h4>Beispiel B: Interne Vertriebs-Plattform</h4>
-                        <p>Echtzeit-Dashboard für Mitarbeiter zur Einsicht eigener Verkäufe.</p>
-                    </div>
-                </div>
-
-                <!-- Example 3 -->
-                <div class="laptop-wrapper">
-                    <div class="laptop-mockup">
-                        <div class="laptop-screen">
-                            <img src="ex3.jpg" alt="Website Screenshot mit Buchungskalender" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
-                    <div class="showcase-caption">
-                        <h4>Beispiel C: Moderne Arztpraxis</h4>
-                        <p>Alle Infos (Sprechzeiten, Notdienst) direkt sichtbar. Keine Klicks nötig.</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- AUTHORITY SECTION -->
     <section class="authority-section">
-        <div class="container authority-flex">
-            <div class="authority-img">
-                <img src="david.jpg" alt="David Leipi" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-            </div>
-            <div class="authority-text">
-                <h2>Vom "Teenage-Founder" zum Cybersecurity-Experten: Ihr Partner David Leipi</h2>
-                
-                <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-top: 15px;">Webdesign ist für mich kein Hobby. Es ist meine DNA.</p>
-                <p>Ich programmiere nicht erst seit gestern. Ich habe mit 10 Jahren angefangen, Code zu schreiben. Während andere "Webdesigner" bunte Baukästen zusammenklicken, habe ich die Infrastruktur einer Universität mit <b>5.000 Besuchern täglich</b> verwaltet.</p>
-                
-                <p style="margin-top: 15px;">Schon mit 15 Jahren war ich nach einer <b>strengen juristischen Prüfung voll geschäftsfähig</b>. Während Gleichaltrige Taschengeld bekamen, führte ich offiziell eigene Unternehmen in den Bereichen:</p>
-                <ul style="margin-left: 20px; color: var(--text-secondary); margin-top: 5px;">
-                    <li>🔧 <b>Handy-Reparaturen</b> (Technisches Verständnis)</li>
-                    <li>👕 <b>T-Shirt Design & E-Commerce</b> (Design & Vertrieb)</li>
-                    <li>⛏️ <b>Krypto-Mining</b> (High-Tech Hardware Infrastruktur)</li>
-                </ul>
-
-                <p style="margin-top: 15px;">Heute promoviere ich im Bereich <b>Cybersecurity</b>.</p>
-                
-                <div class="highlight-box">
-                    <b style="color: var(--accent-indigo)">Warum ist das wichtig für Sie?</b><br>
-                    Weil ich weiß, wie man Systeme baut, die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">nicht abstürzen</span>, die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">sicher vor Hackern</span> sind und die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">verkaufen</span>.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DEEP DIVE FEATURE SECTIONS -->
-    <section class="features-detail-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; color: var(--text-primary); margin-bottom: 80px;">Lassen Sie uns einen Blick in den Maschinenraum werfen:</h2>
-
-            <!-- Feature Card 1 -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">1. "Smart-Architektur" Design</h3>
-                <div class="feature-value-large">WERT: 3.500 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Mobile Smart Design">
+            <h2 class="text-center" style="font-size: 2.5rem; text-align: center; margin-bottom: 60px;">Ihre Partner für digitale Dominanz: <br>Cansin Gülal & David Leipi</h2>
+            
+            <!-- Zeile 1: Cansin Gülal -->
+            <div class="authority-row">
+                <div class="authority-img">
+                    <img src="cansin.jpeg" alt="Cansin Gülal" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
                 </div>
-                <div class="feature-description">
-                    <p>Templates sind der Tod jeder Marke. Wir bauen Ihnen eine digitale Architektur, die genau auf Ihre Kunden zugeschnitten ist. Das Design ist <b>"Mobile-First"</b> – das bedeutet, es sieht auf dem Smartphone (wo 80% Ihrer Kunden sind) noch besser aus als auf dem PC.</p>
-                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Daumenfreundliche Navigation und ultraschnelle Ladezeiten.</p>
-                </div>
-            </div>
-
-            <!-- Feature Card 2 -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">2. Verkaufspsychologie (Copywriting)</h3>
-                <div class="feature-value-large">WERT: 1.000 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Verkaufspsychologie Copywriting">
-                </div>
-                <div class="feature-description">
-                    <p>Hübsche Bilder verkaufen nicht. <b>Worte verkaufen.</b> Wir schreiben Texte, die die tiefsten Bedürfnisse Ihrer Kunden ansprechen. Keine langweiligen "Wir über uns"-Texte, sondern messerscharfe Verkaufsargumente, die Einwände vorwegnehmen und Vertrauen aufbauen.</p>
-                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Besucher werden emotional abgeholt und wollen bei Ihnen kaufen.</p>
+                <div class="authority-content-frame">
+                    <div class="profile-frame">
+                        <h3>Cansin Gülal</h3>
+                        <p>Durch sein Studium zur Lehrkraft bringt <b>Cansin Gülal</b> eine entscheidende Komponente ein: Die Fähigkeit, komplexe Informationen perfekt aufzubereiten und zu präsentieren. Auf einer Website zählt nicht nur der Code, sondern wie die Botschaft beim Kunden ankommt.</p>
+                        <p style="margin-top: 15px;">Cansins pädagogisches Wissen in der Wissensvermittlung sorgt dafür, dass Ihre Besucher innerhalb von Sekunden verstehen, warum Ihr Angebot die beste Lösung ist. Er verwandelt abstrakte Vorteile in klare, überzeugende Verkaufsargumente.</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Feature Card 3 -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">3. Hochsicherheits-Paket</h3>
-                <div class="feature-value-large">WERT: 500 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cybersecurity Shield">
+            <!-- Zeile 2: David Leipi -->
+            <div class="authority-row">
+                <div class="authority-img">
+                    <img src="dl.jpeg" alt="David Leipi" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
                 </div>
-                <div class="feature-description">
-                    <p>Als angehender Doktor der Cybersecurity überlasse ich nichts dem Zufall. Ihre Website wird mit <b>Firewalls, SSL-Verschlüsselung und Anti-Bot-Systemen</b> ausgestattet, die sonst nur große Konzerne nutzen.</p>
-                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Sie schlafen ruhig, während Ihre Konkurrenz gehackt wird.</p>
-                </div>
-            </div>
-
-            <!-- Feature Card 4 -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">4. "Atomare Updates" Protokoll</h3>
-                <div class="feature-value-large">WERT: 400 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Server Updates">
-                </div>
-                <div class="feature-description">
-                    <p>Kennen Sie das: "Seite wird gewartet"? Das gibt es bei uns nicht. Wir nutzen atomare Deployments. Das bedeutet: Neue Versionen gehen erst live, wenn sie zu 100% geladen sind. Es gibt <b>keine Sekunde Ausfallzeit</b>.</p>
-                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> 99,99% Verfügbarkeit für Ihre Kunden.</p>
+                <div class="authority-content-frame">
+                    <div class="profile-frame">
+                        <h3>David Leipi</h3>
+                        <p>Ich programmiere nicht erst seit gestern. Ich habe mit 10 Jahren angefangen, Code zu schreiben. Während andere "Webdesigner" bunte Baukästen zusammenklicken, habe ich die Infrastruktur einer Universität mit <b>5.000 Besuchern täglich</b> verwaltet.</p>
+                        
+                        <p style="margin-top: 15px;">Schon mit 15 Jahren war ich nach einer <b>strengen juristischen Prüfung voll geschäftsfähig</b>. Während Gleichaltrige Taschengeld bekamen, führte ich offiziell eigene Unternehmen in den Bereichen:</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>🔧 <b>Handy-Reparaturen</b> (Technisches Verständnis)</li>
+                            <li>👕 <b>T-Shirt Design & E-Commerce</b> (Design & Vertrieb)</li>
+                            <li>⛏️ <b>Krypto-Mining</b> (High-Tech Hardware Infrastruktur)</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <!-- Feature Card 5 -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">5. Rechtstexte & DSGVO-Schutz</h3>
-                <div class="feature-value-large">WERT: 300 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Rechtstexte Vertrag">
-                </div>
-                <div class="feature-description">
-                    <p>Deutschland ist das Land der Abmahnungen. Wir integrieren für Sie **technische Lösungen etablierter Drittanbieter**, die Ihre Rechtstexte und Cookie-Banner automatisiert bereitstellen.</p>
-                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Professionelle Risikominimierung durch spezialisierte Tools statt eigener Haftungsfallen.</p>
-                </div>
+            <div class="highlight-box">
+                <b style="color: var(--accent-indigo)">Warum ist das wichtig für Sie?</b><br>
+                Weil wir technische Perfektion mit einer pädagogisch klaren Präsentation verbinden, die Ihre Kunden emotional abholt und zum Kauf führt.
             </div>
-
-            <!-- Feature Card 6: Barrierefreiheit -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">6. Barrierefreie Optimierung (BFSG)</h3>
-                <div style="font-size: 1.2rem; color: var(--danger-red); font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; border: 2px solid var(--danger-red); display: inline-block; padding: 5px 15px; border-radius: 50px;">
-                    ⚠️ ACHTUNG: Abmahngefahr ab Juni 2025!
-                </div>
-                <div class="feature-value-large" style="margin-top: 15px;">WERT: 600 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Barrierefreiheit Accessibilty">
-                </div>
-                <div class="feature-description">
-                    <p>Ab Juni 2025 tritt das <b>Barrierefreiheitsstärkungsgesetz (BFSG)</b> in Kraft. Websites müssen dann für alle Menschen zugänglich sein. Wer das ignoriert, riskiert hohe Bußgelder.</p>
-                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Sie sind rechtssicher aufgestellt, während Ihre Konkurrenz panisch nachrüsten muss.</p>
-                </div>
-            </div>
-
-            <!-- Feature Card 7 -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">BONUS: Buch "Dominanz auf Google"</h3>
-                <div class="feature-value-large">WERT: 97 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ebook Bonus">
-                </div>
-                <div class="feature-description">
-                    <p>Mein persönliches Playbook. Wie ich Universitäts-Websites auf Platz 1 gebracht habe. Sie erhalten die <b>exklusive digitale Edition</b>, da die gedruckte Version restlos vergriffen ist.</p>
-                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Insider-Wissen, das Sie bei keiner Agentur bekommen.</p>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- VALUE STACK SECTION (INTENSE GLASS) -->
+    <!-- VALUE STACK SECTION -->
     <section class="stack-section" id="offer">
         <div class="container">
-            <!-- NEW STACK VISUAL COMPOSITION - IN CONTAINER -->
             <div class="stack-visual-wrapper">
                 <div class="floating-icon icon-1"><i class="fas fa-shield-alt"></i></div>
                 <div class="floating-icon icon-2"><i class="fas fa-bolt"></i></div>
@@ -606,30 +374,20 @@
                 <div class="stack-laptop">
                     <div class="laptop-mockup">
                         <div class="laptop-screen">
-                            <img src="ev1.jpg" alt="Desktop Website Preview" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Desktop Website Preview">
                         </div>
                     </div>
                     <div class="laptop-base"></div>
                 </div>
-
-                <div class="stack-phone">
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <img src="ev2.jpg" alt="Mobile Website Preview" onerror="this.src='https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80'">
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="glass-panel stack-box">
-                <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
-                <p class="text-center" style="margin-bottom: 30px; color: var(--text-secondary);">Hier sehen Sie schwarz auf weiß, warum dieses Angebot ein "No-Brainer" ist.</p>
-
-                <!-- Stack Items ... -->
+                <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px; text-align:center;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
+                
                 <div class="stack-item">
                     <div>
                         <div class="stack-name"><i class="fas fa-layer-group"></i> Maßgeschneidertes "Smart-Architektur" Design</div>
-                        <div class="stack-desc">Kein Template. 100% mobil-optimiert für Daumen-Scrolling.</div>
+                        <div class="stack-desc">Kein Template. 100% mobil-optimiert.</div>
                     </div>
                     <div class="stack-value">3.500 €</div>
                 </div>
@@ -637,7 +395,7 @@
                 <div class="stack-item">
                     <div>
                         <div class="stack-name"><i class="fas fa-pen-nib"></i> Verkaufspsychologische Texte</div>
-                        <div class="stack-desc">Wir schreiben Texte, die Besucher in zahlende Kunden verwandeln.</div>
+                        <div class="stack-desc">Worte, die Besucher in zahlende Kunden verwandeln.</div>
                     </div>
                     <div class="stack-value">1.000 €</div>
                 </div>
@@ -645,44 +403,11 @@
                 <div class="stack-item">
                     <div>
                         <div class="stack-name"><i class="fas fa-shield-alt"></i> Hochsicherheits-Paket</div>
-                        <div class="stack-desc">Sicherheit auf Universitäts-Niveau. SSL, Firewall & Backups.</div>
+                        <div class="stack-desc">Sicherheit auf Universitäts-Niveau. SSL & Firewall.</div>
                     </div>
                     <div class="stack-value">500 €</div>
                 </div>
 
-                <div class="stack-item">
-                    <div>
-                        <div class="stack-name"><i class="fas fa-sync-alt"></i> Das "Atomare Updates" Protokoll</div>
-                        <div class="stack-desc">99,9% Ausfallsicherheit. Nie wieder peinliche Fehlerseiten.</div>
-                    </div>
-                    <div class="stack-value">400 €</div>
-                </div>
-
-                 <div class="stack-item">
-                    <div>
-                        <div class="stack-name"><i class="fas fa-file-contract"></i> Rechtstexte & DSGVO-Schutz</div>
-                        <div class="stack-desc">Abmahnsicheres Impressum & Datenschutz.</div>
-                    </div>
-                    <div class="stack-value">300 €</div>
-                </div>
-
-                <div class="stack-item">
-                    <div>
-                        <div class="stack-name"><i class="fas fa-universal-access"></i> Barrierefreie Optimierung (BFSG)</div>
-                        <div class="stack-desc">Schutz vor Abmahnungen durch neues Gesetz ab 2025.</div>
-                    </div>
-                    <div class="stack-value">600 €</div>
-                </div>
-
-                <div class="stack-item" style="background: rgba(255, 23, 68, 0.05);">
-                    <div>
-                        <div class="stack-name" style="color: var(--danger-red);"><i class="fas fa-gift"></i> BONUS: Buch "Dominanz auf Google"</div>
-                        <div class="stack-desc">Exklusive E-Book Edition. Playbook für Platz 1.</div>
-                    </div>
-                    <div class="stack-value">97 €</div>
-                </div>
-
-                <!-- TOTAL ROW -->
                 <div class="total-value-row">
                     <div class="total-value-label">GESAMTWERT PAKET:</div>
                     <span class="total-value-amount">6.397 €</span>
@@ -690,24 +415,21 @@
 
                 <div class="real-price">
                     Ihr Preis heute: <span class="main-price">899 € + 39 € / mtl.</span>
-                    <span class="secondary-cost">(Boutique-Agentur: Festpreis + Wartung & Hosting)</span>
                 </div>
             </div>
 
-            <!-- SCARCITY -->
             <div class="scarcity-box">
                 <i class="fas fa-exclamation-triangle"></i> 
-                <span>ACHTUNG: Da ich (David) jeden Code persönlich prüfe, nehme ich maximal 3 Neukunden pro Monat an. <br>Aktuell ist noch <b>1 Slot frei</b>.</span>
+                <span>ACHTUNG: Da wir jeden Code persönlich prüfe, nehme ich maximal 3 Neukunden pro Monat an.</span>
             </div>
 
-            <!-- CTA -->
-            <div class="text-center">
+            <!-- MAIN CONVERSION CTA -->
+            <div class="text-center" style="text-align:center;">
                 <a href="https://netgains-pactum.pages.dev/" class="btn-cta">
-                    JETZT TERMIN SICHERN
-                    <span class="btn-subtext">Kostenloses Erstgespräch mit David persönlich</span>
+                    JETZT DEAL ABSCHLIESSEN
+                    <span class="btn-subtext">Angebot zum Sonderpreis von 899 € sichern • Unverbindliche Anfrage</span>
                 </a>
             </div>
-            
         </div>
     </section>
 
@@ -716,24 +438,20 @@
         <div class="container">
             <p>&copy; 2026 NetGains Webdesign. Alle Rechte vorbehalten.</p>
             <p style="margin-top: 10px;">
-                <a href="#">Impressum</a> | 
-                <a href="#">Datenschutz</a> | 
-                <a href="#">AGB</a>
-            </p>
-            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">
-                Haftungsausschluss: Die Ergebnisse können variieren.
+                <a href="#">Impressum</a> | <a href="#">Datenschutz</a> | <a href="#">AGB</a>
             </p>
         </div>
     </footer>
 
     <script>
-        // Smooth Scroll
+        // Smooth Scroll für Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
     </script>
