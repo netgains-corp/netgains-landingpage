@@ -199,6 +199,11 @@
         .btn-cta-red:hover {
             box-shadow: 0 15px 40px rgba(239, 68, 68, 0.5);
         }
+        
+        /* SPEZIFISCH FÜR DEN ERSTEN BUTTON: Kleineres Padding, gleiche Schriftgröße */
+        .hero-btn-compact {
+            padding: 16px 45px !important; /* Weniger Höhe */
+        }
 
         .btn-subtext {
             display: block;
@@ -309,7 +314,7 @@
         }
 
         /* --- SECTIONS SPACING --- */
-        .problem-section, .features-detail-section, .stack-section { 
+        .problem-section, .features-detail-section, .stack-section, .showcase-section { 
             padding: 120px 0; 
             position: relative; 
         }
@@ -332,19 +337,21 @@
         /* --- EPIPHANY & AUTHORITY SECTIONS --- */
         .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 60px; position: relative; z-index: 2; }
         
+        /* OLD WAY: More Intense Red */
         .old-way { 
-            background: rgba(255, 0, 0, 0.05); 
-            border: 1px solid rgba(255, 0, 0, 0.1); 
+            background: rgba(255, 23, 68, 0.15); /* More opaque red */
+            border: 2px solid rgba(255, 23, 68, 0.3); /* Stronger border */
             padding: 40px; border-radius: 20px; color: var(--text-secondary); 
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5); /* Inner shadow for gloom */
         }
         
+        /* NEW WAY: More Intense Cyan/Tech Look */
         .new-way { 
-            /* Using Glass Panel logic here too but specific */
             position: relative;
-            background: rgba(34, 211, 238, 0.05);
+            background: rgba(34, 211, 238, 0.15); /* Stronger Cyan tint */
             backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--accent-cyan);
-            box-shadow: 0 0 50px rgba(34, 211, 238, 0.1);
+            border: 2px solid var(--accent-cyan); /* Thicker border */
+            box-shadow: 0 0 60px rgba(34, 211, 238, 0.25), inset 0 0 20px rgba(34, 211, 238, 0.1); /* Intense Glow */
             padding: 40px; border-radius: 20px; color: var(--text-primary);
             transform: scale(1.05); 
         }
@@ -364,6 +371,77 @@
             border-left: 4px solid var(--accent-cyan); 
             padding: 20px; border-radius: 10px; margin-top: 20px; color: var(--text-primary); border: 1px solid var(--glass-border);
         }
+
+        /* --- SHOWCASE / PORTFOLIO SECTION (LAPTOP CSS MOCKUPS) --- */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .laptop-wrapper {
+            perspective: 1000px;
+            transition: transform 0.4s ease;
+        }
+        
+        .laptop-wrapper:hover {
+            transform: translateY(-10px);
+        }
+
+        /* CSS ONLY LAPTOP */
+        .laptop-mockup {
+            background-color: #1e1e1e;
+            border-radius: 12px 12px 0 0;
+            padding: 3% 3% 0 3%; /* Screen Bezel */
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            border: 1px solid #444;
+        }
+
+        .laptop-screen {
+            width: 100%;
+            padding-top: 62.5%; /* 16:10 Ratio */
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid #000;
+        }
+
+        .laptop-screen img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: top; /* Show Header */
+        }
+
+        .laptop-base {
+            height: 14px;
+            background: #2d2d2d;
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            margin-top: -1px;
+            border-top: 1px solid #444;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        /* Laptop Opener/notch */
+        .laptop-base::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 15%; height: 4px;
+            background: #1a1a1a;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .showcase-caption {
+            margin-top: 25px;
+            text-align: center;
+        }
+        .showcase-caption h4 { color: var(--accent-cyan); margin-bottom: 5px; font-size: 1.2rem; }
+        .showcase-caption p { color: var(--text-secondary); font-size: 0.95rem; }
+
 
         /* --- DEEP DIVE FEATURE SECTIONS (NEW DESIGN) --- */
         .feature-card {
@@ -548,7 +626,8 @@
                 </div>
             </div>
 
-            <a href="#offer" class="btn-cta btn-cta-red">
+            <!-- COMPACT HERO BUTTON -->
+            <a href="#offer" class="btn-cta btn-cta-red hero-btn-compact">
                 Ja! Ich will die kostenlose Analyse
                 <span class="btn-subtext">100% Kostenfrei • Kein Vertrag • Sofortiges Ergebnis</span>
             </a>
@@ -593,7 +672,7 @@
 
             <div class="comparison-grid">
                 <div class="old-way">
-                    <h3 style="color: #f87171; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
+                    <h3 style="color: #ff1744; font-size: 1.5rem; border-bottom: 1px solid rgba(255,23,68,0.3); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
                     <ul class="comparison-list">
                         <li><span class="icon-emoji">❌</span><span class="text-content"><b>Statische "Visitenkarte":</b> Wartet passiv darauf, dass Kunden anrufen. Passiert aber nie.</span></li>
                         <li><span class="icon-emoji">❌</span><span class="text-content"><b>Sicherheits-Risiko:</b> Veraltete Plugins machen die Seite zum leichten Ziel für Hacker.</span></li>
@@ -609,8 +688,51 @@
                         <li><span class="icon-emoji">✅</span><span class="text-content"><b>Digitaler Vertriebler:</b> Arbeitet 24/7 und konvertiert Besucher aktiv in echte Leads.</span></li>
                         <li><span class="icon-emoji">✅</span><span class="text-content"><b>Fort Knox Sicherheit:</b> Cybersecurity auf Universitäts-Niveau und SSL-Verschlüsselung.</span></li>
                         <li><span class="icon-emoji">✅</span><span class="text-content"><b>Atomare Updates:</b> Die Seite repariert sich selbst und ist immer online (99,9% Uptime).</span></li>
-                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Google Dominanz:</b> Technisch so sauber, dass Suchmaschinen sie lieben (SEO-Boost).</span></li>
+                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Google Dominanz:</b> Automatische Anpassung von Keywords & Metatexten für Top-Rankings.</span></li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW PORTFOLIO SHOWCASE SECTION -->
+    <section class="showcase-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px; color: var(--text-primary);">Übersichtlichkeit, die verkauft</h2>
+            <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary); margin-bottom: 50px;">
+                Unsere Design-Philosophie: Wichtige Informationen (Adresse, Öffnungszeiten, Anruf-Button) gehören nach ganz oben. 
+                Keine unnötigen Klicks – der Kunde findet sofort, was er sucht.
+            </p>
+
+            <div class="showcase-grid">
+                <!-- Example 1 -->
+                <div class="laptop-wrapper">
+                    <div class="laptop-mockup">
+                        <div class="laptop-screen">
+                            <!-- User's specific image filename -->
+                            <img src="ex1.jpg" alt="Website Screenshot mit klaren Kontaktinfos" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                    <div class="showcase-caption">
+                        <h4>Beispiel A: Handwerk</h4>
+                        <p>Sofort sichtbare Notruf-Nummer & "Angebot anfordern" Button.</p>
+                    </div>
+                </div>
+
+                <!-- Example 2 -->
+                <div class="laptop-wrapper">
+                    <div class="laptop-mockup">
+                        <div class="laptop-screen">
+                            <!-- User's specific image filename -->
+                            <img src="ex2.jpg" alt="Website Screenshot mit Öffnungszeiten" onerror="this.src='https://images.unsplash.com/photo-1481487484168-9b930d55208d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                    <div class="showcase-caption">
+                        <h4>Beispiel B: Gastronomie/Praxis</h4>
+                        <p>Öffnungszeiten und Adresse direkt "Above the Fold".</p>
+                    </div>
                 </div>
             </div>
         </div>
