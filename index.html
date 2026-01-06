@@ -243,14 +243,23 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
+        /* ANIMATED GRADIENT FOR SMART WEBSITE TEXT */
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
         .text-highlight {
-            /* SHARP GRADIENT: LEFT TO RIGHT HELLBLAU/TÜRKIS */
-            background: linear-gradient(to right, #67e8f9, #2dd4bf);
+            /* ANIMATED GRADIENT: Greenish -> Cyan -> Greenish */
+            background: linear-gradient(90deg, #00E676, #22d3ee, #00E676);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 900;
-            /* Subtle shadow for lift */
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+            /* Animation */
+            animation: textShine 3s linear infinite;
+            /* Subtle glow to make it pop but stay readable */
+            filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.5));
         }
         
         .red-underline {
@@ -554,8 +563,9 @@
         .stack-value { 
             font-size: 1.8rem; font-weight: 800; 
             color: var(--danger-red); 
-            /* WHITE BACKGROUND with RED GLOW */
-            background: #ffffff;
+            /* TRANSPARENT WHITE BACKGROUND with BLUR */
+            background: rgba(255, 255, 255, 0.6); 
+            backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 23, 68, 0.3);
             padding: 8px 20px; border-radius: 12px; min-width: 150px; text-align: right; 
             box-shadow: 0 0 25px rgba(255, 23, 68, 0.5); /* Intense Red Glow */
