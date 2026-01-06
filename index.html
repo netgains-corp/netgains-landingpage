@@ -173,8 +173,8 @@
             border-radius: 50px;
             cursor: pointer;
             text-decoration: none;
-            display: inline-block;
-            margin-top: 25px;
+            display: block; /* Centering Fix */
+            margin: 25px auto 0 auto; /* Centering Fix */
             box-shadow: 0 10px 30px rgba(219, 39, 119, 0.3);
             transition: all 0.3s ease;
             width: 100%;
@@ -200,9 +200,8 @@
             box-shadow: 0 15px 40px rgba(239, 68, 68, 0.5);
         }
         
-        /* SPEZIFISCH FÜR DEN ERSTEN BUTTON: Kleineres Padding, gleiche Schriftgröße */
         .hero-btn-compact {
-            padding: 16px 45px !important; /* Weniger Höhe */
+            padding: 16px 45px !important;
         }
 
         .btn-subtext {
@@ -337,15 +336,15 @@
         /* --- EPIPHANY & AUTHORITY SECTIONS --- */
         .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 60px; position: relative; z-index: 2; }
         
-        /* OLD WAY: More Intense Red */
+        /* OLD WAY */
         .old-way { 
             background: rgba(255, 23, 68, 0.15); /* More opaque red */
             border: 2px solid rgba(255, 23, 68, 0.3); /* Stronger border */
             padding: 40px; border-radius: 20px; color: var(--text-secondary); 
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.5); /* Inner shadow for gloom */
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5); 
         }
         
-        /* NEW WAY: More Intense Cyan/Tech Look */
+        /* NEW WAY */
         .new-way { 
             position: relative;
             background: rgba(34, 211, 238, 0.15); /* Stronger Cyan tint */
@@ -425,7 +424,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
-        /* Laptop Opener/notch */
         .laptop-base::after {
             content: '';
             position: absolute;
@@ -443,9 +441,8 @@
         .showcase-caption p { color: var(--text-secondary); font-size: 0.95rem; }
 
 
-        /* --- DEEP DIVE FEATURE SECTIONS (NEW DESIGN) --- */
+        /* --- DEEP DIVE FEATURE SECTIONS --- */
         .feature-card {
-            /* Adopting .glass-panel styles + specific layout */
             margin-bottom: 100px;
             text-align: center;
         }
@@ -541,16 +538,17 @@
             color: white; padding: 40px; border-radius: 20px; 
         }
         .total-value-amount { 
-            font-size: 3.5rem; 
-            color: var(--text-secondary);
-            text-decoration: line-through; font-weight: 800; display: block; margin-top: 10px; opacity: 0.7;
+            font-size: 4rem; 
+            color: var(--danger-red);
+            text-decoration: line-through; font-weight: 800; display: block; margin-top: 10px; opacity: 1;
+            text-shadow: 0 0 20px rgba(255, 23, 68, 0.6);
         }
         
         /* Updated Real Price */
         .real-price { text-align: center; margin-top: 40px; font-size: 2.5rem; font-weight: 800; color: var(--text-primary); }
-        .real-price span {
+        .real-price span.main-price {
             color: var(--price-green) !important;
-            font-size: 4rem; /* Main Price Typography */
+            font-size: 5rem; /* Massive Price */
             text-decoration: none !important;
             text-shadow: 0 0 40px rgba(0, 230, 118, 0.6); /* Intense Neon Glow */
             display: block;
@@ -559,10 +557,11 @@
         }
         .secondary-cost {
             font-size: 1.25rem;
-            color: var(--text-secondary);
+            color: var(--text-secondary); /* Grey/White */
             font-weight: 700;
             display: block;
             margin-top: 5px;
+            text-shadow: none;
         }
 
         /* --- SCARCITY & FOOTER --- */
@@ -584,14 +583,19 @@
         .footer a { color: var(--text-primary); text-decoration: none; transition: color 0.3s; opacity: 0.7; }
         .footer a:hover { opacity: 1; color: var(--accent-cyan); }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .hero h1 { font-size: 2.2rem; }
             .feature-title-large { font-size: 2rem; }
             .feature-value-large { font-size: 2.2rem; }
             .stack-item { flex-direction: column; text-align: center; align-items: center;}
             .stack-value { margin-top: 15px; width: 100%; text-align: center; }
             .stack-desc { margin-left: 0; }
-            .authority-flex { flex-direction: column-reverse; }
+            
+            /* Authority Section Fix: Text Top, Image Bottom */
+            .authority-flex { flex-direction: column-reverse; text-align: center; }
+            .authority-text { min-width: 100%; }
+            .authority-img { max-width: 100%; margin-bottom: 30px; width: 80%; }
+            
             .comparison-grid { grid-template-columns: 1fr; gap: 30px; }
             .new-way { transform: scale(1); }
             .glass-panel { padding: 25px; }
@@ -627,7 +631,7 @@
             </div>
 
             <!-- COMPACT HERO BUTTON -->
-            <a href="#offer" class="btn-cta btn-cta-red hero-btn-compact">
+            <a href="https://netgains-pactum.pages.dev/" class="btn-cta btn-cta-red hero-btn-compact">
                 Ja! Ich will die kostenlose Analyse
                 <span class="btn-subtext">100% Kostenfrei • Kein Vertrag • Sofortiges Ergebnis</span>
             </a>
@@ -672,7 +676,7 @@
 
             <div class="comparison-grid">
                 <div class="old-way">
-                    <h3 style="color: #ff1744; font-size: 1.5rem; border-bottom: 1px solid rgba(255,23,68,0.3); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
+                    <h3 style="color: #f87171; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
                     <ul class="comparison-list">
                         <li><span class="icon-emoji">❌</span><span class="text-content"><b>Statische "Visitenkarte":</b> Wartet passiv darauf, dass Kunden anrufen. Passiert aber nie.</span></li>
                         <li><span class="icon-emoji">❌</span><span class="text-content"><b>Sicherheits-Risiko:</b> Veraltete Plugins machen die Seite zum leichten Ziel für Hacker.</span></li>
@@ -953,16 +957,12 @@
 
             <!-- CTA -->
             <div class="text-center">
-                <a href="#contact" class="btn-cta">
+                <a href="https://netgains-pactum.pages.dev/" class="btn-cta">
                     JETZT TERMIN SICHERN
                     <span class="btn-subtext">Kostenloses Erstgespräch mit David persönlich</span>
                 </a>
             </div>
             
-            <p class="text-center" style="margin-top: 25px; font-size: 0.9rem; color: var(--text-secondary);">
-                <i class="fas fa-lock"></i> <b>Unsere "No Catch" Garantie:</b> Wenn Ihnen unser Entwurf im Gespräch nicht gefällt, haben Sie keinen Cent verloren. Wir tragen das Risiko.
-            </p>
-
         </div>
     </section>
 
