@@ -18,12 +18,15 @@
             /* Hero Gradient: Deep Blue to Purple */
             --hero-gradient: linear-gradient(to bottom, #020024 0%, #090979 35%, #5d26c1 100%);
             
-            /* Accent Gradient: Cyan to Blue/Purple */
+            /* Accent Gradient: Cyan to Blue/Purple (Default) */
             --accent-gradient: linear-gradient(to bottom, #00c6ff 0%, #0072ff 100%); 
             
+            /* RED Gradient for CTA */
+            --red-gradient: linear-gradient(45deg, #d50000 0%, #ff1744 100%);
+            
             /* Glass Effects */
-            --glass-bg: rgba(255, 255, 255, 0.75);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.9);
             --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
             
             /* Colors */
@@ -31,7 +34,7 @@
             --text-light: #475569;
             --primary-blue: #1e3a8a; /* Strong Blue for Text headers */
             --success-cyan: #06b6d4;
-            --danger-red: #ef4444; 
+            --danger-red: #d50000; /* Stärkeres Rot für Preise */
         }
 
         * {
@@ -45,7 +48,7 @@
             line-height: 1.6;
             color: var(--text-dark);
             background: var(--bg-gradient);
-            background-attachment: fixed; /* Fixiert den Verlauf beim Scrollen */
+            background-attachment: fixed;
         }
 
         h1, h2, h3, h4 {
@@ -107,6 +110,15 @@
             transform: scale(1.02);
             box-shadow: 0 15px 30px rgba(0, 114, 255, 0.5);
         }
+
+        /* Specific RED CTA Style */
+        .btn-cta-red {
+            background: var(--red-gradient);
+            box-shadow: 0 10px 20px rgba(213, 0, 0, 0.4);
+        }
+        .btn-cta-red:hover {
+            box-shadow: 0 15px 30px rgba(213, 0, 0, 0.6);
+        }
         
         .btn-cta::after {
             content: '';
@@ -142,33 +154,19 @@
             overflow: hidden;
         }
         
-        /* Decorative circle in background */
+        /* Decorative circles */
         .hero::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(123, 67, 151, 0.3) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
+            content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(123, 67, 151, 0.3) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;
         }
-
-        /* Second decorative circle left */
         .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            left: -50px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 198, 255, 0.2) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
+            content: ''; position: absolute; bottom: -50px; left: -50px; width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(0, 198, 255, 0.2) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;
         }
 
         .pre-headline {
             background: rgba(255, 255, 255, 0.1);
-            color: #67e8f9; /* Helles Cyan */
+            color: #67e8f9;
             padding: 8px 16px;
             border-radius: 20px;
             font-weight: 700;
@@ -195,6 +193,14 @@
             padding: 0 10px;
             border-radius: 5px;
             box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .red-underline {
+            text-decoration: underline;
+            text-decoration-color: var(--danger-red);
+            text-decoration-thickness: 5px;
+            text-underline-offset: 8px;
+            -webkit-text-fill-color: white; /* Make text white again to ensure contrast */
         }
 
         .hero-sub {
@@ -237,290 +243,136 @@
         .play-btn:hover i { color: #1e3a8a; }
 
         /* --- PROBLEM SECTION --- */
-        .problem-section {
-            padding: 80px 0;
-            position: relative;
-        }
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .problem-card {
-            border-left: 6px solid var(--danger-red);
-        }
-
-        .problem-card i {
+        .problem-section { padding: 80px 0; position: relative; }
+        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .problem-card { border-left: 6px solid var(--danger-red); }
+        .problem-card > i {
             font-size: 2.5rem;
-            /* Gradient for Icon: Red to Purple */
             background: -webkit-linear-gradient(45deg, #ef4444, #be123c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
         }
 
-        /* --- EPIPHANY BRIDGE (MODERN DARK THEME) --- */
+        /* --- EPIPHANY & AUTHORITY SECTIONS --- */
         .epiphany-section {
             padding: 100px 0;
-            /* Dark Blue to Purple Gradient */
             background: linear-gradient(160deg, #0f172a 0%, #312e81 100%);
             color: white;
             position: relative;
         }
-        
         .epiphany-section::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
-                radial-gradient(at 90% 90%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.1) 0px, transparent 50%), radial-gradient(at 90% 90%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
         }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin-top: 60px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .old-way {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            color: #94a3b8;
-        }
-
-        .new-way {
-            background: rgba(30, 58, 138, 0.4); /* Blue transparent */
-            backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(139, 92, 246, 0.3); /* Purple border */
-            box-shadow: 0 0 50px rgba(59, 130, 246, 0.15);
-            position: relative;
-            transform: scale(1.05);
-            color: white;
-        }
-        
-        .new-way-badge {
-            position: absolute;
-            top: -20px;
-            right: 30px;
-            background: var(--accent-gradient);
-            color: white;
-            padding: 8px 20px;
-            font-weight: 700;
-            border-radius: 30px;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .comparison-list {
-            list-style: none;
-            margin-top: 30px;
-        }
-
-        .comparison-list li {
-            margin-bottom: 25px;
-            display: flex;
-            align-items: flex-start;
-            font-size: 1.1rem;
-        }
-
-        /* EMOJI STYLING */
-        .icon-emoji {
-            font-size: 1.8rem;
-            margin-right: 15px;
-            line-height: 1.2;
-            min-width: 40px;
-            text-align: center;
-        }
-        
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 60px; position: relative; z-index: 2; }
+        .old-way { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); color: #94a3b8; }
+        .new-way { background: rgba(30, 58, 138, 0.4); backdrop-filter: blur(15px); padding: 40px; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.3); box-shadow: 0 0 50px rgba(59, 130, 246, 0.15); position: relative; transform: scale(1.05); color: white; }
+        .new-way-badge { position: absolute; top: -20px; right: 30px; background: var(--accent-gradient); color: white; padding: 8px 20px; font-weight: 700; border-radius: 30px; text-transform: uppercase; font-size: 0.85rem; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .comparison-list { list-style: none; margin-top: 30px; }
+        .comparison-list li { margin-bottom: 25px; display: flex; align-items: flex-start; font-size: 1.1rem; }
+        .icon-emoji { font-size: 1.8rem; margin-right: 15px; line-height: 1.2; min-width: 40px; text-align: center; }
         .text-content { padding-top: 5px; }
-        
-        .old-way b { color: #f87171; }
-        .new-way b { color: #67e8f9; }
+        .old-way b { color: #f87171; } .new-way b { color: #67e8f9; }
+        .authority-section { padding: 100px 0; background: #fff; }
+        .authority-flex { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 60px; }
+        .authority-img { flex: 0 0 auto; width: 100%; max-width: 350px; }
+        .authority-img img { width: 100%; height: auto; border-radius: 20px; box-shadow: 20px 20px 60px #cbd5e1, -20px -20px 60px #ffffff; }
+        .authority-text { flex: 1; min-width: 300px; }
+        .authority-text h2 { color: var(--primary-blue); font-size: 2.5rem; }
+        .highlight-box { background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%); border-left: 5px solid #3b82f6; padding: 20px; border-radius: 10px; margin-top: 20px; color: #1e3a8a; }
 
-
-        /* --- AUTHORITY SECTION --- */
-        .authority-section {
-            padding: 100px 0;
-            background: #fff;
-        }
-
-        .authority-flex {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center; /* Vertikal zentrieren */
-            justify-content: center;
-            gap: 60px;
-        }
-
-        .authority-img {
-            flex: 0 0 auto; /* Verhindert dass es zu klein wird */
-            width: 100%;
-            max-width: 350px; /* Bildgröße begrenzt */
-        }
-
-        .authority-img img {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 20px 20px 60px #cbd5e1, -20px -20px 60px #ffffff;
-        }
-
-        .authority-text {
-            flex: 1;
-            min-width: 300px; /* Damit Text nicht zu schmal wird */
-        }
-
-        .authority-text h2 { 
-            color: var(--primary-blue);
-            font-size: 2.5rem;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%);
-            border-left: 5px solid #3b82f6;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            color: #1e3a8a;
-        }
-
-        /* --- STACK SECTION (PREMIUM) --- */
-        .stack-section {
+        /* --- DEEP DIVE FEATURE SECTIONS (NEW) --- */
+        .features-detail-section {
             padding: 80px 0;
-            /* Light Blue gradient */
-            background: linear-gradient(to bottom, #f0f9ff, #eef2ff);
-        }
-
-        .stack-box {
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid #fff;
-            box-shadow: 0 20px 80px rgba(30, 58, 138, 0.1);
-            border-radius: 24px;
-            padding: 50px;
-            margin-top: 40px;
-            position: relative;
-            overflow: hidden;
+            background: #fff; /* Clean white background for reading */
         }
         
-        /* Dekorative Gradienten im Hintergrund der Box */
-        .stack-box::before {
-            content: ''; position: absolute; top: -50px; right: -50px;
-            width: 250px; height: 250px; 
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 50%; filter: blur(50px);
-        }
-
-        .stack-item {
+        .feature-row {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 25px 0;
-            border-bottom: 1px solid rgba(30, 58, 138, 0.08);
-            transition: background 0.3s;
+            gap: 60px;
+            margin-bottom: 120px;
         }
         
-        .stack-item:hover {
-            background: rgba(239, 246, 255, 0.7); /* Light blue hover */
-            border-radius: 10px;
-            padding-left: 15px; padding-right: 15px;
+        .feature-row:last-child { margin-bottom: 0; }
+        
+        /* Zig-Zag Layout */
+        .feature-row:nth-child(even) {
+            flex-direction: row-reverse;
         }
 
-        .stack-item:last-child { border-bottom: none; }
+        .feature-img {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .feature-img img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+        
+        .feature-img img:hover { transform: scale(1.02); }
 
-        .stack-name {
-            font-size: 1.3rem;
-            font-weight: 700;
+        .feature-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .feature-text h3 {
+            font-size: 2rem;
             color: var(--primary-blue);
+            margin-bottom: 20px;
         }
         
+        .feature-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .feature-value-display {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--danger-red);
+            background: #ffebee;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid var(--danger-red);
+            margin-top: 10px;
+        }
+
+        /* --- STACK SECTION --- */
+        .stack-section { padding: 80px 0; background: linear-gradient(to bottom, #f0f9ff, #eef2ff); }
+        .stack-box { background: rgba(255, 255, 255, 0.9); border: 1px solid #fff; box-shadow: 0 20px 80px rgba(30, 58, 138, 0.1); border-radius: 24px; padding: 50px; margin-top: 40px; position: relative; overflow: hidden; }
+        .stack-box::before { content: ''; position: absolute; top: -50px; right: -50px; width: 250px; height: 250px; background: rgba(59, 130, 246, 0.1); border-radius: 50%; filter: blur(50px); }
+        .stack-item { display: flex; justify-content: space-between; align-items: center; padding: 25px 0; border-bottom: 1px solid rgba(30, 58, 138, 0.08); transition: background 0.3s; }
+        .stack-item:hover { background: rgba(239, 246, 255, 0.7); border-radius: 10px; padding-left: 15px; padding-right: 15px; }
+        .stack-item:last-child { border-bottom: none; }
+        .stack-name { font-size: 1.3rem; font-weight: 700; color: var(--primary-blue); }
         .stack-name i { color: #0ea5e9; margin-right: 10px; }
-        
         .stack-desc { font-size: 0.95rem; color: #64748b; margin-left: 32px; margin-top: 5px; }
-
-        .stack-value {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #1e293b;
-            background: #f1f5f9;
-            padding: 5px 15px;
-            border-radius: 8px;
-        }
-
-        .total-value-row {
-            margin-top: 40px;
-            text-align: center;
-            background: var(--hero-gradient);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
-        }
         
-        .total-value-amount {
-            font-size: 3rem;
-            /* Gradient Text: White to Cyan */
-            background: linear-gradient(to right, #ffffff, #67e8f9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: line-through;
-            font-weight: 800;
-            display: block;
-        }
-        
-        .real-price {
-            text-align: center; margin-top: 30px;
-            font-size: 2.2rem; font-weight: 800; color: var(--primary-blue);
-        }
+        /* Red Value in Stack */
+        .stack-value { font-size: 1.5rem; font-weight: 800; color: var(--danger-red); background: #fff1f2; padding: 5px 15px; border-radius: 8px; min-width: 140px; text-align: right; }
 
-        /* --- SCARCITY --- */
-        .scarcity-box {
-            background: #e0f2fe;
-            border: 2px solid #0ea5e9;
-            color: #0369a1;
-            padding: 20px;
-            text-align: center;
-            font-weight: 600;
-            margin: 30px auto;
-            max-width: 800px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        
+        .total-value-row { margin-top: 40px; text-align: center; background: var(--hero-gradient); color: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3); }
+        .total-value-amount { font-size: 3rem; background: linear-gradient(to right, #ffffff, #67e8f9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: line-through; font-weight: 800; display: block; }
+        .real-price { text-align: center; margin-top: 30px; font-size: 2.2rem; font-weight: 800; color: var(--primary-blue); }
+
+        /* --- SCARCITY & FOOTER --- */
+        .scarcity-box { background: #e0f2fe; border: 2px solid #0ea5e9; color: #0369a1; padding: 20px; text-align: center; font-weight: 600; margin: 30px auto; max-width: 800px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 15px; }
         .scarcity-box i { font-size: 1.5rem; color: #0ea5e9; }
-
-        /* --- FOOTER --- */
-        .footer {
-            background: #020617; /* Very Dark Blue */
-            color: #94a3b8;
-            padding: 60px 0;
-            text-align: center;
-            font-size: 0.9rem;
-            border-top: 1px solid #1e293b;
-        }
-        
+        .footer { background: #020617; color: #94a3b8; padding: 60px 0; text-align: center; font-size: 0.9rem; border-top: 1px solid #1e293b; }
         .footer a { color: #cbd5e1; text-decoration: none; transition: color 0.3s; }
         .footer a:hover { color: white; }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
-            .hero-sub { font-size: 1rem; }
+            .feature-row, .feature-row:nth-child(even) { flex-direction: column; text-align: center; }
             .stack-item { flex-direction: column; text-align: center; align-items: center;}
             .stack-value { margin-top: 15px; width: 100%; text-align: center; }
             .stack-desc { margin-left: 0; }
@@ -538,7 +390,8 @@
         <div class="container">
             <div class="pre-headline">⚠️ ACHTUNG: FÜR UNTERNEHMER OHNE (ODER MIT VERALTETER) WEBSITE</div>
             
-            <h1>Wie Sie Ihre Firma in eine <span class="text-highlight">"Digitale Marke"</span> verwandeln, die automatisch Kunden gewinnt</h1>
+            <!-- ROTE UNTERSTREICHUNG -->
+            <h1>Wie Sie Ihre Firmen-Website in eine <span class="text-highlight">"Smart-Website"</span> verwandeln, die <span class="red-underline">automatisch Kunden gewinnt</span></h1>
             
             <p class="hero-sub">Egal ob Sie bei Null starten oder einen Relaunch brauchen: Ohne Technik-Frust, ohne 10.000 € Kosten und mit der <b>Sicherheits-Garantie</b> eines Cybersecurity-Experten.</p>
 
@@ -552,7 +405,8 @@
                 </div>
             </div>
 
-            <a href="#offer" class="btn-cta">
+            <!-- CTA IN ROT -->
+            <a href="#offer" class="btn-cta btn-cta-red">
                 Ja! Ich will die kostenlose Analyse
                 <span class="btn-subtext">100% Kostenfrei • Kein Vertrag • Sofortiges Ergebnis</span>
             </a>
@@ -649,7 +503,6 @@
     <section class="authority-section">
         <div class="container authority-flex">
             <div class="authority-img">
-                <!-- PLATZHALTER BILD -->
                 <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="David Leipi">
             </div>
             <div class="authority-text">
@@ -675,11 +528,97 @@
         </div>
     </section>
 
+    <!-- DEEP DIVE FEATURE SECTIONS (NEW) -->
+    <section class="features-detail-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 60px;">Lassen Sie uns einen Blick in den Maschinenraum werfen:</h2>
+
+            <!-- Feature 1: Design -->
+            <div class="feature-row">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Mobile Smart Design">
+                </div>
+                <div class="feature-text">
+                    <h3>1. Maßgeschneidertes "Smart-Architektur" Design</h3>
+                    <p>Templates sind der Tod jeder Marke. Wir bauen Ihnen eine digitale Architektur, die genau auf Ihre Kunden zugeschnitten ist. Das Design ist "Mobile-First" – das bedeutet, es sieht auf dem Smartphone (wo 80% Ihrer Kunden sind) noch besser aus als auf dem PC.</p>
+                    <p><b>Der Vorteil:</b> Daumenfreundliche Navigation und ultraschnelle Ladezeiten.</p>
+                    <div class="feature-value-display">WERT: 3.500 €</div>
+                </div>
+            </div>
+
+            <!-- Feature 2: Copywriting -->
+            <div class="feature-row">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Verkaufspsychologie Copywriting">
+                </div>
+                <div class="feature-text">
+                    <h3>2. Verkaufspsychologische Texte (Copywriting)</h3>
+                    <p>Hübsche Bilder verkaufen nicht. Worte verkaufen. Wir schreiben Texte, die die tiefsten Bedürfnisse Ihrer Kunden ansprechen. Keine langweiligen "Wir über uns"-Texte, sondern messerscharfe Verkaufsargumente, die Einwände vorwegnehmen und Vertrauen aufbauen.</p>
+                    <p><b>Der Vorteil:</b> Besucher werden emotional abgeholt und wollen bei Ihnen kaufen.</p>
+                    <div class="feature-value-display">WERT: 1.000 €</div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Security -->
+            <div class="feature-row">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cybersecurity Shield">
+                </div>
+                <div class="feature-text">
+                    <h3>3. Hochsicherheits-Paket (Cybersecurity)</h3>
+                    <p>Als angehender Doktor der Cybersecurity überlasse ich nichts dem Zufall. Ihre Website wird mit Firewalls, SSL-Verschlüsselung und Anti-Bot-Systemen ausgestattet, die sonst nur große Konzerne nutzen.</p>
+                    <p><b>Der Vorteil:</b> Sie schlafen ruhig, während Ihre Konkurrenz gehackt wird.</p>
+                    <div class="feature-value-display">WERT: 500 €</div>
+                </div>
+            </div>
+
+            <!-- Feature 4: Updates -->
+            <div class="feature-row">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef526b0042a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Server Updates">
+                </div>
+                <div class="feature-text">
+                    <h3>4. Das "Atomare Updates" Protokoll</h3>
+                    <p>Kennen Sie das: "Seite wird gewartet"? Das gibt es bei uns nicht. Wir nutzen atomare Deployments. Das bedeutet: Neue Versionen gehen erst live, wenn sie zu 100% geladen sind. Es gibt keine Sekunde Ausfallzeit.</p>
+                    <p><b>Der Vorteil:</b> 99,99% Verfügbarkeit für Ihre Kunden.</p>
+                    <div class="feature-value-display">WERT: 400 €</div>
+                </div>
+            </div>
+
+            <!-- Feature 5: Recht -->
+            <div class="feature-row">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Rechtstexte Vertrag">
+                </div>
+                <div class="feature-text">
+                    <h3>5. Rechtstexte & DSGVO-Schutz</h3>
+                    <p>Deutschland ist das Land der Abmahnungen. Wir integrieren wasserdichte Impressums-Generatoren und Cookie-Consent-Tools, die den aktuellen deutschen Gesetzen entsprechen.</p>
+                    <p><b>Der Vorteil:</b> Kein Brief vom Anwalt im Briefkasten.</p>
+                    <div class="feature-value-display">WERT: 300 €</div>
+                </div>
+            </div>
+
+            <!-- Feature 6: Bonus -->
+            <div class="feature-row">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ebook Bonus">
+                </div>
+                <div class="feature-text">
+                    <h3>BONUS: Buch "Dominanz auf Google"</h3>
+                    <p>Mein persönliches Playbook. Wie ich Universitäts-Websites auf Platz 1 gebracht habe. Sie erhalten die exklusive digitale Edition, da die gedruckte Version restlos vergriffen ist.</p>
+                    <p><b>Der Vorteil:</b> Insider-Wissen, das Sie bei keiner Agentur bekommen.</p>
+                    <div class="feature-value-display">WERT: 97 €</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <!-- VALUE STACK SECTION -->
     <section class="stack-section" id="offer">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; color: var(--primary-blue);">Ihr "Digital Dominance" Paket</h2>
-            <p class="text-center" style="margin-bottom: 20px; color: #64748b;">Wir bauen Ihnen keine "Homepage". Wir bauen Ihnen einen digitalen Vertriebsmitarbeiter.</p>
+            <h2 class="text-center" style="font-size: 2.5rem; color: var(--primary-blue);">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
+            <p class="text-center" style="margin-bottom: 20px; color: #64748b;">Hier sehen Sie schwarz auf weiß, warum dieses Angebot ein "No-Brainer" ist.</p>
 
             <div class="stack-box">
                 <!-- Item 1 -->
@@ -695,7 +634,7 @@
                 <div class="stack-item">
                     <div>
                         <div class="stack-name"><i class="fas fa-pen-nib"></i> Verkaufspsychologische Texte</div>
-                        <div class="stack-desc">Wir schreiben Texte, die Besucher in zahlende Kunden verwandeln (kein Bla-Bla).</div>
+                        <div class="stack-desc">Wir schreiben Texte, die Besucher in zahlende Kunden verwandeln.</div>
                     </div>
                     <div class="stack-value">1.000 €</div>
                 </div>
@@ -722,18 +661,18 @@
                  <div class="stack-item">
                     <div>
                         <div class="stack-name"><i class="fas fa-file-contract"></i> Rechtstexte & DSGVO-Schutz</div>
-                        <div class="stack-desc">Abmahnsicheres Impressum & Datenschutz (für Deutschland optimiert).</div>
+                        <div class="stack-desc">Abmahnsicheres Impressum & Datenschutz.</div>
                     </div>
                     <div class="stack-value">300 €</div>
                 </div>
 
                 <!-- BONUS -->
-                <div class="stack-item" style="background: linear-gradient(to right, #ecfeff, #fff);">
+                <div class="stack-item" style="background: linear-gradient(to right, #fff1f2, #fff);">
                     <div>
-                        <div class="stack-name" style="color: #0e7490;"><i class="fas fa-gift"></i> BONUS: Buch "Dominanz auf Google"</div>
-                        <div class="stack-desc">Exklusive E-Book Edition (Physisch ausverkauft!). Playbook für Platz 1.</div>
+                        <div class="stack-name" style="color: var(--danger-red);"><i class="fas fa-gift"></i> BONUS: Buch "Dominanz auf Google"</div>
+                        <div class="stack-desc">Exklusive E-Book Edition. Playbook für Platz 1.</div>
                     </div>
-                    <div class="stack-value" style="background: #cffafe; color: #0e7490;">97 €</div>
+                    <div class="stack-value" style="color: var(--danger-red);">97 €</div>
                 </div>
 
                 <!-- TOTAL ROW -->
@@ -743,8 +682,8 @@
                 </div>
 
                 <div class="real-price">
-                    Ihr Preis heute: <span style="color: #0ea5e9; text-decoration: underline;">Auf Anfrage</span>
-                    <div style="font-size: 1rem; color: #64748b; font-weight: normal; margin-top: 5px;">(Boutique-Agentur: Preis variiert nach Projektumfang)</div>
+                    Ihr Preis heute: <span style="color: var(--danger-red); text-decoration: underline;">899 € + 39 € / mtl.</span>
+                    <div style="font-size: 1rem; color: #64748b; font-weight: normal; margin-top: 5px;">(Boutique-Agentur: Festpreis + Wartung & Hosting)</div>
                 </div>
             </div>
 
