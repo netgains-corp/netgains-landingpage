@@ -48,6 +48,8 @@
             color: var(--text-primary);
         }
 
+        .text-center { text-align: center; }
+
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -95,6 +97,11 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
         .glass-panel > * { position: relative; z-index: 1; }
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(79, 70, 229, 0.2);
+        }
 
         /* --- BUTTONS --- */
         .btn-cta {
@@ -133,8 +140,36 @@
         @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; text-shadow: 0 0 30px rgba(34, 211, 238, 0.8); } 100% { opacity: 0.7; } }
 
         /* --- SECTIONS --- */
-        .problem-section, .authority-section, .stack-section { padding: 120px 0; position: relative; }
+        .problem-section, .epiphany-section, .showcase-section, .authority-section, .features-detail-section, .stack-section { padding: 120px 0; position: relative; }
         
+        /* Problem Grid */
+        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .problem-card { border-left: 4px solid var(--danger-red); }
+        .problem-card h3 { color: var(--text-primary); margin-bottom: 15px; }
+        .problem-card p { color: var(--text-secondary); }
+        .problem-card > i { font-size: 2.5rem; background: -webkit-linear-gradient(45deg, #ef4444, #be123c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; display: block; }
+
+        /* Comparison Grid */
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 60px; position: relative; z-index: 2; }
+        .old-way { background: rgba(255, 23, 68, 0.15); border: 2px solid rgba(255, 23, 68, 0.3); padding: 40px; border-radius: 20px; color: var(--text-secondary); box-shadow: inset 0 0 50px rgba(0,0,0,0.5); }
+        .new-way { position: relative; background: rgba(34, 211, 238, 0.15); backdrop-filter: blur(var(--glass-blur)); border: 2px solid var(--accent-cyan); box-shadow: 0 0 60px rgba(34, 211, 238, 0.25), inset 0 0 20px rgba(34, 211, 238, 0.1); padding: 40px; border-radius: 20px; color: var(--text-primary); transform: scale(1.05); }
+        .new-way-badge { position: absolute; top: -20px; right: 30px; background: var(--accent-cyan); color: #000; padding: 8px 20px; font-weight: 700; border-radius: 30px; text-transform: uppercase; font-size: 0.85rem; box-shadow: 0 0 20px rgba(34, 211, 238, 0.5); }
+        .comparison-list { list-style: none; margin-top: 30px; }
+        .comparison-list li { margin-bottom: 25px; display: flex; align-items: flex-start; font-size: 1.1rem; }
+        .icon-emoji { font-size: 1.8rem; margin-right: 15px; line-height: 1.2; min-width: 40px; text-align: center; }
+
+        /* Showcase / Laptop Grid */
+        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px; margin-top: 60px; }
+        .laptop-wrapper { perspective: 1000px; transition: transform 0.4s ease; }
+        .laptop-wrapper:hover { transform: translateY(-10px); }
+        .laptop-mockup { background-color: #1a1a1a; border-radius: 12px 12px 0 0; padding: 12px 12px 0 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid #333; }
+        .laptop-screen { width: 100%; padding-top: 62.5%; position: relative; overflow: hidden; background: #050505; }
+        .laptop-screen img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        .laptop-base { height: 16px; background: linear-gradient(to bottom, #2a2a2a, #1a1a1a); border-radius: 0 0 16px 16px; position: relative; margin-top: -1px; border-top: 1px solid #000; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .showcase-caption { margin-top: 25px; text-align: center; }
+        .showcase-caption h4 { color: var(--accent-cyan); margin-bottom: 5px; font-size: 1.2rem; }
+        .showcase-caption p { color: var(--text-secondary); font-size: 0.95rem; }
+
         /* Authority Restructured */
         .authority-row {
             display: flex;
@@ -185,6 +220,14 @@
         .profile-frame p, .profile-frame ul { color: var(--text-secondary); }
         .profile-frame b { color: var(--text-primary); }
 
+        /* Features Detail */
+        .feature-card { margin-bottom: 100px; text-align: center; }
+        .feature-title-large { font-size: 3rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--text-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; text-transform: uppercase; }
+        .feature-value-large { font-size: 2.5rem; font-weight: 900; color: var(--danger-red); margin-bottom: 40px; display: block; text-shadow: 0 0 30px rgba(255, 23, 68, 0.4); }
+        .feature-img-container { margin: 0 auto 50px auto; max-width: 900px; width: 100%; }
+        .feature-img-container img { width: 100%; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); transition: transform 0.4s ease; border: 1px solid var(--glass-border); }
+        .feature-description { font-size: 1.3rem; line-height: 1.8; color: var(--text-secondary); max-width: 800px; margin: 0 auto; }
+
         .highlight-box { background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%); border-left: 4px solid var(--accent-cyan); padding: 20px; border-radius: 10px; margin-top: 40px; color: var(--text-primary); border: 1px solid var(--glass-border); text-align: center; }
 
         /* --- STACK SECTION & VISUALS --- */
@@ -226,11 +269,6 @@
             transform: rotate(-5deg);
         }
 
-        .laptop-mockup { background-color: #1a1a1a; border-radius: 12px 12px 0 0; padding: 12px 12px 0 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid #333; }
-        .laptop-screen { width: 100%; padding-top: 62.5%; position: relative; overflow: hidden; background: #050505; }
-        .laptop-screen img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-        .laptop-base { height: 16px; background: linear-gradient(to bottom, #2a2a2a, #1a1a1a); border-radius: 0 0 16px 16px; position: relative; margin-top: -1px; border-top: 1px solid #000; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        
         .phone-mockup { background-color: #111; border-radius: 18px; padding: 8px 4px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); border: 2px solid #333; }
         .phone-screen { width: 100%; padding-top: 216%; position: relative; background: #000; border-radius: 12px; overflow: hidden; }
         .phone-screen img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -274,6 +312,7 @@
             .stack-visual-wrapper { display: none; }
             .stack-box { margin-top: 50px; padding-top: 40px; }
             .real-price span.main-price { font-size: 3rem; }
+            .comparison-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -316,6 +355,112 @@
         </div>
     </section>
 
+    <!-- PROBLEM SECTION -->
+    <section class="problem-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.2rem; margin-bottom: 10px;">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
+            <p class="text-center" style="color: var(--text-secondary);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
+            
+            <div class="problem-grid">
+                <div class="glass-panel problem-card">
+                    <i class="fas fa-history"></i>
+                    <h3>Der "2008"-Effekt</h3>
+                    <p>Ihre Website sieht aus wie aus der Zeit vor dem iPhone? Kunden schließen daraus leider sofort: <i>"Dieses Unternehmen ist veraltet und arbeitet langsam."</i> Sie verlieren Vertrauen in Sekunden.</p>
+                </div>
+                <div class="glass-panel problem-card">
+                    <i class="fas fa-store-slash"></i>
+                    <h3>Der "Unsichtbare"-Status</h3>
+                    <p><b>Sie haben noch gar keine Website?</b> Oder eine Seite, die niemand findet? Dann existieren Sie für Kunden unter 40 Jahren praktisch nicht. Konkurrenten ziehen an Ihnen vorbei.</p>
+                </div>
+                <div class="glass-panel problem-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Die Technik-Falle</h3>
+                    <p>Haben Sie schon mal erlebt, dass eine Seite nicht lädt? Das passiert bei billigem Hosting ständig. Kunden kommen nie wieder, wenn die digitale Tür klemmt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EPIPHANY SECTION (COMPARISON) -->
+    <section class="epiphany-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.5rem;">Warum klassische Websites ausgedient haben</h2>
+            <p class="text-center" style="max-width: 700px; margin: 0 auto; color: var(--text-secondary);">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
+
+            <div class="comparison-grid">
+                <div class="old-way">
+                    <h3 style="color: #f87171; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
+                    <ul class="comparison-list">
+                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Statische "Visitenkarte":</b> Wartet passiv darauf, dass Kunden anrufen. Passiert aber nie.</span></li>
+                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Sicherheits-Risiko:</b> Veraltete Plugins machen die Seite zum leichten Ziel für Hacker.</span></li>
+                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Teure Abhängigkeit:</b> Jede kleine Textänderung kostet Geld bei der Agentur.</span></li>
+                    </ul>
+                </div>
+
+                <div class="new-way">
+                    <div class="new-way-badge">Das NetGains System</div>
+                    <h3 style="color: var(--accent-cyan); font-size: 1.5rem; border-bottom: 1px solid var(--accent-cyan); padding-bottom: 15px; margin-bottom: 20px;">Die "Smart-Website"</h3>
+                    <ul class="comparison-list">
+                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Digitaler Vertriebler:</b> Arbeitet 24/7 und konvertiert Besucher aktiv in echte Leads.</span></li>
+                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Fort Knox Sicherheit:</b> Cybersecurity auf Universitäts-Niveau.</span></li>
+                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Google Dominanz:</b> Automatische Anpassung von Keywords für Top-Rankings.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOWCASE SECTION (PORTFOLIO) -->
+    <section class="showcase-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;">Übersichtlichkeit, die verkauft</h2>
+            <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary); margin-bottom: 50px;">
+                Unsere Design-Philosophie: Wichtige Informationen gehören nach ganz oben. Keine unnötigen Klicks – der Kunde findet sofort, was er sucht.
+            </p>
+
+            <div class="showcase-grid">
+                <div class="laptop-wrapper">
+                    <div class="laptop-mockup">
+                        <div class="laptop-screen">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Website Beispiel A]">
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                    <div class="showcase-caption">
+                        <h4>Beispiel A: KFZ-Meisterbetrieb</h4>
+                        <p>Integrierte Terminbuchung spart täglich 2 Stunden Telefonzeit.</p>
+                    </div>
+                </div>
+
+                <div class="laptop-wrapper">
+                    <div class="laptop-mockup">
+                        <div class="laptop-screen">
+                            <img src="https://images.unsplash.com/photo-1481487484168-9b930d55208d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Website Beispiel B]">
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                    <div class="showcase-caption">
+                        <h4>Beispiel B: Interne Plattform</h4>
+                        <p>Echtzeit-Dashboard für Mitarbeiter zur Verkaufsübersicht.</p>
+                    </div>
+                </div>
+
+                <div class="laptop-wrapper">
+                    <div class="laptop-mockup">
+                        <div class="laptop-screen">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Website Beispiel C]">
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                    <div class="showcase-caption">
+                        <h4>Beispiel C: Moderne Arztpraxis</h4>
+                        <p>Sprechzeiten und Notdienst direkt sichtbar ohne Klicks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- AUTHORITY SECTION -->
     <section class="authority-section">
         <div class="container">
@@ -324,7 +469,7 @@
             <!-- Zeile 1: Cansin Gülal -->
             <div class="authority-row">
                 <div class="authority-img">
-                    <img src="cansin.jpeg" alt="Cansin Gülal" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+                    <img src="cansin.jpeg" alt="[Cansin Gülal]" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
                 </div>
                 <div class="authority-content-frame">
                     <div class="profile-frame">
@@ -338,7 +483,7 @@
             <!-- Zeile 2: David Leipi -->
             <div class="authority-row">
                 <div class="authority-img">
-                    <img src="dl.jpg" alt="David Leipi" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+                    <img src="dl.jpg" alt="[David Leipi]" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
                 </div>
                 <div class="authority-content-frame">
                     <div class="profile-frame">
@@ -362,6 +507,58 @@
         </div>
     </section>
 
+    <!-- FEATURES DETAIL SECTION -->
+    <section class="features-detail-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 80px;">Blick in den Maschinenraum:</h2>
+
+            <div class="glass-panel feature-card">
+                <h3 class="feature-title-large">1. "Smart-Architektur" Design</h3>
+                <div class="feature-value-large">WERT: 3.500 €</div>
+                <div class="feature-img-container">
+                    <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Smart Architektur Design]">
+                </div>
+                <div class="feature-description">
+                    <p>Wir bauen Ihnen eine digitale Architektur, die genau auf Ihre Kunden zugeschnitten ist. Das Design ist <b>"Mobile-First"</b> – es sieht auf dem Smartphone (wo 80% Ihrer Kunden sind) perfekt aus.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel feature-card">
+                <h3 class="feature-title-large">2. Verkaufspsychologie</h3>
+                <div class="feature-value-large">WERT: 1.000 €</div>
+                <div class="feature-img-container">
+                    <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Verkaufspsychologie]">
+                </div>
+                <div class="feature-description">
+                    <p>Hübsche Bilder verkaufen nicht. <b>Worte verkaufen.</b> Wir schreiben Texte, die die tiefsten Bedürfnisse Ihrer Kunden ansprechen und Einwände vorwegnehmen.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel feature-card">
+                <h3 class="feature-title-large">3. Hochsicherheits-Paket</h3>
+                <div class="feature-value-large">WERT: 500 €</div>
+                <div class="feature-img-container">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Cybersecurity Paket]">
+                </div>
+                <div class="feature-description">
+                    <p>Ihre Website wird mit Firewalls, SSL-Verschlüsselung und Anti-Bot-Systemen ausgestattet, die sonst nur große Konzerne nutzen.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel feature-card">
+                <h3 class="feature-title-large">4. Barrierefreiheit (BFSG)</h3>
+                <div style="font-size: 1.2rem; color: var(--danger-red); font-weight: 800; margin-bottom: 10px; text-transform: uppercase;">⚠️ ACHTUNG: Abmahngefahr ab Juni 2025!</div>
+                <div class="feature-value-large">WERT: 600 €</div>
+                <div class="feature-img-container">
+                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Barrierefreie Optimierung]">
+                </div>
+                <div class="feature-description">
+                    <p>Ab Juni 2025 müssen Websites barrierefrei sein. Wer das ignoriert, riskiert hohe Bußgelder. Wir machen Sie rechtssicher.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- VALUE STACK SECTION -->
     <section class="stack-section" id="offer">
         <div class="container">
@@ -374,15 +571,23 @@
                 <div class="stack-laptop">
                     <div class="laptop-mockup">
                         <div class="laptop-screen">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Desktop Website Preview">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Laptop Website Vorschau]">
                         </div>
                     </div>
                     <div class="laptop-base"></div>
                 </div>
+
+                <div class="stack-phone">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="[Smartphone Vorschau]">
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="glass-panel stack-box">
-                <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px; text-align:center;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
+                <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
                 
                 <div class="stack-item">
                     <div>
@@ -420,11 +625,10 @@
 
             <div class="scarcity-box">
                 <i class="fas fa-exclamation-triangle"></i> 
-                <span>ACHTUNG: Da wir jeden Code persönlich prüfe, nehme ich maximal 3 Neukunden pro Monat an.</span>
+                <span>ACHTUNG: Da wir jeden Code persönlich prüfen, nehme ich maximal 3 Neukunden pro Monat an.</span>
             </div>
 
-            <!-- MAIN CONVERSION CTA -->
-            <div class="text-center" style="text-align:center;">
+            <div class="text-center">
                 <a href="https://netgains-pactum.pages.dev/" class="btn-cta">
                     JETZT DEAL ABSCHLIESSEN
                     <span class="btn-subtext">Angebot zum Sonderpreis von 899 € sichern • Unverbindliche Anfrage</span>
