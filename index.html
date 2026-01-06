@@ -217,7 +217,7 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            padding: 60px 0 100px 0;
+            padding: 20px 0 80px 0; /* REDUCED TOP PADDING */
             text-align: center;
             position: relative;
         }
@@ -244,12 +244,13 @@
         }
 
         .text-highlight {
-            background: linear-gradient(120deg, var(--accent-cyan) 0%, var(--accent-indigo) 100%);
+            /* SHARP GRADIENT: LEFT TO RIGHT HELLBLAU/TÜRKIS */
+            background: linear-gradient(to right, #67e8f9, #2dd4bf);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 900;
-            /* BETTER READABLE GLOW (LESS BLUR, MORE OPACITY) */
-            filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.8)) drop-shadow(0 0 15px rgba(34, 211, 238, 0.4));
+            /* Subtle shadow for lift */
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
         }
         
         .red-underline {
@@ -262,7 +263,7 @@
         .hero-sub {
             font-size: 1.25rem;
             color: var(--text-secondary);
-            margin-bottom: 50px;
+            margin-bottom: 25px; /* REDUCED BOTTOM MARGIN */
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
@@ -553,10 +554,11 @@
         .stack-value { 
             font-size: 1.8rem; font-weight: 800; 
             color: var(--danger-red); 
-            background: rgba(255, 23, 68, 0.1); 
+            /* WHITE BACKGROUND with RED GLOW */
+            background: #ffffff;
             border: 1px solid rgba(255, 23, 68, 0.3);
             padding: 8px 20px; border-radius: 12px; min-width: 150px; text-align: right; 
-            text-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
+            box-shadow: 0 0 25px rgba(255, 23, 68, 0.5); /* Intense Red Glow */
         }
 
         .total-value-row { 
@@ -749,8 +751,8 @@
                     </div>
                     <div class="laptop-base"></div>
                     <div class="showcase-caption">
-                        <h4>Beispiel A: Handwerk</h4>
-                        <p>Sofort sichtbare Notruf-Nummer & "Angebot anfordern" Button.</p>
+                        <h4>Beispiel A: KFZ-Meisterbetrieb</h4>
+                        <p>Integrierte Terminbuchung spart täglich 2 Stunden Telefonzeit.</p>
                     </div>
                 </div>
 
@@ -764,8 +766,8 @@
                     </div>
                     <div class="laptop-base"></div>
                     <div class="showcase-caption">
-                        <h4>Beispiel B: Gastronomie/Praxis</h4>
-                        <p>Öffnungszeiten und Adresse direkt "Above the Fold".</p>
+                        <h4>Beispiel B: Interne Vertriebs-Plattform</h4>
+                        <p>Echtzeit-Dashboard für Mitarbeiter zur Einsicht eigener Verkäufe.</p>
                     </div>
                 </div>
 
@@ -779,8 +781,8 @@
                     </div>
                     <div class="laptop-base"></div>
                     <div class="showcase-caption">
-                        <h4>Beispiel C: Dienstleistung</h4>
-                        <p>Direktbuchung im Kalender ohne Email-Ping-Pong.</p>
+                        <h4>Beispiel C: Moderne Arztpraxis</h4>
+                        <p>Alle Infos (Sprechzeiten, Notdienst) direkt sichtbar. Keine Klicks nötig.</p>
                     </div>
                 </div>
             </div>
@@ -791,8 +793,8 @@
     <section class="authority-section">
         <div class="container authority-flex">
             <div class="authority-img">
-                <!-- Abstract Tech Image instead of Human -->
-                <img src="https://images.unsplash.com/photo-1558494949-ef526b0042a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Server Technologie">
+                <!-- User's specific image filename -->
+                <img src="david.jpg" alt="David Leipi" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
             </div>
             <div class="authority-text">
                 <h2>Vom "Teenage-Founder" zum Cybersecurity-Experten: Ihr Partner David Leipi</h2>
@@ -810,7 +812,7 @@
                 <p style="margin-top: 15px;">Heute promoviere ich im Bereich <b>Cybersecurity</b>.</p>
                 
                 <div class="highlight-box">
-                    <b style="color: var(--accent-cyan)">Warum ist das wichtig für Sie?</b><br>
+                    <b style="color: var(--accent-indigo)">Warum ist das wichtig für Sie?</b><br>
                     Weil ich weiß, wie man Systeme baut, die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">nicht abstürzen</span>, die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">sicher vor Hackern</span> sind und die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">verkaufen</span>.
                 </div>
             </div>
