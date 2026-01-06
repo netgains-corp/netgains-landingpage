@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetGains | Smart Websites der nächsten Generation</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- MODERN VARIABLES (BLUE-PURPLE EDITION) --- */
+        :root {
+            /* Hintergrund Gradients: Blau oben -> Lila unten */
+            --bg-gradient: linear-gradient(to bottom, #f0f7ff 0%, #f3e5f5 100%);
+            
+            /* Hero Gradient: Deep Blue to Purple */
+            --hero-gradient: linear-gradient(to bottom, #020024 0%, #090979 35%, #5d26c1 100%);
+            
+            /* Accent Gradient: Cyan to Blue/Purple */
+            --accent-gradient: linear-gradient(to bottom, #00c6ff 0%, #0072ff 100%); 
+            
+            /* Glass Effects */
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            
+            /* Colors */
+            --text-dark: #0f172a; /* Deep Navy Blue Black */
+            --text-light: #475569;
+            --primary-blue: #1e3a8a; /* Strong Blue for Text headers */
+            --success-cyan: #06b6d4;
+            --danger-red: #ef4444; 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-gradient);
+            background-attachment: fixed; /* Fixiert den Verlauf beim Scrollen */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- GLASS MORPHISM UTILS --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: var(--glass-border);
+            border-radius: 16px;
+            box-shadow: var(--glass-shadow);
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 114, 255, 0.2);
+        }
+
+        /* --- BUTTONS --- */
+        .btn-cta {
+            background: var(--accent-gradient);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            padding: 22px 45px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 25px;
+            box-shadow: 0 10px 20px rgba(0, 114, 255, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-cta:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 114, 255, 0.5);
+        }
+        
+        .btn-cta::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-cta:hover::after {
+            left: 100%;
+        }
+
+        .btn-subtext {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.95;
+            text-transform: none;
+            margin-top: 5px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: var(--hero-gradient);
+            color: white;
+            padding: 80px 0 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Decorative circle in background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(123, 67, 151, 0.3) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+        }
+
+        /* Second decorative circle left */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 198, 255, 0.2) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+        }
+
+        .pre-headline {
+            background: rgba(255, 255, 255, 0.1);
+            color: #67e8f9; /* Helles Cyan */
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: inline-block;
+            border: 1px solid rgba(103, 232, 249, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #ffffff, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .text-highlight {
+            background: linear-gradient(120deg, #2563eb 0%, #7c3aed 100%);
+            -webkit-text-fill-color: white;
+            padding: 0 10px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .hero-sub {
+            font-size: 1.25rem;
+            color: #e2e8f0;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        .video-wrapper {
+            max-width: 850px;
+            margin: 0 auto 40px auto;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .play-btn {
+            width: 80px; height: 80px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid #67e8f9;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(103, 232, 249, 0.2);
+        }
+        .play-btn:hover { background: #67e8f9; transform: scale(1.1); border-color: #67e8f9; }
+        .play-btn i { color: white; margin-left: 5px; }
+        .play-btn:hover i { color: #1e3a8a; }
+
+        /* --- PROBLEM SECTION --- */
+        .problem-section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .problem-card {
+            border-left: 6px solid var(--danger-red);
+        }
+
+        .problem-card i {
+            font-size: 2.5rem;
+            /* Gradient for Icon: Red to Purple */
+            background: -webkit-linear-gradient(45deg, #ef4444, #be123c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        /* --- EPIPHANY BRIDGE (MODERN DARK THEME) --- */
+        .epiphany-section {
+            padding: 100px 0;
+            /* Dark Blue to Purple Gradient */
+            background: linear-gradient(160deg, #0f172a 0%, #312e81 100%);
+            color: white;
+            position: relative;
+        }
+        
+        .epiphany-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .old-way {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+        }
+
+        .new-way {
+            background: rgba(30, 58, 138, 0.4); /* Blue transparent */
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.3); /* Purple border */
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.15);
+            position: relative;
+            transform: scale(1.05);
+            color: white;
+        }
+        
+        .new-way-badge {
+            position: absolute;
+            top: -20px;
+            right: 30px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 8px 20px;
+            font-weight: 700;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .comparison-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .comparison-list li {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 1.1rem;
+        }
+
+        /* EMOJI STYLING */
+        .icon-emoji {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            line-height: 1.2;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .text-content { padding-top: 5px; }
+        
+        .old-way b { color: #f87171; }
+        .new-way b { color: #67e8f9; }
+
+
+        /* --- AUTHORITY SECTION --- */
+        .authority-section {
+            padding: 100px 0;
+            background: #fff;
+        }
+
+        .authority-flex {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center; /* Vertikal zentrieren */
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .authority-img {
+            flex: 0 0 auto; /* Verhindert dass es zu klein wird */
+            width: 100%;
+            max-width: 350px; /* Bildgröße begrenzt */
+        }
+
+        .authority-img img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px #cbd5e1, -20px -20px 60px #ffffff;
+        }
+
+        .authority-text {
+            flex: 1;
+            min-width: 300px; /* Damit Text nicht zu schmal wird */
+        }
+
+        .authority-text h2 { 
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%);
+            border-left: 5px solid #3b82f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            color: #1e3a8a;
+        }
+
+        /* --- STACK SECTION (PREMIUM) --- */
+        .stack-section {
+            padding: 80px 0;
+            /* Light Blue gradient */
+            background: linear-gradient(to bottom, #f0f9ff, #eef2ff);
+        }
+
+        .stack-box {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #fff;
+            box-shadow: 0 20px 80px rgba(30, 58, 138, 0.1);
+            border-radius: 24px;
+            padding: 50px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Dekorative Gradienten im Hintergrund der Box */
+        .stack-box::before {
+            content: ''; position: absolute; top: -50px; right: -50px;
+            width: 250px; height: 250px; 
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%; filter: blur(50px);
+        }
+
+        .stack-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(30, 58, 138, 0.08);
+            transition: background 0.3s;
+        }
+        
+        .stack-item:hover {
+            background: rgba(239, 246, 255, 0.7); /* Light blue hover */
+            border-radius: 10px;
+            padding-left: 15px; padding-right: 15px;
+        }
+
+        .stack-item:last-child { border-bottom: none; }
+
+        .stack-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .stack-name i { color: #0ea5e9; margin-right: 10px; }
+        
+        .stack-desc { font-size: 0.95rem; color: #64748b; margin-left: 32px; margin-top: 5px; }
+
+        .stack-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #1e293b;
+            background: #f1f5f9;
+            padding: 5px 15px;
+            border-radius: 8px;
+        }
+
+        .total-value-row {
+            margin-top: 40px;
+            text-align: center;
+            background: var(--hero-gradient);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+        }
+        
+        .total-value-amount {
+            font-size: 3rem;
+            /* Gradient Text: White to Cyan */
+            background: linear-gradient(to right, #ffffff, #67e8f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: line-through;
+            font-weight: 800;
+            display: block;
+        }
+        
+        .real-price {
+            text-align: center; margin-top: 30px;
+            font-size: 2.2rem; font-weight: 800; color: var(--primary-blue);
+        }
+
+        /* --- SCARCITY --- */
+        .scarcity-box {
+            background: #e0f2fe;
+            border: 2px solid #0ea5e9;
+            color: #0369a1;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            margin: 30px auto;
+            max-width: 800px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .scarcity-box i { font-size: 1.5rem; color: #0ea5e9; }
+
+        /* --- FOOTER --- */
+        .footer {
+            background: #020617; /* Very Dark Blue */
+            color: #94a3b8;
+            padding: 60px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+        
+        .footer a { color: #cbd5e1; text-decoration: none; transition: color 0.3s; }
+        .footer a:hover { color: white; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero-sub { font-size: 1rem; }
+            .stack-item { flex-direction: column; text-align: center; align-items: center;}
+            .stack-value { margin-top: 15px; width: 100%; text-align: center; }
+            .stack-desc { margin-left: 0; }
+            .authority-flex { flex-direction: column-reverse; }
+            .comparison-grid { grid-template-columns: 1fr; gap: 30px; }
+            .new-way { transform: scale(1); }
+            .stack-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="pre-headline">⚠️ ACHTUNG: FÜR UNTERNEHMER OHNE (ODER MIT VERALTETER) WEBSITE</div>
+            
+            <h1>Wie Sie Ihre Firma in eine <span class="text-highlight">"Digitale Marke"</span> verwandeln, die automatisch Kunden gewinnt</h1>
+            
+            <p class="hero-sub">Egal ob Sie bei Null starten oder einen Relaunch brauchen: Ohne Technik-Frust, ohne 10.000 € Kosten und mit der <b>Sicherheits-Garantie</b> eines Cybersecurity-Experten.</p>
+
+            <!-- VSL VIDEO WRAPPER (GLASS EFFECT) -->
+            <div class="video-wrapper">
+                <div class="video-placeholder-text">
+                    <div class="play-btn">
+                        <i class="fas fa-play" style="font-size: 24px;"></i>
+                    </div>
+                    <div style="margin-top: 20px; font-weight: 600;">David Leipi erklärt das System<br><span style="font-size: 0.8rem; font-weight: 300;">(Bitte Sound einschalten)</span></div>
+                </div>
+            </div>
+
+            <a href="#offer" class="btn-cta">
+                Ja! Ich will die kostenlose Analyse
+                <span class="btn-subtext">100% Kostenfrei • Kein Vertrag • Sofortiges Ergebnis</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- PROBLEM SECTION -->
+    <section class="problem-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.2rem; margin-bottom: 10px; color: var(--primary-blue);">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
+            <p class="text-center" style="color: var(--text-light);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
+            
+            <div class="problem-grid">
+                <!-- Problem 1 -->
+                <div class="glass-card problem-card">
+                    <i class="fas fa-history"></i>
+                    <h3>Der "2008"-Effekt</h3>
+                    <p>Ihre Website sieht aus wie aus der Zeit vor dem iPhone? Kunden schließen daraus leider sofort: <i>"Dieses Unternehmen ist veraltet und arbeitet langsam."</i> Sie verlieren Vertrauen in Sekunden.</p>
+                </div>
+                <!-- Problem 2 -->
+                <div class="glass-card problem-card">
+                    <i class="fas fa-store-slash"></i>
+                    <h3>Der "Unsichtbare"-Status</h3>
+                    <p><b>Sie haben noch gar keine Website?</b> Oder eine Seite, die niemand findet? Dann existieren Sie für Kunden unter 40 Jahren praktisch nicht. Konkurrenten ziehen an Ihnen vorbei.</p>
+                </div>
+                <!-- Problem 3 -->
+                <div class="glass-card problem-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Die Technik-Falle</h3>
+                    <p>Haben Sie schon mal erlebt, dass eine Seite nicht lädt ("Fehler 404")? Das passiert bei billigem Hosting ständig. Kunden kommen nie wieder, wenn die digitale Tür klemmt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EPIPHANY BRIDGE SECTION (MODERN DARK THEME) -->
+    <section class="epiphany-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.5rem; color: #fff;">Warum klassische Websites ausgedient haben</h2>
+            <p class="text-center" style="max-width: 700px; margin: 0 auto; color: #cbd5e1;">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
+
+            <div class="comparison-grid">
+                <!-- Alte Art -->
+                <div class="old-way">
+                    <h3 style="color: #f87171; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
+                    <ul class="comparison-list">
+                        <li>
+                            <span class="icon-emoji">❌</span>
+                            <span class="text-content"><b>Statische "Visitenkarte":</b> Wartet passiv darauf, dass Kunden anrufen. Passiert aber nie.</span>
+                        </li>
+                        <li>
+                            <span class="icon-emoji">❌</span>
+                            <span class="text-content"><b>Sicherheits-Risiko:</b> Veraltete Plugins machen die Seite zum leichten Ziel für Hacker.</span>
+                        </li>
+                        <li>
+                            <span class="icon-emoji">❌</span>
+                            <span class="text-content"><b>Teure Abhängigkeit:</b> Jede kleine Textänderung kostet Geld bei der Agentur.</span>
+                        </li>
+                        <li>
+                            <span class="icon-emoji">❌</span>
+                            <span class="text-content"><b>Unsichtbar:</b> Wird von Google ignoriert und landet auf Seite 10.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Neue Art -->
+                <div class="new-way">
+                    <div class="new-way-badge">Das NetGains System</div>
+                    <h3 style="color: #67e8f9; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px; margin-bottom: 20px;">Die "Smart-Website"</h3>
+                    <ul class="comparison-list">
+                        <li>
+                            <span class="icon-emoji">✅</span>
+                            <span class="text-content"><b>Digitaler Vertriebler:</b> Arbeitet 24/7 und konvertiert Besucher aktiv in echte Leads.</span>
+                        </li>
+                        <li>
+                            <span class="icon-emoji">✅</span>
+                            <span class="text-content"><b>Fort Knox Sicherheit:</b> Cybersecurity auf Universitäts-Niveau und SSL-Verschlüsselung.</span>
+                        </li>
+                        <li>
+                            <span class="icon-emoji">✅</span>
+                            <span class="text-content"><b>Atomare Updates:</b> Die Seite repariert sich selbst und ist immer online (99,9% Uptime).</span>
+                        </li>
+                        <li>
+                            <span class="icon-emoji">✅</span>
+                            <span class="text-content"><b>Google Dominanz:</b> Technisch so sauber, dass Suchmaschinen sie lieben (SEO-Boost).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTHORITY SECTION -->
+    <section class="authority-section">
+        <div class="container authority-flex">
+            <div class="authority-img">
+                <!-- PLATZHALTER BILD -->
+                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="David Leipi">
+            </div>
+            <div class="authority-text">
+                <h2>Vom "Teenage-Founder" zum Cybersecurity-Experten: Ihr Partner David Leipi</h2>
+                
+                <p style="font-size: 1.1rem; font-weight: 600; color: #1e3a8a; margin-top: 15px;">Webdesign ist für mich kein Hobby. Es ist meine DNA.</p>
+                <p>Ich programmiere nicht erst seit gestern. Ich habe mit 10 Jahren angefangen, Code zu schreiben. Während andere "Webdesigner" bunte Baukästen zusammenklicken, habe ich die Infrastruktur einer Universität mit <b>5.000 Besuchern täglich</b> verwaltet.</p>
+                
+                <p style="margin-top: 15px;">Schon mit 15 Jahren war ich nach einer <b>strengen juristischen Prüfung voll geschäftsfähig</b>. Während Gleichaltrige Taschengeld bekamen, führte ich offiziell eigene Unternehmen in den Bereichen:</p>
+                <ul style="margin-left: 20px; color: #475569; margin-top: 5px;">
+                    <li>🔧 <b>Handy-Reparaturen</b> (Technisches Verständnis)</li>
+                    <li>👕 <b>T-Shirt Design & E-Commerce</b> (Design & Vertrieb)</li>
+                    <li>⛏️ <b>Krypto-Mining</b> (High-Tech Hardware Infrastruktur)</li>
+                </ul>
+
+                <p style="margin-top: 15px;">Heute promoviere ich im Bereich <b>Cybersecurity</b>.</p>
+                
+                <div class="highlight-box">
+                    <b style="color: #1e40af">Warum ist das wichtig für Sie?</b><br>
+                    Weil ich weiß, wie man Systeme baut, die <span style="background: #bfdbfe; padding: 2px 5px; border-radius: 3px;">nicht abstürzen</span>, die <span style="background: #bfdbfe; padding: 2px 5px; border-radius: 3px;">sicher vor Hackern</span> sind und die <span style="background: #bfdbfe; padding: 2px 5px; border-radius: 3px;">verkaufen</span>.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUE STACK SECTION -->
+    <section class="stack-section" id="offer">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.5rem; color: var(--primary-blue);">Ihr "Digital Dominance" Paket</h2>
+            <p class="text-center" style="margin-bottom: 20px; color: #64748b;">Wir bauen Ihnen keine "Homepage". Wir bauen Ihnen einen digitalen Vertriebsmitarbeiter.</p>
+
+            <div class="stack-box">
+                <!-- Item 1 -->
+                <div class="stack-item">
+                    <div>
+                        <div class="stack-name"><i class="fas fa-layer-group"></i> Maßgeschneidertes "Smart-Architektur" Design</div>
+                        <div class="stack-desc">Kein Template. 100% mobil-optimiert für Daumen-Scrolling (Handy).</div>
+                    </div>
+                    <div class="stack-value">3.500 €</div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="stack-item">
+                    <div>
+                        <div class="stack-name"><i class="fas fa-pen-nib"></i> Verkaufspsychologische Texte</div>
+                        <div class="stack-desc">Wir schreiben Texte, die Besucher in zahlende Kunden verwandeln (kein Bla-Bla).</div>
+                    </div>
+                    <div class="stack-value">1.000 €</div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="stack-item">
+                    <div>
+                        <div class="stack-name"><i class="fas fa-shield-alt"></i> Hochsicherheits-Paket (Cybersecurity)</div>
+                        <div class="stack-desc">Sicherheit auf Universitäts-Niveau. SSL, Firewall & Backups.</div>
+                    </div>
+                    <div class="stack-value">500 €</div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="stack-item">
+                    <div>
+                        <div class="stack-name"><i class="fas fa-sync-alt"></i> Das "Atomare Updates" Protokoll</div>
+                        <div class="stack-desc">99,9% Ausfallsicherheit. Nie wieder peinliche Fehlerseiten.</div>
+                    </div>
+                    <div class="stack-value">400 €</div>
+                </div>
+
+                 <!-- Item 5 -->
+                 <div class="stack-item">
+                    <div>
+                        <div class="stack-name"><i class="fas fa-file-contract"></i> Rechtstexte & DSGVO-Schutz</div>
+                        <div class="stack-desc">Abmahnsicheres Impressum & Datenschutz (für Deutschland optimiert).</div>
+                    </div>
+                    <div class="stack-value">300 €</div>
+                </div>
+
+                <!-- BONUS -->
+                <div class="stack-item" style="background: linear-gradient(to right, #ecfeff, #fff);">
+                    <div>
+                        <div class="stack-name" style="color: #0e7490;"><i class="fas fa-gift"></i> BONUS: Buch "Dominanz auf Google"</div>
+                        <div class="stack-desc">Exklusive E-Book Edition (Physisch ausverkauft!). Playbook für Platz 1.</div>
+                    </div>
+                    <div class="stack-value" style="background: #cffafe; color: #0e7490;">97 €</div>
+                </div>
+
+                <!-- TOTAL ROW -->
+                <div class="total-value-row">
+                    <div class="total-value-label">GESAMTWERT PAKET:</div>
+                    <span class="total-value-amount">5.797 €</span>
+                </div>
+
+                <div class="real-price">
+                    Ihr Preis heute: <span style="color: #0ea5e9; text-decoration: underline;">Auf Anfrage</span>
+                    <div style="font-size: 1rem; color: #64748b; font-weight: normal; margin-top: 5px;">(Boutique-Agentur: Preis variiert nach Projektumfang)</div>
+                </div>
+            </div>
+
+            <!-- SCARCITY -->
+            <div class="scarcity-box">
+                <i class="fas fa-exclamation-triangle"></i> 
+                <span>ACHTUNG: Da ich (David) jeden Code persönlich prüfe, nehme ich maximal 3 Neukunden pro Monat an. <br>Aktuell ist noch <b>1 Slot frei</b>.</span>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center">
+                <a href="#contact" class="btn-cta">
+                    JETZT TERMIN SICHERN
+                    <span class="btn-subtext">Kostenloses Erstgespräch mit David persönlich</span>
+                </a>
+            </div>
+            
+            <p class="text-center" style="margin-top: 25px; font-size: 0.9rem; color: #666;">
+                <i class="fas fa-lock"></i> <b>Unsere "No Catch" Garantie:</b> Wenn Ihnen unser Entwurf im Gespräch nicht gefällt, haben Sie keinen Cent verloren. Wir tragen das Risiko.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 NetGains Webdesign. Alle Rechte vorbehalten.</p>
+            <p style="margin-top: 10px;">
+                <a href="#">Impressum</a> | 
+                <a href="#">Datenschutz</a> | 
+                <a href="#">AGB</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">
+                Haftungsausschluss: Die Ergebnisse können variieren.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
