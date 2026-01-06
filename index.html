@@ -25,9 +25,9 @@
             --red-gradient: linear-gradient(45deg, #d50000 0%, #ff1744 100%);
             
             /* Glass Effects */
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.9);
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.65); /* More transparent for stronger effect */
+            --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
             
             /* Colors */
             --text-dark: #0f172a; /* Deep Navy Blue Black */
@@ -36,6 +36,10 @@
             --success-cyan: #06b6d4;
             --danger-red: #d50000; /* Stärkeres Rot für Preise */
             --price-green: #00E676; /* Knalliges Grün für den Hauptpreis */
+            
+            /* Shadows */
+            --neon-shadow: 0 20px 60px rgba(79, 70, 229, 0.4), 0 0 0 1px rgba(255,255,255,0.5) inset;
+            --neon-shadow-hover: 0 30px 80px rgba(79, 70, 229, 0.6), 0 0 20px rgba(255,255,255,0.8) inset;
         }
 
         * {
@@ -68,8 +72,8 @@
         /* --- GLASS MORPHISM UTILS --- */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: var(--glass-border);
             border-radius: 16px;
             box-shadow: var(--glass-shadow);
@@ -298,30 +302,39 @@
         .authority-text h2 { color: var(--primary-blue); font-size: 2.5rem; }
         .highlight-box { background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%); border-left: 5px solid #3b82f6; padding: 20px; border-radius: 10px; margin-top: 20px; color: #1e3a8a; }
 
-        /* --- DEEP DIVE FEATURE SECTIONS (VERTICAL & CENTERED) --- */
+        /* --- DEEP DIVE FEATURE SECTIONS (LIQUID GLASS UPGRADE) --- */
         .features-detail-section {
-            padding: 80px 0;
-            background: #fff;
+            padding: 100px 0;
+            /* Subtiler Tech-Gradient Background, damit Glass wirkt */
+            background: linear-gradient(135deg, #f0f4ff 0%, #dbeafe 50%, #ede9fe 100%);
         }
 
-        /* NEW MASSIVE CARD STYLE */
+        /* NEW MASSIVE CARD STYLE WITH LIQUID GLASS */
         .feature-card {
-            background: #ffffff;
+            /* Milchiges, halb-transparentes Weiß */
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            
+            border: 1px solid rgba(255, 255, 255, 0.8);
             border-radius: 30px;
             padding: 80px 40px;
             margin-bottom: 100px;
-            /* Knalliger Drop Shadow: Blue/Purple Glow */
-            box-shadow: 0 20px 60px rgba(79, 70, 229, 0.25), 0 10px 20px rgba(79, 70, 229, 0.2);
-            border: 1px solid rgba(0,0,0,0.05);
-            text-align: center; /* Center everything */
+            
+            /* KNALLIGER NEON SHADOW */
+            box-shadow: var(--neon-shadow);
+            
+            text-align: center;
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 80px rgba(79, 70, 229, 0.4);
+            transform: translateY(-10px) scale(1.01);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: var(--neon-shadow-hover);
+            border-color: #fff;
         }
 
         .feature-title-large {
@@ -339,7 +352,7 @@
             color: var(--danger-red);
             margin-bottom: 40px;
             display: block;
-            text-shadow: 0 2px 10px rgba(213, 0, 0, 0.1);
+            text-shadow: 0 0 20px rgba(213, 0, 0, 0.2); /* Red Glow */
         }
 
         .feature-img-container {
@@ -351,7 +364,8 @@
         .feature-img-container img {
             width: 100%;
             border-radius: 20px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            /* Floating Shadow */
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
             transition: transform 0.4s ease;
         }
 
@@ -362,39 +376,93 @@
         .feature-description {
             font-size: 1.4rem;
             line-height: 1.8;
-            color: var(--text-light);
+            color: var(--text-dark);
             max-width: 800px;
             margin: 0 auto;
+            opacity: 0.9;
         }
         
         .feature-description b {
-            color: var(--text-dark);
+            color: #000;
+            background: linear-gradient(120deg, #dbeafe 0%, #ede9fe 100%);
+            padding: 0 5px;
         }
 
-        /* --- STACK SECTION --- */
-        .stack-section { padding: 80px 0; background: linear-gradient(to bottom, #f0f9ff, #eef2ff); }
-        .stack-box { background: rgba(255, 255, 255, 0.9); border: 1px solid #fff; box-shadow: 0 20px 80px rgba(30, 58, 138, 0.1); border-radius: 24px; padding: 50px; margin-top: 40px; position: relative; overflow: hidden; }
-        .stack-box::before { content: ''; position: absolute; top: -50px; right: -50px; width: 250px; height: 250px; background: rgba(59, 130, 246, 0.1); border-radius: 50%; filter: blur(50px); }
-        .stack-item { display: flex; justify-content: space-between; align-items: center; padding: 25px 0; border-bottom: 1px solid rgba(30, 58, 138, 0.08); transition: background 0.3s; }
-        .stack-item:hover { background: rgba(239, 246, 255, 0.7); border-radius: 10px; padding-left: 15px; padding-right: 15px; }
+        /* --- STACK SECTION (LIQUID & INTENSE) --- */
+        .stack-section { 
+            padding: 120px 0; 
+            /* Kräftigerer Hintergrund für Kontrast */
+            background: linear-gradient(150deg, #4338ca 0%, #4f46e5 50%, #818cf8 100%);
+            position: relative;
+        }
+        
+        /* Background Mesh Effect */
+        .stack-section::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .stack-section h2 { color: white !important; text-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .stack-section p { color: #e0e7ff !important; font-size: 1.2rem; }
+
+        .stack-box { 
+            background: rgba(255, 255, 255, 0.85); /* Etwas deckender für Lesbarkeit */
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.5) inset;
+            border-radius: 30px; 
+            padding: 60px; 
+            margin-top: 50px; 
+            position: relative; 
+            overflow: hidden; 
+            transform: translateZ(0); /* Hardware Accel */
+        }
+        
+        .stack-box::before { 
+            content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; 
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 70%); 
+            border-radius: 50%; filter: blur(60px); pointer-events: none;
+        }
+        
+        .stack-item { 
+            display: flex; justify-content: space-between; align-items: center; padding: 25px 0; 
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08); 
+            transition: all 0.3s; 
+        }
+        .stack-item:hover { 
+            background: rgba(255, 255, 255, 0.6); 
+            border-radius: 15px; padding-left: 20px; padding-right: 20px; transform: scale(1.01);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
         .stack-item:last-child { border-bottom: none; }
-        .stack-name { font-size: 1.3rem; font-weight: 700; color: var(--primary-blue); }
-        .stack-name i { color: #0ea5e9; margin-right: 10px; }
-        .stack-desc { font-size: 0.95rem; color: #64748b; margin-left: 32px; margin-top: 5px; }
+        
+        .stack-name { font-size: 1.4rem; font-weight: 700; color: #1e3a8a; }
+        .stack-name i { color: #4338ca; margin-right: 15px; }
+        .stack-desc { font-size: 1rem; color: #475569; margin-left: 38px; margin-top: 5px; }
         
         /* Red Value in Stack */
-        .stack-value { font-size: 1.8rem; font-weight: 800; color: var(--danger-red); background: #fff1f2; padding: 5px 15px; border-radius: 8px; min-width: 140px; text-align: right; }
+        .stack-value { font-size: 1.8rem; font-weight: 800; color: var(--danger-red); background: #fff1f2; padding: 8px 20px; border-radius: 12px; min-width: 150px; text-align: right; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        .total-value-row { margin-top: 40px; text-align: center; background: var(--hero-gradient); color: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3); }
-        .total-value-amount { font-size: 3rem; background: linear-gradient(to right, #ffffff, #67e8f9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: line-through; font-weight: 800; display: block; }
+        .total-value-row { 
+            margin-top: 50px; text-align: center; 
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); 
+            color: white; padding: 40px; border-radius: 20px; 
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .total-value-amount { font-size: 3.5rem; background: linear-gradient(to right, #fff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: line-through; font-weight: 800; display: block; margin-top: 10px; }
         
         /* Updated Real Price: GREEN and BIGGER */
-        .real-price { text-align: center; margin-top: 30px; font-size: 2.2rem; font-weight: 800; color: var(--primary-blue); }
+        .real-price { text-align: center; margin-top: 40px; font-size: 2.5rem; font-weight: 800; color: #1e3a8a; }
         .real-price span {
-            color: var(--price-green) !important;
-            font-size: 3.5rem;
+            color: #00E676 !important;
+            font-size: 4rem;
             text-decoration: none !important;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 4px 20px rgba(0, 230, 118, 0.4); /* Green Neon Glow */
+            display: block;
+            margin-top: 10px;
         }
 
         /* --- SCARCITY & FOOTER --- */
@@ -406,8 +474,8 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
-            .feature-title-large { font-size: 2.2rem; }
-            .feature-value-large { font-size: 2.5rem; }
+            .feature-title-large { font-size: 2rem; }
+            .feature-value-large { font-size: 2.2rem; }
             .stack-item { flex-direction: column; text-align: center; align-items: center;}
             .stack-value { margin-top: 15px; width: 100%; text-align: center; }
             .stack-desc { margin-left: 0; }
@@ -416,6 +484,7 @@
             .new-way { transform: scale(1); }
             .stack-box { padding: 20px; }
             .feature-card { padding: 30px; }
+            .real-price span { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -536,7 +605,7 @@
         </div>
     </section>
 
-    <!-- DEEP DIVE FEATURE SECTIONS (NEW VERTICAL LAYOUT) -->
+    <!-- DEEP DIVE FEATURE SECTIONS (NEW VERTICAL LAYOUT WITH GLASS) -->
     <section class="features-detail-section">
         <div class="container">
             <h2 class="text-center" style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 80px;">Lassen Sie uns einen Blick in den Maschinenraum werfen:</h2>
@@ -622,11 +691,11 @@
         </div>
     </section>
 
-    <!-- VALUE STACK SECTION -->
+    <!-- VALUE STACK SECTION (INTENSE GLASS) -->
     <section class="stack-section" id="offer">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; color: var(--primary-blue);">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
-            <p class="text-center" style="margin-bottom: 20px; color: #64748b;">Hier sehen Sie schwarz auf weiß, warum dieses Angebot ein "No-Brainer" ist.</p>
+            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
+            <p class="text-center" style="margin-bottom: 20px;">Hier sehen Sie schwarz auf weiß, warum dieses Angebot ein "No-Brainer" ist.</p>
 
             <div class="stack-box">
                 <!-- Stack Items ... -->
@@ -686,7 +755,7 @@
 
                 <div class="real-price">
                     Ihr Preis heute: <span>899 € + 39 € / mtl.</span>
-                    <div style="font-size: 1rem; color: #64748b; font-weight: normal; margin-top: 5px;">(Boutique-Agentur: Festpreis + Wartung & Hosting)</div>
+                    <div style="font-size: 1rem; color: #1e3a8a; font-weight: 600; margin-top: 10px;">(Boutique-Agentur: Festpreis + Wartung & Hosting)</div>
                 </div>
             </div>
 
