@@ -248,8 +248,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 900;
-            /* INTENSE GLOW EFFECT */
-            filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.8)) drop-shadow(0 0 30px rgba(34, 211, 238, 0.4));
+            /* BETTER READABLE GLOW (LESS BLUR, MORE OPACITY) */
+            filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.8)) drop-shadow(0 0 15px rgba(34, 211, 238, 0.4));
         }
         
         .red-underline {
@@ -402,7 +402,7 @@
         /* --- SHOWCASE / PORTFOLIO SECTION (LAPTOP CSS MOCKUPS) --- */
         .showcase-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 60px;
             margin-top: 60px;
         }
@@ -768,6 +768,21 @@
                         <p>Öffnungszeiten und Adresse direkt "Above the Fold".</p>
                     </div>
                 </div>
+
+                <!-- Example 3 -->
+                <div class="laptop-wrapper">
+                    <div class="laptop-mockup">
+                        <div class="laptop-screen">
+                            <!-- User's specific image filename -->
+                            <img src="ex3.jpg" alt="Website Screenshot mit Buchungskalender" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                    <div class="showcase-caption">
+                        <h4>Beispiel C: Dienstleistung</h4>
+                        <p>Direktbuchung im Kalender ohne Email-Ping-Pong.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -776,7 +791,8 @@
     <section class="authority-section">
         <div class="container authority-flex">
             <div class="authority-img">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="David Leipi">
+                <!-- Abstract Tech Image instead of Human -->
+                <img src="https://images.unsplash.com/photo-1558494949-ef526b0042a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Server Technologie">
             </div>
             <div class="authority-text">
                 <h2>Vom "Teenage-Founder" zum Cybersecurity-Experten: Ihr Partner David Leipi</h2>
@@ -794,7 +810,7 @@
                 <p style="margin-top: 15px;">Heute promoviere ich im Bereich <b>Cybersecurity</b>.</p>
                 
                 <div class="highlight-box">
-                    <b style="color: var(--accent-indigo)">Warum ist das wichtig für Sie?</b><br>
+                    <b style="color: var(--accent-cyan)">Warum ist das wichtig für Sie?</b><br>
                     Weil ich weiß, wie man Systeme baut, die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">nicht abstürzen</span>, die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">sicher vor Hackern</span> sind und die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">verkaufen</span>.
                 </div>
             </div>
