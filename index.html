@@ -10,36 +10,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- MODERN VARIABLES (BLUE-PURPLE EDITION) --- */
+        /* --- NETGAINS DIGITAL DESIGN SYSTEM --- */
+        /* Focus: Premium Glassmorphism & High-Contrast Dark Mode */
+
         :root {
-            /* Hintergrund Gradients: Blau oben -> Lila unten */
-            --bg-gradient: linear-gradient(to bottom, #f0f7ff 0%, #f3e5f5 100%);
+            /* Color Tokens */
+            --bg-dark: #020617;
+            --accent-indigo: #4f46e5;
+            --accent-cyan: #22d3ee;
+            --accent-pink: #db2777;
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1; /* slate-300 */
             
-            /* Hero Gradient: Deep Blue to Purple */
-            --hero-gradient: linear-gradient(to bottom, #020024 0%, #090979 35%, #5d26c1 100%);
+            /* Glass Effect Tokens */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: 50px;
             
-            /* Accent Gradient: Cyan to Blue/Purple (Default) */
-            --accent-gradient: linear-gradient(to bottom, #00c6ff 0%, #0072ff 100%); 
-            
-            /* RED Gradient for CTA */
-            --red-gradient: linear-gradient(45deg, #d50000 0%, #ff1744 100%);
-            
-            /* Glass Effects */
-            --glass-bg: rgba(255, 255, 255, 0.65); /* More transparent for stronger effect */
-            --glass-border: 1px solid rgba(255, 255, 255, 0.6);
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            
-            /* Colors */
-            --text-dark: #0f172a; /* Deep Navy Blue Black */
-            --text-light: #475569;
-            --primary-blue: #1e3a8a; /* Strong Blue for Text headers */
-            --success-cyan: #06b6d4;
-            --danger-red: #d50000; /* Stärkeres Rot für Preise */
-            --price-green: #00E676; /* Knalliges Grün für den Hauptpreis */
-            
-            /* Shadows */
-            --neon-shadow: 0 20px 60px rgba(79, 70, 229, 0.4), 0 0 0 1px rgba(255,255,255,0.5) inset;
-            --neon-shadow-hover: 0 30px 80px rgba(79, 70, 229, 0.6), 0 0 20px rgba(255,255,255,0.8) inset;
+            /* Legacy Variables Adaptation */
+            --danger-red: #ff1744;
+            --price-green: #00E676;
         }
 
         * {
@@ -51,9 +41,10 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--bg-gradient);
-            background-attachment: fixed;
+            color: var(--text-primary);
+            background-color: var(--bg-dark);
+            overflow-x: hidden; /* Prevent horizontal scroll from blobs */
+            position: relative;
         }
 
         h1, h2, h3, h4 {
@@ -61,36 +52,120 @@
             text-transform: uppercase;
             line-height: 1.2;
             letter-spacing: 0.5px;
+            color: var(--text-primary);
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 10; /* Content above blobs */
         }
 
-        /* --- GLASS MORPHISM UTILS --- */
-        .glass-card {
+        /* --- BACKGROUND ANIMATION BLOBS --- */
+        .blob-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: move-gradient 20s infinite alternate ease-in-out;
+            border-radius: 50%;
+        }
+
+        .blob-1 {
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: var(--accent-indigo);
+        }
+
+        .blob-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: var(--accent-cyan);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            top: 40%;
+            left: 40%;
+            width: 40vw;
+            height: 40vw;
+            background: var(--accent-pink);
+            opacity: 0.2;
+            animation-delay: -10s;
+        }
+
+        @keyframes move-gradient {
+            0% { 
+                transform: translate(0, 0) rotate(0deg) scale(1); 
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
+            }
+            33% { 
+                transform: translate(50px, -30px) rotate(10deg) scale(1.1); 
+                border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; 
+            }
+            100% { 
+                transform: translate(20px, 20px) rotate(5deg) scale(1.05); 
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
+            }
+        }
+
+        /* --- CORE GLASS PANEL CLASS (Used for Cards & Stack) --- */
+        .glass-panel {
+            position: relative;
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: var(--glass-border);
-            border-radius: 16px;
-            box-shadow: var(--glass-shadow);
-            padding: 30px;
-            transition: transform 0.3s ease;
+            backdrop-filter: blur(var(--glass-blur)) saturate(150%) brightness(110%);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%) brightness(110%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
         }
 
-        .glass-card:hover {
+        /* Noise Texture Overlay */
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.07;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Ensure content is above noise */
+        .glass-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-panel:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 40px 0 rgba(0, 114, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(79, 70, 229, 0.2); /* Glow on hover */
         }
 
         /* --- BUTTONS --- */
         .btn-cta {
-            background: var(--accent-gradient);
+            background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-pink) 100%);
             color: white;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
             padding: 22px 45px;
             font-size: 1.4rem;
             font-weight: 800;
@@ -100,7 +175,7 @@
             text-decoration: none;
             display: inline-block;
             margin-top: 25px;
-            box-shadow: 0 10px 20px rgba(0, 114, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(219, 39, 119, 0.3);
             transition: all 0.3s ease;
             width: 100%;
             max-width: 650px;
@@ -109,40 +184,27 @@
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
+            z-index: 2;
         }
 
         .btn-cta:hover {
             transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 114, 255, 0.5);
+            box-shadow: 0 15px 40px rgba(219, 39, 119, 0.5);
         }
 
-        /* Specific RED CTA Style */
         .btn-cta-red {
-            background: var(--red-gradient);
-            box-shadow: 0 10px 20px rgba(213, 0, 0, 0.4);
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
         }
         .btn-cta-red:hover {
-            box-shadow: 0 15px 30px rgba(213, 0, 0, 0.6);
-        }
-        
-        .btn-cta::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s;
-        }
-        
-        .btn-cta:hover::after {
-            left: 100%;
+            box-shadow: 0 15px 40px rgba(239, 68, 68, 0.5);
         }
 
         .btn-subtext {
             display: block;
             font-size: 0.85rem;
             font-weight: 600;
-            opacity: 0.95;
+            opacity: 0.9;
             text-transform: none;
             margin-top: 5px;
             font-family: 'Inter', sans-serif;
@@ -151,27 +213,14 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            background: var(--hero-gradient);
-            color: white;
-            padding: 40px 0 100px 0;
+            padding: 60px 0 100px 0;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-        
-        /* Decorative circles */
-        .hero::before {
-            content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(123, 67, 151, 0.3) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;
-        }
-        .hero::after {
-            content: ''; position: absolute; bottom: -50px; left: -50px; width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(0, 198, 255, 0.2) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;
         }
 
         .pre-headline {
             background: rgba(255, 255, 255, 0.1);
-            color: #67e8f9;
+            color: var(--accent-cyan);
             padding: 8px 16px;
             border-radius: 20px;
             font-weight: 700;
@@ -179,25 +228,22 @@
             letter-spacing: 1px;
             margin-bottom: 20px;
             display: inline-block;
-            border: 1px solid rgba(103, 232, 249, 0.3);
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
-            background: linear-gradient(to bottom, #ffffff, #c4b5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+            color: white;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .text-highlight {
-            background: linear-gradient(120deg, #2563eb 0%, #7c3aed 100%);
-            -webkit-text-fill-color: white;
-            padding: 0 10px;
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+            background: linear-gradient(120deg, var(--accent-cyan) 0%, var(--accent-indigo) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
         }
         
         .red-underline {
@@ -205,12 +251,11 @@
             text-decoration-color: var(--danger-red);
             text-decoration-thickness: 5px;
             text-underline-offset: 8px;
-            -webkit-text-fill-color: white; 
         }
 
         .hero-sub {
             font-size: 1.25rem;
-            color: #e2e8f0;
+            color: var(--text-secondary);
             margin-bottom: 50px;
             max-width: 800px;
             margin-left: auto;
@@ -220,11 +265,12 @@
 
         .video-wrapper {
             max-width: 850px;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 30px auto;
             border-radius: 20px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid var(--glass-border);
+            /* Glass wrapper for video */
+            background: rgba(0,0,0,0.5);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
             aspect-ratio: 16 / 9;
             display: flex;
             align-items: center;
@@ -238,34 +284,43 @@
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            border: 2px solid #67e8f9;
+            border: 2px solid var(--accent-cyan);
             transition: all 0.3s;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(103, 232, 249, 0.2);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
         }
-        .play-btn:hover { background: #67e8f9; transform: scale(1.1); border-color: #67e8f9; }
+        .play-btn:hover { background: var(--accent-cyan); transform: scale(1.1); border-color: var(--accent-cyan); }
         .play-btn i { color: white; margin-left: 5px; }
-        .play-btn:hover i { color: #1e3a8a; }
+        .play-btn:hover i { color: #000; }
 
         .hero-scarcity {
-            color: #ffcc00; /* Yellow for high contrast on dark bg */
+            color: var(--accent-cyan);
             font-weight: 700;
-            margin-top: 15px;
-            font-size: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin-top: 20px;
+            font-size: 1.1rem;
+            text-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
             animation: pulse 2s infinite;
         }
         
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% { opacity: 0.7; }
+            50% { opacity: 1; text-shadow: 0 0 30px rgba(34, 211, 238, 0.8); }
+            100% { opacity: 0.7; }
+        }
+
+        /* --- SECTIONS SPACING --- */
+        .problem-section, .features-detail-section, .stack-section { 
+            padding: 120px 0; 
+            position: relative; 
         }
 
         /* --- PROBLEM SECTION --- */
-        .problem-section { padding: 80px 0; position: relative; }
         .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .problem-card { border-left: 6px solid var(--danger-red); }
+        .problem-card {
+            border-left: 4px solid var(--danger-red);
+        }
+        .problem-card h3 { color: var(--text-primary); margin-bottom: 15px; }
+        .problem-card p { color: var(--text-secondary); }
         .problem-card > i {
             font-size: 2.5rem;
             background: -webkit-linear-gradient(45deg, #ef4444, #be123c);
@@ -275,84 +330,65 @@
         }
 
         /* --- EPIPHANY & AUTHORITY SECTIONS --- */
-        .epiphany-section {
-            padding: 100px 0;
-            background: linear-gradient(160deg, #0f172a 0%, #312e81 100%);
-            color: white;
-            position: relative;
-        }
-        .epiphany-section::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.1) 0px, transparent 50%), radial-gradient(at 90% 90%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
-        }
         .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 60px; position: relative; z-index: 2; }
-        .old-way { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); color: #94a3b8; }
-        .new-way { background: rgba(30, 58, 138, 0.4); backdrop-filter: blur(15px); padding: 40px; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.3); box-shadow: 0 0 50px rgba(59, 130, 246, 0.15); position: relative; transform: scale(1.05); color: white; }
-        .new-way-badge { position: absolute; top: -20px; right: 30px; background: var(--accent-gradient); color: white; padding: 8px 20px; font-weight: 700; border-radius: 30px; text-transform: uppercase; font-size: 0.85rem; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        
+        .old-way { 
+            background: rgba(255, 0, 0, 0.05); 
+            border: 1px solid rgba(255, 0, 0, 0.1); 
+            padding: 40px; border-radius: 20px; color: var(--text-secondary); 
+        }
+        
+        .new-way { 
+            /* Using Glass Panel logic here too but specific */
+            position: relative;
+            background: rgba(34, 211, 238, 0.05);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 50px rgba(34, 211, 238, 0.1);
+            padding: 40px; border-radius: 20px; color: var(--text-primary);
+            transform: scale(1.05); 
+        }
+        
+        .new-way-badge { position: absolute; top: -20px; right: 30px; background: var(--accent-cyan); color: #000; padding: 8px 20px; font-weight: 700; border-radius: 30px; text-transform: uppercase; font-size: 0.85rem; box-shadow: 0 0 20px rgba(34, 211, 238, 0.5); }
+        
         .comparison-list { list-style: none; margin-top: 30px; }
         .comparison-list li { margin-bottom: 25px; display: flex; align-items: flex-start; font-size: 1.1rem; }
         .icon-emoji { font-size: 1.8rem; margin-right: 15px; line-height: 1.2; min-width: 40px; text-align: center; }
-        .text-content { padding-top: 5px; }
-        .old-way b { color: #f87171; } .new-way b { color: #67e8f9; }
-        .authority-section { padding: 100px 0; background: #fff; }
+        
         .authority-flex { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 60px; }
-        .authority-img { flex: 0 0 auto; width: 100%; max-width: 350px; }
-        .authority-img img { width: 100%; height: auto; border-radius: 20px; box-shadow: 20px 20px 60px #cbd5e1, -20px -20px 60px #ffffff; }
-        .authority-text { flex: 1; min-width: 300px; }
-        .authority-text h2 { color: var(--primary-blue); font-size: 2.5rem; }
-        .highlight-box { background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%); border-left: 5px solid #3b82f6; padding: 20px; border-radius: 10px; margin-top: 20px; color: #1e3a8a; }
-
-        /* --- DEEP DIVE FEATURE SECTIONS (LIQUID GLASS UPGRADE) --- */
-        .features-detail-section {
-            padding: 100px 0;
-            /* Subtiler Tech-Gradient Background, damit Glass wirkt */
-            background: linear-gradient(135deg, #f0f4ff 0%, #dbeafe 50%, #ede9fe 100%);
+        .authority-img img { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid var(--glass-border); }
+        .authority-text h2 { color: var(--text-primary); font-size: 2.5rem; }
+        .authority-text p { color: var(--text-secondary); }
+        .highlight-box { 
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%); 
+            border-left: 4px solid var(--accent-cyan); 
+            padding: 20px; border-radius: 10px; margin-top: 20px; color: var(--text-primary); border: 1px solid var(--glass-border);
         }
 
-        /* NEW MASSIVE CARD STYLE WITH LIQUID GLASS */
+        /* --- DEEP DIVE FEATURE SECTIONS (NEW DESIGN) --- */
         .feature-card {
-            /* Milchiges, halb-transparentes Weiß */
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 30px;
-            padding: 80px 40px;
+            /* Adopting .glass-panel styles + specific layout */
             margin-bottom: 100px;
-            
-            /* KNALLIGER NEON SHADOW */
-            box-shadow: var(--neon-shadow);
-            
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.01);
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: var(--neon-shadow-hover);
-            border-color: #fff;
         }
 
         .feature-title-large {
-            font-size: 3.5rem; /* RIESIG */
+            font-size: 3rem; 
             font-weight: 800;
-            color: var(--primary-blue);
+            background: linear-gradient(to right, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
-            line-height: 1.1;
             text-transform: uppercase;
         }
 
         .feature-value-large {
-            font-size: 3rem; /* RIESIG ROT */
+            font-size: 2.5rem; 
             font-weight: 900;
             color: var(--danger-red);
             margin-bottom: 40px;
             display: block;
-            text-shadow: 0 0 20px rgba(213, 0, 0, 0.2); /* Red Glow */
+            text-shadow: 0 0 30px rgba(255, 23, 68, 0.4);
         }
 
         .feature-img-container {
@@ -364,9 +400,9 @@
         .feature-img-container img {
             width: 100%;
             border-radius: 20px;
-            /* Floating Shadow */
-            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5); /* Deeper shadow for dark mode */
             transition: transform 0.4s ease;
+            border: 1px solid var(--glass-border);
         }
 
         .feature-img-container img:hover {
@@ -374,103 +410,101 @@
         }
 
         .feature-description {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             line-height: 1.8;
-            color: var(--text-dark);
+            color: var(--text-secondary);
             max-width: 800px;
             margin: 0 auto;
-            opacity: 0.9;
         }
         
         .feature-description b {
-            color: #000;
-            background: linear-gradient(120deg, #dbeafe 0%, #ede9fe 100%);
-            padding: 0 5px;
+            color: var(--text-primary);
+            font-weight: 700;
         }
 
-        /* --- STACK SECTION (LIQUID & INTENSE) --- */
-        .stack-section { 
-            padding: 120px 0; 
-            /* Kräftigerer Hintergrund für Kontrast */
-            background: linear-gradient(150deg, #4338ca 0%, #4f46e5 50%, #818cf8 100%);
-            position: relative;
-        }
-        
-        /* Background Mesh Effect */
-        .stack-section::after {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 40%);
-            pointer-events: none;
-        }
-
-        .stack-section h2 { color: white !important; text-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .stack-section p { color: #e0e7ff !important; font-size: 1.2rem; }
-
+        /* --- STACK SECTION (High Intensity Glass) --- */
         .stack-box { 
-            background: rgba(255, 255, 255, 0.85); /* Etwas deckender für Lesbarkeit */
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.5) inset;
-            border-radius: 30px; 
-            padding: 60px; 
+            /* Inherits .glass-panel styles via class, adding specific overrides */
             margin-top: 50px; 
-            position: relative; 
-            overflow: hidden; 
-            transform: translateZ(0); /* Hardware Accel */
-        }
-        
-        .stack-box::before { 
-            content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; 
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 70%); 
-            border-radius: 50%; filter: blur(60px); pointer-events: none;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.05); /* Slightly different for stack */
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
         
         .stack-item { 
             display: flex; justify-content: space-between; align-items: center; padding: 25px 0; 
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08); 
+            border-bottom: 1px solid var(--glass-border); 
             transition: all 0.3s; 
         }
         .stack-item:hover { 
-            background: rgba(255, 255, 255, 0.6); 
+            background: rgba(255, 255, 255, 0.05); 
             border-radius: 15px; padding-left: 20px; padding-right: 20px; transform: scale(1.01);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         .stack-item:last-child { border-bottom: none; }
         
-        .stack-name { font-size: 1.4rem; font-weight: 700; color: #1e3a8a; }
-        .stack-name i { color: #4338ca; margin-right: 15px; }
-        .stack-desc { font-size: 1rem; color: #475569; margin-left: 38px; margin-top: 5px; }
+        .stack-name { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); }
+        .stack-name i { color: var(--accent-cyan); margin-right: 15px; }
+        .stack-desc { font-size: 1rem; color: var(--text-secondary); margin-left: 38px; margin-top: 5px; }
         
-        /* Red Value in Stack */
-        .stack-value { font-size: 1.8rem; font-weight: 800; color: var(--danger-red); background: #fff1f2; padding: 8px 20px; border-radius: 12px; min-width: 150px; text-align: right; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        /* Value Box */
+        .stack-value { 
+            font-size: 1.8rem; font-weight: 800; 
+            color: var(--danger-red); 
+            background: rgba(255, 23, 68, 0.1); 
+            border: 1px solid rgba(255, 23, 68, 0.3);
+            padding: 8px 20px; border-radius: 12px; min-width: 150px; text-align: right; 
+            text-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
+        }
 
         .total-value-row { 
             margin-top: 50px; text-align: center; 
-            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); 
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%); 
+            border: 1px solid var(--glass-border);
             color: white; padding: 40px; border-radius: 20px; 
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255,255,255,0.1);
         }
-        .total-value-amount { font-size: 3.5rem; background: linear-gradient(to right, #fff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: line-through; font-weight: 800; display: block; margin-top: 10px; }
+        .total-value-amount { 
+            font-size: 3.5rem; 
+            color: var(--text-secondary);
+            text-decoration: line-through; font-weight: 800; display: block; margin-top: 10px; opacity: 0.7;
+        }
         
-        /* Updated Real Price: GREEN and BIGGER */
-        .real-price { text-align: center; margin-top: 40px; font-size: 2.5rem; font-weight: 800; color: #1e3a8a; }
+        /* Updated Real Price */
+        .real-price { text-align: center; margin-top: 40px; font-size: 2.5rem; font-weight: 800; color: var(--text-primary); }
         .real-price span {
-            color: #00E676 !important;
-            font-size: 4rem;
+            color: var(--price-green) !important;
+            font-size: 4rem; /* Main Price Typography */
             text-decoration: none !important;
-            text-shadow: 0 4px 20px rgba(0, 230, 118, 0.4); /* Green Neon Glow */
+            text-shadow: 0 0 40px rgba(0, 230, 118, 0.6); /* Intense Neon Glow */
             display: block;
             margin-top: 10px;
+            letter-spacing: -0.025em;
+        }
+        .secondary-cost {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+            display: block;
+            margin-top: 5px;
         }
 
         /* --- SCARCITY & FOOTER --- */
-        .scarcity-box { background: #e0f2fe; border: 2px solid #0ea5e9; color: #0369a1; padding: 20px; text-align: center; font-weight: 600; margin: 30px auto; max-width: 800px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 15px; }
-        .scarcity-box i { font-size: 1.5rem; color: #0ea5e9; }
-        .footer { background: #020617; color: #94a3b8; padding: 60px 0; text-align: center; font-size: 0.9rem; border-top: 1px solid #1e293b; }
-        .footer a { color: #cbd5e1; text-decoration: none; transition: color 0.3s; }
-        .footer a:hover { color: white; }
+        .scarcity-box { 
+            background: rgba(34, 211, 238, 0.1); 
+            border: 1px solid var(--accent-cyan); 
+            color: var(--accent-cyan); 
+            padding: 20px; text-align: center; font-weight: 600; margin: 30px auto; max-width: 800px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 15px; 
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+        }
+        .scarcity-box i { font-size: 1.5rem; }
+        
+        .footer { 
+            background: #000; 
+            color: var(--text-secondary); 
+            padding: 60px 0; text-align: center; font-size: 0.9rem; border-top: 1px solid var(--glass-border); 
+            position: relative; z-index: 10;
+        }
+        .footer a { color: var(--text-primary); text-decoration: none; transition: color 0.3s; opacity: 0.7; }
+        .footer a:hover { opacity: 1; color: var(--accent-cyan); }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
@@ -482,13 +516,19 @@
             .authority-flex { flex-direction: column-reverse; }
             .comparison-grid { grid-template-columns: 1fr; gap: 30px; }
             .new-way { transform: scale(1); }
-            .stack-box { padding: 20px; }
-            .feature-card { padding: 30px; }
+            .glass-panel { padding: 25px; }
             .real-price span { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ANIMATED BACKGROUND BLOBS -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
     <!-- HERO SECTION -->
     <section class="hero">
@@ -504,7 +544,7 @@
                     <div class="play-btn">
                         <i class="fas fa-play" style="font-size: 24px;"></i>
                     </div>
-                    <div style="margin-top: 20px; font-weight: 600;">David Leipi erklärt das System<br><span style="font-size: 0.8rem; font-weight: 300;">(Bitte Sound einschalten)</span></div>
+                    <div style="margin-top: 20px; font-weight: 600; color: white;">David Leipi erklärt das System<br><span style="font-size: 0.8rem; font-weight: 300;">(Bitte Sound einschalten)</span></div>
                 </div>
             </div>
 
@@ -522,21 +562,21 @@
     <!-- PROBLEM SECTION -->
     <section class="problem-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.2rem; margin-bottom: 10px; color: var(--primary-blue);">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
-            <p class="text-center" style="color: var(--text-light);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
+            <h2 class="text-center" style="font-size: 2.2rem; margin-bottom: 10px; color: var(--text-primary);">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
+            <p class="text-center" style="color: var(--text-secondary);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
             
             <div class="problem-grid">
-                <div class="glass-card problem-card">
+                <div class="glass-panel problem-card">
                     <i class="fas fa-history"></i>
                     <h3>Der "2008"-Effekt</h3>
                     <p>Ihre Website sieht aus wie aus der Zeit vor dem iPhone? Kunden schließen daraus leider sofort: <i>"Dieses Unternehmen ist veraltet und arbeitet langsam."</i> Sie verlieren Vertrauen in Sekunden.</p>
                 </div>
-                <div class="glass-card problem-card">
+                <div class="glass-panel problem-card">
                     <i class="fas fa-store-slash"></i>
                     <h3>Der "Unsichtbare"-Status</h3>
                     <p><b>Sie haben noch gar keine Website?</b> Oder eine Seite, die niemand findet? Dann existieren Sie für Kunden unter 40 Jahren praktisch nicht. Konkurrenten ziehen an Ihnen vorbei.</p>
                 </div>
-                <div class="glass-card problem-card">
+                <div class="glass-panel problem-card">
                     <i class="fas fa-cogs"></i>
                     <h3>Die Technik-Falle</h3>
                     <p>Haben Sie schon mal erlebt, dass eine Seite nicht lädt ("Fehler 404")? Das passiert bei billigem Hosting ständig. Kunden kommen nie wieder, wenn die digitale Tür klemmt.</p>
@@ -548,8 +588,8 @@
     <!-- EPIPHANY BRIDGE SECTION -->
     <section class="epiphany-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; color: #fff;">Warum klassische Websites ausgedient haben</h2>
-            <p class="text-center" style="max-width: 700px; margin: 0 auto; color: #cbd5e1;">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
+            <h2 class="text-center" style="font-size: 2.5rem;">Warum klassische Websites ausgedient haben</h2>
+            <p class="text-center" style="max-width: 700px; margin: 0 auto; color: var(--text-secondary);">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
 
             <div class="comparison-grid">
                 <div class="old-way">
@@ -564,7 +604,7 @@
 
                 <div class="new-way">
                     <div class="new-way-badge">Das NetGains System</div>
-                    <h3 style="color: #67e8f9; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px; margin-bottom: 20px;">Die "Smart-Website"</h3>
+                    <h3 style="color: var(--accent-cyan); font-size: 1.5rem; border-bottom: 1px solid var(--accent-cyan); padding-bottom: 15px; margin-bottom: 20px;">Die "Smart-Website"</h3>
                     <ul class="comparison-list">
                         <li><span class="icon-emoji">✅</span><span class="text-content"><b>Digitaler Vertriebler:</b> Arbeitet 24/7 und konvertiert Besucher aktiv in echte Leads.</span></li>
                         <li><span class="icon-emoji">✅</span><span class="text-content"><b>Fort Knox Sicherheit:</b> Cybersecurity auf Universitäts-Niveau und SSL-Verschlüsselung.</span></li>
@@ -585,11 +625,11 @@
             <div class="authority-text">
                 <h2>Vom "Teenage-Founder" zum Cybersecurity-Experten: Ihr Partner David Leipi</h2>
                 
-                <p style="font-size: 1.1rem; font-weight: 600; color: #1e3a8a; margin-top: 15px;">Webdesign ist für mich kein Hobby. Es ist meine DNA.</p>
+                <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-top: 15px;">Webdesign ist für mich kein Hobby. Es ist meine DNA.</p>
                 <p>Ich programmiere nicht erst seit gestern. Ich habe mit 10 Jahren angefangen, Code zu schreiben. Während andere "Webdesigner" bunte Baukästen zusammenklicken, habe ich die Infrastruktur einer Universität mit <b>5.000 Besuchern täglich</b> verwaltet.</p>
                 
                 <p style="margin-top: 15px;">Schon mit 15 Jahren war ich nach einer <b>strengen juristischen Prüfung voll geschäftsfähig</b>. Während Gleichaltrige Taschengeld bekamen, führte ich offiziell eigene Unternehmen in den Bereichen:</p>
-                <ul style="margin-left: 20px; color: #475569; margin-top: 5px;">
+                <ul style="margin-left: 20px; color: var(--text-secondary); margin-top: 5px;">
                     <li>🔧 <b>Handy-Reparaturen</b> (Technisches Verständnis)</li>
                     <li>👕 <b>T-Shirt Design & E-Commerce</b> (Design & Vertrieb)</li>
                     <li>⛏️ <b>Krypto-Mining</b> (High-Tech Hardware Infrastruktur)</li>
@@ -598,20 +638,20 @@
                 <p style="margin-top: 15px;">Heute promoviere ich im Bereich <b>Cybersecurity</b>.</p>
                 
                 <div class="highlight-box">
-                    <b style="color: #1e40af">Warum ist das wichtig für Sie?</b><br>
-                    Weil ich weiß, wie man Systeme baut, die <span style="background: #bfdbfe; padding: 2px 5px; border-radius: 3px;">nicht abstürzen</span>, die <span style="background: #bfdbfe; padding: 2px 5px; border-radius: 3px;">sicher vor Hackern</span> sind und die <span style="background: #bfdbfe; padding: 2px 5px; border-radius: 3px;">verkaufen</span>.
+                    <b style="color: var(--accent-indigo)">Warum ist das wichtig für Sie?</b><br>
+                    Weil ich weiß, wie man Systeme baut, die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">nicht abstürzen</span>, die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">sicher vor Hackern</span> sind und die <span style="background: rgba(79, 70, 229, 0.2); padding: 2px 5px; border-radius: 3px;">verkaufen</span>.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- DEEP DIVE FEATURE SECTIONS (NEW VERTICAL LAYOUT WITH GLASS) -->
+    <!-- DEEP DIVE FEATURE SECTIONS (VERTICAL WITH GLASS) -->
     <section class="features-detail-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 80px;">Lassen Sie uns einen Blick in den Maschinenraum werfen:</h2>
+            <h2 class="text-center" style="font-size: 2.5rem; color: var(--text-primary); margin-bottom: 80px;">Lassen Sie uns einen Blick in den Maschinenraum werfen:</h2>
 
             <!-- Feature Card 1 -->
-            <div class="feature-card">
+            <div class="glass-panel feature-card">
                 <h3 class="feature-title-large">1. "Smart-Architektur" Design</h3>
                 <div class="feature-value-large">WERT: 3.500 €</div>
                 <div class="feature-img-container">
@@ -624,7 +664,7 @@
             </div>
 
             <!-- Feature Card 2 -->
-            <div class="feature-card">
+            <div class="glass-panel feature-card">
                 <h3 class="feature-title-large">2. Verkaufspsychologie (Copywriting)</h3>
                 <div class="feature-value-large">WERT: 1.000 €</div>
                 <div class="feature-img-container">
@@ -637,7 +677,7 @@
             </div>
 
             <!-- Feature Card 3 -->
-            <div class="feature-card">
+            <div class="glass-panel feature-card">
                 <h3 class="feature-title-large">3. Hochsicherheits-Paket</h3>
                 <div class="feature-value-large">WERT: 500 €</div>
                 <div class="feature-img-container">
@@ -650,7 +690,7 @@
             </div>
 
             <!-- Feature Card 4 -->
-            <div class="feature-card">
+            <div class="glass-panel feature-card">
                 <h3 class="feature-title-large">4. "Atomare Updates" Protokoll</h3>
                 <div class="feature-value-large">WERT: 400 €</div>
                 <div class="feature-img-container">
@@ -663,7 +703,7 @@
             </div>
 
             <!-- Feature Card 5 -->
-            <div class="feature-card">
+            <div class="glass-panel feature-card">
                 <h3 class="feature-title-large">5. Rechtstexte & DSGVO-Schutz</h3>
                 <div class="feature-value-large">WERT: 300 €</div>
                 <div class="feature-img-container">
@@ -675,8 +715,24 @@
                 </div>
             </div>
 
-            <!-- Feature Card 6 -->
-            <div class="feature-card">
+            <!-- Feature Card 6: Barrierefreiheit -->
+            <div class="glass-panel feature-card">
+                <h3 class="feature-title-large">6. Barrierefreie Optimierung (BFSG)</h3>
+                <div style="font-size: 1.2rem; color: var(--danger-red); font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; border: 2px solid var(--danger-red); display: inline-block; padding: 5px 15px; border-radius: 50px;">
+                    ⚠️ ACHTUNG: Abmahngefahr ab Juni 2025!
+                </div>
+                <div class="feature-value-large" style="margin-top: 15px;">WERT: 600 €</div>
+                <div class="feature-img-container">
+                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Barrierefreiheit Accessibilty">
+                </div>
+                <div class="feature-description">
+                    <p>Ab Juni 2025 tritt das <b>Barrierefreiheitsstärkungsgesetz (BFSG)</b> in Kraft. Websites müssen dann für alle Menschen zugänglich sein. Wer das ignoriert, riskiert hohe Bußgelder.</p>
+                    <p style="margin-top: 15px;"><b>Der Vorteil:</b> Sie sind rechtssicher aufgestellt, während Ihre Konkurrenz panisch nachrüsten muss.</p>
+                </div>
+            </div>
+
+            <!-- Feature Card 7 -->
+            <div class="glass-panel feature-card">
                 <h3 class="feature-title-large">BONUS: Buch "Dominanz auf Google"</h3>
                 <div class="feature-value-large">WERT: 97 €</div>
                 <div class="feature-img-container">
@@ -695,9 +751,9 @@
     <section class="stack-section" id="offer">
         <div class="container">
             <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
-            <p class="text-center" style="margin-bottom: 20px;">Hier sehen Sie schwarz auf weiß, warum dieses Angebot ein "No-Brainer" ist.</p>
+            <p class="text-center" style="margin-bottom: 20px; color: var(--text-secondary);">Hier sehen Sie schwarz auf weiß, warum dieses Angebot ein "No-Brainer" ist.</p>
 
-            <div class="stack-box">
+            <div class="glass-panel stack-box">
                 <!-- Stack Items ... -->
                 <div class="stack-item">
                     <div>
@@ -739,23 +795,31 @@
                     <div class="stack-value">300 €</div>
                 </div>
 
-                <div class="stack-item" style="background: linear-gradient(to right, #fff1f2, #fff);">
+                <div class="stack-item">
+                    <div>
+                        <div class="stack-name"><i class="fas fa-universal-access"></i> Barrierefreie Optimierung (BFSG)</div>
+                        <div class="stack-desc">Schutz vor Abmahnungen durch neues Gesetz ab 2025.</div>
+                    </div>
+                    <div class="stack-value">600 €</div>
+                </div>
+
+                <div class="stack-item" style="background: rgba(255, 23, 68, 0.05);">
                     <div>
                         <div class="stack-name" style="color: var(--danger-red);"><i class="fas fa-gift"></i> BONUS: Buch "Dominanz auf Google"</div>
                         <div class="stack-desc">Exklusive E-Book Edition. Playbook für Platz 1.</div>
                     </div>
-                    <div class="stack-value" style="color: var(--danger-red);">97 €</div>
+                    <div class="stack-value">97 €</div>
                 </div>
 
                 <!-- TOTAL ROW -->
                 <div class="total-value-row">
                     <div class="total-value-label">GESAMTWERT PAKET:</div>
-                    <span class="total-value-amount">5.797 €</span>
+                    <span class="total-value-amount">6.397 €</span>
                 </div>
 
                 <div class="real-price">
-                    Ihr Preis heute: <span>899 € + 39 € / mtl.</span>
-                    <div style="font-size: 1rem; color: #1e3a8a; font-weight: 600; margin-top: 10px;">(Boutique-Agentur: Festpreis + Wartung & Hosting)</div>
+                    Ihr Preis heute: <span class="main-price">899 € + 39 € / mtl.</span>
+                    <span class="secondary-cost">(Boutique-Agentur: Festpreis + Wartung & Hosting)</span>
                 </div>
             </div>
 
@@ -773,7 +837,7 @@
                 </a>
             </div>
             
-            <p class="text-center" style="margin-top: 25px; font-size: 0.9rem; color: #666;">
+            <p class="text-center" style="margin-top: 25px; font-size: 0.9rem; color: var(--text-secondary);">
                 <i class="fas fa-lock"></i> <b>Unsere "No Catch" Garantie:</b> Wenn Ihnen unser Entwurf im Gespräch nicht gefällt, haben Sie keinen Cent verloren. Wir tragen das Risiko.
             </p>
 
