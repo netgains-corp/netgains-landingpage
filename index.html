@@ -248,6 +248,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 900;
+            /* INTENSE GLOW EFFECT */
+            filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.8)) drop-shadow(0 0 30px rgba(34, 211, 238, 0.4));
         }
         
         .red-underline {
@@ -361,8 +363,34 @@
         .comparison-list li { margin-bottom: 25px; display: flex; align-items: flex-start; font-size: 1.1rem; }
         .icon-emoji { font-size: 1.8rem; margin-right: 15px; line-height: 1.2; min-width: 40px; text-align: center; }
         
-        .authority-flex { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 60px; }
-        .authority-img img { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid var(--glass-border); }
+        .authority-flex { 
+            display: flex; 
+            flex-wrap: nowrap; /* Prevent wrap on desktop */
+            align-items: center; 
+            justify-content: center; 
+            gap: 40px; 
+        }
+        
+        .authority-img { 
+            flex: 0 0 350px; /* Fixed width base */
+            width: 350px; 
+            max-width: 100%; 
+        }
+        
+        .authority-img img { 
+            width: 100%; 
+            aspect-ratio: 1 / 1; /* Force Square */
+            object-fit: cover;
+            border-radius: 20px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            border: 1px solid var(--glass-border); 
+        }
+        
+        .authority-text { 
+            flex: 1; 
+            min-width: 300px; 
+        }
+        
         .authority-text h2 { color: var(--text-primary); font-size: 2.5rem; }
         .authority-text p { color: var(--text-secondary); }
         .highlight-box { 
@@ -583,7 +611,9 @@
         .footer a { color: var(--text-primary); text-decoration: none; transition: color 0.3s; opacity: 0.7; }
         .footer a:hover { opacity: 1; color: var(--accent-cyan); }
 
-        @media (max-width: 1024px) {
+        /* Responsive Breakpoints */
+        /* Increased to 1024px to ensure Tablets use vertical layout for Authority */
+        @media (max-width: 900px) {
             .hero h1 { font-size: 2.2rem; }
             .feature-title-large { font-size: 2rem; }
             .feature-value-large { font-size: 2.2rem; }
@@ -592,9 +622,9 @@
             .stack-desc { margin-left: 0; }
             
             /* Authority Section Fix: Text Top, Image Bottom */
-            .authority-flex { flex-direction: column-reverse; text-align: center; }
+            .authority-flex { flex-direction: column-reverse; text-align: center; flex-wrap: wrap; }
             .authority-text { min-width: 100%; }
-            .authority-img { max-width: 100%; margin-bottom: 30px; width: 80%; }
+            .authority-img { max-width: 100%; margin-bottom: 30px; width: 80%; flex: 0 0 auto; }
             
             .comparison-grid { grid-template-columns: 1fr; gap: 30px; }
             .new-way { transform: scale(1); }
@@ -746,7 +776,7 @@
     <section class="authority-section">
         <div class="container authority-flex">
             <div class="authority-img">
-                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="David Leipi">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="David Leipi">
             </div>
             <div class="authority-text">
                 <h2>Vom "Teenage-Founder" zum Cybersecurity-Experten: Ihr Partner David Leipi</h2>
