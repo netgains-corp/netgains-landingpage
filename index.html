@@ -51,7 +51,7 @@
         .text-center { text-align: center; }
 
         .container {
-            max-width: 1100px;
+            max-width: 1250px; /* VERBREITERT: von 1100px auf 1250px */
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
@@ -128,9 +128,30 @@
             animation: textShine 3s linear infinite; filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.5));
         }
         .red-underline { text-decoration: underline; text-decoration-color: var(--danger-red); text-decoration-thickness: 5px; text-underline-offset: 8px; }
-        .hero-sub { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto; font-weight: 300; }
+        .hero-sub { 
+            font-size: 1.25rem; 
+            color: var(--text-secondary); 
+            margin-bottom: 25px; 
+            max-width: 900px; /* VERBREITERT: von 800px auf 900px */
+            margin-left: auto; 
+            margin-right: auto; 
+            font-weight: 300; 
+        }
         
-        .video-wrapper { max-width: 850px; margin: 0 auto 30px auto; border-radius: 20px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.5); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; position: relative; backdrop-filter: blur(10px); }
+        .video-wrapper { 
+            max-width: 1000px; /* VERBREITERT: von 850px auf 1000px */
+            margin: 0 auto 30px auto; 
+            border-radius: 20px; 
+            border: 1px solid var(--glass-border); 
+            background: rgba(0,0,0,0.5); 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); 
+            aspect-ratio: 16 / 9; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            backdrop-filter: blur(10px); 
+        }
         .play-btn { width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent-cyan); transition: all 0.3s; cursor: pointer; box-shadow: 0 0 30px rgba(34, 211, 238, 0.2); }
         .play-btn:hover { background: var(--accent-cyan); transform: scale(1.1); border-color: var(--accent-cyan); }
         .play-btn i { color: white; margin-left: 5px; }
@@ -230,6 +251,47 @@
 
         .highlight-box { background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%); border-left: 4px solid var(--accent-cyan); padding: 20px; border-radius: 10px; margin-top: 40px; color: var(--text-primary); border: 1px solid var(--glass-border); text-align: center; }
 
+        /* --- PEACE OF MIND SECTION --- */
+        .peace-section {
+            padding: 120px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(34, 211, 238, 0.03) 50%, var(--bg-dark) 100%);
+            position: relative;
+        }
+        .peace-icon {
+            width: 100px; height: 100px; 
+            background: rgba(34, 211, 238, 0.1); 
+            border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            margin: 0 auto 30px auto; 
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+        }
+
+        /* Guarantee Box in Offer */
+        .guarantee-box {
+            margin-top: 40px;
+            padding: 30px;
+            border: 2px dashed var(--price-green);
+            background: rgba(0, 230, 118, 0.05);
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .guarantee-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-dark);
+            border: 1px solid var(--price-green);
+            color: var(--price-green);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
         /* --- STACK SECTION & VISUALS --- */
         .stack-box { 
             margin-top: 200px; 
@@ -328,7 +390,7 @@
     <!-- HERO SECTION -->
     <section class="hero">
         <div class="container">
-            <div class="pre-headline">⚠️ ACHTUNG: FÜR UNTERNEHMER OHNE (ODER MIT VERALTETER) WEBSITE</div>
+            <div class="pre-headline">Was würden sie mit doppelt so vielen Kunden tun?</div>
             
             <h1>Wie Sie Ihre Firmen-Website in eine <span class="text-highlight">"Smart-Website"</span> verwandeln, die <span class="red-underline">automatisch Kunden gewinnt</span></h1>
             
@@ -595,6 +657,22 @@
         </div>
     </section>
 
+    <!-- NEW SECTION: PEACE OF MIND -->
+    <section class="peace-section">
+        <div class="container text-center">
+            <div class="peace-icon">
+                <i class="fas fa-coffee" style="font-size: 40px; color: var(--accent-cyan);"></i>
+            </div>
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">Heute kaufen, für immer Ruhe.</h2>
+            <p style="font-size: 1.3rem; line-height: 1.8; color: var(--text-secondary); max-width: 800px; margin: 0 auto;">
+                Die meisten Websites sind wie Haustiere: Sie brauchen ständig Pflege, Updates und Aufmerksamkeit. <br>
+                <b>Unsere Systeme sind wie Schweizer Uhren: Sie laufen einfach.</b> <br><br>
+                Sie investieren heute einmal in das Setup. Danach kümmert sich die Technik autonom um sich selbst. Keine Wartungsverträge, keine nächtlichen Server-Abstürze, kein Stress. <br>
+                <span style="color: var(--accent-cyan); font-weight: 700;">Konzentrieren Sie sich auf Ihr Geschäft, wir kümmern uns um den Rest.</span>
+            </p>
+        </div>
+    </section>
+
     <!-- VALUE STACK SECTION -->
     <section class="stack-section" id="offer">
         <div class="container">
@@ -689,11 +767,25 @@
                 <div class="real-price">
                     Ihr Preis heute: <span class="main-price">899 € + 39 € / mtl.</span>
                 </div>
+
+                <!-- GUARANTEE ADDITION -->
+                <div class="guarantee-box">
+                    <div class="guarantee-badge"><i class="fas fa-shield-check"></i> Risikofrei</div>
+                    <h3 style="color: var(--price-green); font-size: 1.5rem; margin-bottom: 10px; font-family: 'Oswald', sans-serif; text-transform: uppercase;">
+                        Unsere "Kein-Kopfzerbrechen"-Garantie
+                    </h3>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.6;">
+                        Wir wissen, dass es viele schwarze Schafe in der Branche gibt. Deshalb gilt bei uns eine einfache Regel:<br>
+                        <b style="color: #fff;">Sie sehen den vollständigen Entwurf, bevor wir final live gehen.</b><br>
+                        Wenn es Ihnen nicht gefällt, wird es angepasst, bis es perfekt ist. Sie kaufen nicht die Katze im Sack.
+                    </p>
+                </div>
+
             </div>
 
             <div class="scarcity-box">
                 <i class="fas fa-exclamation-triangle"></i> 
-                <span>ACHTUNG: Da wir jeden Code persönlich prüfe, nehme ich maximal 3 Neukunden pro Monat an.</span>
+                <span>ACHTUNG: Da wir jeden Code persönlich prüfen, nehme ich maximal 3 Neukunden pro Monat an.</span>
             </div>
 
             <div class="text-center">
