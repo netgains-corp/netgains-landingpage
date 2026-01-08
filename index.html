@@ -23,6 +23,7 @@
             --glass-blur: 50px;
             --danger-red: #ff1744;
             --price-green: #00E676;
+            --status-gold: #fbbf24;
         }
 
         * {
@@ -161,7 +162,7 @@
         @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; text-shadow: 0 0 30px rgba(34, 211, 238, 0.8); } 100% { opacity: 0.7; } }
 
         /* --- SECTIONS --- */
-        .problem-section, .epiphany-section, .showcase-section, .authority-section, .features-detail-section, .stack-section { padding: 120px 0; position: relative; }
+        .problem-section, .epiphany-section, .showcase-section, .authority-section, .features-detail-section, .stack-section, .status-section { padding: 120px 0; position: relative; }
         
         /* Problem Grid */
         .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
@@ -190,6 +191,33 @@
         .showcase-caption { margin-top: 25px; text-align: center; }
         .showcase-caption h4 { color: var(--accent-cyan); margin-bottom: 5px; font-size: 1.2rem; }
         .showcase-caption p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* --- STATUS SECTION STYLES --- */
+        .status-section {
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .status-item {
+            text-align: left;
+            height: 100%;
+        }
+        .status-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+        .status-item h3 i {
+            color: var(--status-gold);
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
 
         /* Authority Restructured */
         .authority-row {
@@ -518,6 +546,33 @@
                         <h4>Beispiel C: Moderne Arztpraxis</h4>
                         <p>Sprechzeiten und Notdienst direkt sichtbar ohne Klicks.</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATUS SECTION -->
+    <section class="status-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2.8rem; margin-bottom: 20px;">Ihr digitales Aushängeschild: <br><span class="text-highlight">Zeigen Sie der Welt, dass Sie Champions-League spielen</span></h2>
+            <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
+                Status ist keine Eitelkeit – Status ist Währung. Ihre Website ist oft der erste (und einzige) Eindruck, den ein potenzieller Premium-Kunde von Ihnen bekommt.
+            </p>
+
+            <div class="status-grid">
+                <div class="glass-panel status-item">
+                    <h3><i class="fas fa-crown"></i> Der "Marktführer"-Effekt</h3>
+                    <p>Während Ihre Konkurrenz noch wie "Kleinbetrieb 2010" aussieht, präsentieren Sie sich optisch als das modernste Unternehmen Ihrer Branche. Wahrnehmung ist Realität.</p>
+                </div>
+                
+                <div class="glass-panel status-item">
+                    <h3><i class="fas fa-magnet"></i> Sogwirkung für A-Kunden</h3>
+                    <p>Kunden mit Geld wollen bei Gewinnern kaufen. Ein High-End-Design signalisiert unterbewusst sofort: "Hier gibt es Qualität, und die hat ihren Preis."</p>
+                </div>
+
+                <div class="glass-panel status-item">
+                    <h3><i class="fas fa-mobile-alt"></i> Stolz statt Scham</h3>
+                    <p>Schämen Sie sich manchmal, Ihre aktuelle URL weiterzugeben? Ab jetzt zücken Sie Ihr Smartphone mit Stolz, um Partnern und Freunden Ihr Unternehmen zu präsentieren.</p>
                 </div>
             </div>
         </div>
