@@ -190,8 +190,8 @@
             height: 100%;
             min-height: 40px;
             
-            /* White base color */
-            background-color: white; 
+            /* Base: Slightly transparent white (looks gray/inactive on dark bg) */
+            background-color: rgba(255, 255, 255, 0.3); 
             
             /* Apply the logo as a mask */
             -webkit-mask-image: var(--logo-url);
@@ -207,15 +207,15 @@
             mask-position: center;
             
             position: relative;
-            opacity: 0.8; /* Base opacity */
-            transition: transform 0.3s ease, opacity 0.3s;
+            transition: all 0.3s ease;
             overflow: hidden; /* Clips the shimmer to the mask container */
         }
 
         /* Hover Effect */
         .logo-item:hover .logo-mask {
-            opacity: 1;
+            background-color: #ffffff; /* Radiant white on hover */
             transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
         }
 
         /* Shimmer Swipe Animation (Applied INSIDE the mask) */
@@ -227,25 +227,25 @@
             width: 200%; 
             height: 100%;
             
-            /* Gradient: Transparent -> Blue/Green -> Transparent */
+            /* Gradient: Transparent -> Cyan/Green -> Transparent */
             background: linear-gradient(
                 110deg, 
-                transparent 20%, 
-                rgba(34, 211, 238, 0.8) 45%, /* Cyan */
-                rgba(0, 230, 118, 0.8) 55%, /* Green */
-                transparent 80%
+                transparent 25%, 
+                rgba(34, 211, 238, 0.9) 45%, /* Bright Cyan */
+                rgba(0, 230, 118, 0.9) 55%, /* Bright Green */
+                transparent 75%
             );
             
             transform: skewX(-20deg);
-            animation: shineSwipe 5s infinite cubic-bezier(0.4, 0.0, 0.2, 1);
+            animation: shineSwipe 4s infinite linear;
             animation-delay: var(--delay);
-            mix-blend-mode: screen; /* Blends nicely with the white base */
+            mix-blend-mode: normal; /* Ensures color shows on white/gray base */
         }
 
         @keyframes shineSwipe {
             0% { left: -150%; }
-            40% { left: 150%; } /* Faster swipe */
-            100% { left: 150%; } /* Delay */
+            40% { left: 150%; } /* Fast swipe */
+            100% { left: 150%; } /* Wait */
         }
 
 
@@ -538,7 +538,7 @@
         <div class="container">
             <!-- New Intro Text -->
             <p class="text-center" style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem; letter-spacing: 0.5px; font-weight: 400; max-width: 800px; margin-left: auto; margin-right: auto;">
-                Wir setzen auf komplexe aber dafür hochwertige High-Performance-Tools, welche auch von folgenden Firmen benutzt werden:
+                Wir entwickeln und sichern unsere Websites mit den selben High-Performance Tools ab wie:
             </p>
             
             <div class="logo-grid">
