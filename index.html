@@ -52,11 +52,16 @@
         .text-center { text-align: center; }
 
         .container {
-            max-width: 1250px; /* VERBREITERT: von 1100px auf 1250px */
+            max-width: 1100px; /* Standardbreite für alle Sektionen wiederhergestellt */
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
             z-index: 10;
+        }
+
+        /* Hero Container spezifisch breiter */
+        .hero .container {
+            max-width: 1250px;
         }
 
         /* --- BACKGROUND ANIMATION BLOBS --- */
@@ -120,7 +125,14 @@
         /* --- HERO SECTION --- */
         .hero { padding: 20px 0 80px 0; text-align: center; position: relative; }
         .pre-headline { background: rgba(255, 255, 255, 0.1); color: var(--accent-cyan); padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(34, 211, 238, 0.3); backdrop-filter: blur(10px); }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .hero h1 { 
+            font-size: 5.5rem; /* DEUTLICH VERGRÖßERT */
+            margin-bottom: 30px; 
+            color: white; 
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            line-height: 1.1;
+            font-weight: 700;
+        }
         
         @keyframes textShine { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
         .text-highlight {
@@ -129,30 +141,9 @@
             animation: textShine 3s linear infinite; filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.5));
         }
         .red-underline { text-decoration: underline; text-decoration-color: var(--danger-red); text-decoration-thickness: 5px; text-underline-offset: 8px; }
-        .hero-sub { 
-            font-size: 1.25rem; 
-            color: var(--text-secondary); 
-            margin-bottom: 25px; 
-            max-width: 900px; /* VERBREITERT: von 800px auf 900px */
-            margin-left: auto; 
-            margin-right: auto; 
-            font-weight: 300; 
-        }
+        .hero-sub { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto; font-weight: 300; }
         
-        .video-wrapper { 
-            max-width: 1000px; /* VERBREITERT: von 850px auf 1000px */
-            margin: 0 auto 30px auto; 
-            border-radius: 20px; 
-            border: 1px solid var(--glass-border); 
-            background: rgba(0,0,0,0.5); 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); 
-            aspect-ratio: 16 / 9; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            position: relative; 
-            backdrop-filter: blur(10px); 
-        }
+        .video-wrapper { max-width: 850px; margin: 0 auto 30px auto; border-radius: 20px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.5); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; position: relative; backdrop-filter: blur(10px); }
         .play-btn { width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent-cyan); transition: all 0.3s; cursor: pointer; box-shadow: 0 0 30px rgba(34, 211, 238, 0.2); }
         .play-btn:hover { background: var(--accent-cyan); transform: scale(1.1); border-color: var(--accent-cyan); }
         .play-btn i { color: white; margin-left: 5px; }
@@ -167,7 +158,7 @@
         /* Problem Grid */
         .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
         .problem-card { border-left: 4px solid var(--danger-red); }
-        .problem-card h3 { color: var(--text-primary); margin-bottom: 15px; }
+        .problem-card h3 { color: var(--text-primary); margin-bottom: 15px; font-size: 1.8rem; /* Increased size */ }
         .problem-card p { color: var(--text-secondary); }
         .problem-card > i { font-size: 2.5rem; background: -webkit-linear-gradient(45deg, #ef4444, #be123c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; display: block; }
 
@@ -189,7 +180,7 @@
         .laptop-screen img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
         .laptop-base { height: 16px; background: linear-gradient(to bottom, #2a2a2a, #1a1a1a); border-radius: 0 0 16px 16px; position: relative; margin-top: -1px; border-top: 1px solid #000; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
         .showcase-caption { margin-top: 25px; text-align: center; }
-        .showcase-caption h4 { color: var(--accent-cyan); margin-bottom: 5px; font-size: 1.2rem; }
+        .showcase-caption h4 { color: var(--accent-cyan); margin-bottom: 5px; font-size: 1.5rem; /* Increased size */ }
         .showcase-caption p { color: var(--text-secondary); font-size: 0.95rem; }
 
         /* --- STATUS SECTION STYLES --- */
@@ -211,12 +202,12 @@
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            font-size: 1.4rem;
+            font-size: 1.8rem; /* Increased size */
         }
         .status-item h3 i {
             color: var(--status-gold);
             margin-right: 15px;
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* Increased size */
         }
 
         /* Authority Restructured */
@@ -261,7 +252,7 @@
         }
         .profile-frame h3 {
             color: var(--accent-cyan);
-            font-size: 1.5rem;
+            font-size: 2rem; /* Increased size */
             margin-bottom: 15px;
             border-bottom: 1px solid rgba(34, 211, 238, 0.2);
             padding-bottom: 10px;
@@ -271,8 +262,8 @@
 
         /* Features Detail */
         .feature-card { margin-bottom: 100px; text-align: center; }
-        .feature-title-large { font-size: 3rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--text-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; text-transform: uppercase; }
-        .feature-value-large { font-size: 2.5rem; font-weight: 900; color: var(--danger-red); margin-bottom: 40px; display: block; text-shadow: 0 0 30px rgba(255, 23, 68, 0.4); }
+        .feature-title-large { font-size: 3.8rem; /* Increased size */ font-weight: 800; background: linear-gradient(to right, #fff, var(--text-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; text-transform: uppercase; }
+        .feature-value-large { font-size: 2.8rem; /* Increased size */ font-weight: 900; color: var(--danger-red); margin-bottom: 40px; display: block; text-shadow: 0 0 30px rgba(255, 23, 68, 0.4); }
         .feature-img-container { margin: 0 auto 50px auto; max-width: 900px; width: 100%; }
         .feature-img-container img { width: 100%; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); transition: transform 0.4s ease; border: 1px solid var(--glass-border); }
         .feature-description { font-size: 1.3rem; line-height: 1.8; color: var(--text-secondary); max-width: 800px; margin: 0 auto; }
@@ -394,7 +385,7 @@
         .footer a:hover { opacity: 1; color: var(--accent-cyan); }
 
         @media (max-width: 900px) {
-            .hero h1 { font-size: 2.2rem; }
+            .hero h1 { font-size: 2.8rem; } /* Auch mobil etwas größer */
             .authority-row { flex-direction: column; align-items: center; text-align: center; }
             .authority-img { flex: 0 0 auto; width: 100%; max-width: 450px; }
             .stack-item { flex-direction: column; text-align: center; align-items: center;}
@@ -448,7 +439,7 @@
     <!-- PROBLEM SECTION -->
     <section class="problem-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.2rem; margin-bottom: 10px;">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
+            <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 10px;">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
             <p class="text-center" style="color: var(--text-secondary);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
             
             <div class="problem-grid">
@@ -474,7 +465,7 @@
     <!-- EPIPHANY SECTION (COMPARISON) -->
     <section class="epiphany-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem;">Warum klassische Websites ausgedient haben</h2>
+            <h2 class="text-center" style="font-size: 3.5rem;">Warum klassische Websites ausgedient haben</h2>
             <p class="text-center" style="max-width: 700px; margin: 0 auto; color: var(--text-secondary);">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
 
             <div class="comparison-grid">
@@ -503,7 +494,7 @@
     <!-- SHOWCASE SECTION (PORTFOLIO) -->
     <section class="showcase-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;">Übersichtlichkeit, die verkauft</h2>
+            <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 20px;">Übersichtlichkeit, die verkauft</h2>
             <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary); margin-bottom: 50px;">
                 Unsere Design-Philosophie: Wichtige Informationen gehören nach ganz oben. Keine unnötigen Klicks – der Kunde findet sofort, was er sucht.
             </p>
@@ -554,7 +545,7 @@
     <!-- STATUS SECTION -->
     <section class="status-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.8rem; margin-bottom: 20px;">Ihr digitales Aushängeschild: <br><span class="text-highlight">Zeigen Sie der Welt, dass Sie Champions-League spielen</span></h2>
+            <h2 class="text-center" style="font-size: 4rem; margin-bottom: 20px;">Ihr digitales Aushängeschild: <br><span class="text-highlight">Zeigen Sie der Welt, dass Sie Champions-League spielen</span></h2>
             <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
                 Status ist keine Eitelkeit – Status ist Währung. Ihre Website ist oft der erste (und einzige) Eindruck, den ein potenzieller Premium-Kunde von Ihnen bekommt.
             </p>
@@ -581,7 +572,7 @@
     <!-- AUTHORITY SECTION -->
     <section class="authority-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; text-align: center; margin-bottom: 60px;">Ihre Partner für digitale Dominanz: <br>Cansin Gülal & David Leipi</h2>
+            <h2 class="text-center" style="font-size: 3.5rem; text-align: center; margin-bottom: 60px;">Ihre Partner für digitale Dominanz: <br>Cansin Gülal & David Leipi</h2>
             
             <!-- Zeile 1: Cansin Gülal -->
             <div class="authority-row">
@@ -627,7 +618,7 @@
     <!-- FEATURES DETAIL SECTION -->
     <section class="features-detail-section">
         <div class="container">
-            <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 80px;">Blick in den Maschinenraum:</h2>
+            <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 80px;">Blick in den Maschinenraum:</h2>
 
             <div class="glass-panel feature-card">
                 <h3 class="feature-title-large">1. "Smart-Architektur" Design</h3>
@@ -718,7 +709,7 @@
             <div class="peace-icon">
                 <i class="fas fa-coffee" style="font-size: 40px; color: var(--accent-cyan);"></i>
             </div>
-            <h2 style="font-size: 3rem; margin-bottom: 20px;">Heute kaufen, für immer Ruhe.</h2>
+            <h2 style="font-size: 4rem; margin-bottom: 20px;">Heute kaufen, für immer Ruhe.</h2>
             <p style="font-size: 1.3rem; line-height: 1.8; color: var(--text-secondary); max-width: 800px; margin: 0 auto;">
                 Die meisten Websites sind wie Haustiere: Sie brauchen ständig Pflege, Updates und Aufmerksamkeit. <br>
                 <b>Unsere Systeme sind wie Schweizer Uhren: Sie laufen einfach.</b> <br><br>
@@ -756,7 +747,7 @@
             </div>
 
             <div class="glass-panel stack-box">
-                <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 20px;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
+                <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 20px;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
                 
                 <div class="stack-item">
                     <div>
