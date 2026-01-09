@@ -152,7 +152,7 @@
         .hero-scarcity { color: var(--accent-cyan); font-weight: 700; margin-top: 20px; font-size: 1.1rem; text-shadow: 0 0 20px rgba(34, 211, 238, 0.4); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; text-shadow: 0 0 30px rgba(34, 211, 238, 0.8); } 100% { opacity: 0.7; } }
 
-        /* --- LOGO SHIMMER SECTION STYLES --- */
+        /* --- LOGO SHIMMER SECTION STYLES (REVISED) --- */
         .logo-section {
             padding: 40px 0;
             border-bottom: 1px solid var(--glass-border);
@@ -176,68 +176,76 @@
 
         .logo-item {
             width: 100%;
+            height: 60px; /* Fixed height container to prevent layout shifts */
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
-            /* Radiant White Effect: Brightness 0 to make it black, then invert to make it white */
-            filter: brightness(0) invert(1); 
-            opacity: 0.5;
-            transform: scale(0.95);
-            transition: all 0.4s ease;
             cursor: pointer;
-            position: relative;
-            overflow: hidden; /* Important for the shine swipe overlay */
+            padding: 5px; /* Padding inside the item */
         }
 
-        /* Hover State: Restore original colors */
-        .logo-item:hover {
-            filter: none;
+        /* The Mask Container - The core of the solution */
+        .logo-mask {
+            width: 100%;
+            height: 100%;
+            min-height: 40px;
+            
+            /* White base color */
+            background-color: white; 
+            
+            /* Apply the logo as a mask */
+            -webkit-mask-image: var(--logo-url);
+            mask-image: var(--logo-url);
+            
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            
+            -webkit-mask-position: center;
+            mask-position: center;
+            
+            position: relative;
+            opacity: 0.8; /* Base opacity */
+            transition: transform 0.3s ease, opacity 0.3s;
+            overflow: hidden; /* Clips the shimmer to the mask container */
+        }
+
+        /* Hover Effect */
+        .logo-item:hover .logo-mask {
             opacity: 1;
             transform: scale(1.05);
         }
-        
-        /* Stop shine on hover to see clear logo */
-        .logo-item:hover::after {
-            display: none;
-        }
 
-        .logo-item img {
-            height: 40px;
-            width: auto;
-            object-fit: contain;
-            max-width: 100%;
-        }
-
-        /* Shimmer Swipe Overlay */
-        .logo-item::after {
+        /* Shimmer Swipe Animation (Applied INSIDE the mask) */
+        .logo-mask::after {
             content: "";
             position: absolute;
-            top: 0;
+            top: 0; 
             left: -150%;
-            width: 100%;
+            width: 200%; 
             height: 100%;
-            /* Green/Cyan Gradient (Smart Website Colors) */
+            
+            /* Gradient: Transparent -> Blue/Green -> Transparent */
             background: linear-gradient(
-                90deg, 
-                transparent 0%, 
-                rgba(34, 211, 238, 0.1) 20%, 
-                rgba(0, 230, 118, 0.6) 50%, 
-                rgba(34, 211, 238, 0.1) 80%, 
-                transparent 100%
+                110deg, 
+                transparent 20%, 
+                rgba(34, 211, 238, 0.8) 45%, /* Cyan */
+                rgba(0, 230, 118, 0.8) 55%, /* Green */
+                transparent 80%
             );
-            transform: skewX(-25deg);
-            /* Important: Use var(--delay) for sequential animation */
-            animation: shineSwipe 5s infinite linear;
+            
+            transform: skewX(-20deg);
+            animation: shineSwipe 5s infinite cubic-bezier(0.4, 0.0, 0.2, 1);
             animation-delay: var(--delay);
-            pointer-events: none;
-            mix-blend-mode: overlay;
+            mix-blend-mode: screen; /* Blends nicely with the white base */
         }
 
         @keyframes shineSwipe {
             0% { left: -150%; }
-            30% { left: 150%; } /* Swipe duration approx 1.5s */
-            100% { left: 150%; } /* Wait */
+            40% { left: 150%; } /* Faster swipe */
+            100% { left: 150%; } /* Delay */
         }
 
 
@@ -535,63 +543,63 @@
             
             <div class="logo-grid">
                 <!-- 1. Google -->
-                <div class="logo-item" style="--delay: 0s;">
-                    <img src="images/google.svg" alt="Google">
+                <div class="logo-item" style="--delay: 0s; --logo-url: url('images/google.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 2. Unilever -->
-                <div class="logo-item" style="--delay: 0.2s;">
-                    <img src="images/unilever.svg" alt="Unilever">
+                <div class="logo-item" style="--delay: 0.2s; --logo-url: url('images/unilever.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 3. Visa -->
-                <div class="logo-item" style="--delay: 0.4s;">
-                    <img src="images/visa.svg" alt="Visa">
+                <div class="logo-item" style="--delay: 0.4s; --logo-url: url('images/visa.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 4. Porsche -->
-                <div class="logo-item" style="--delay: 0.6s;">
-                    <img src="images/porsche.svg" alt="Porsche">
+                <div class="logo-item" style="--delay: 0.6s; --logo-url: url('images/porsche.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 5. OpenAI -->
-                <div class="logo-item" style="--delay: 0.8s;">
-                    <img src="images/openai.svg" alt="OpenAI">
+                <div class="logo-item" style="--delay: 0.8s; --logo-url: url('images/openai.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 6. NordVPN -->
-                <div class="logo-item" style="--delay: 1.0s;">
-                    <img src="images/nordvpn.svg" alt="NordVPN">
+                <div class="logo-item" style="--delay: 1.0s; --logo-url: url('images/nordvpn.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 7. Cloudflare -->
-                <div class="logo-item" style="--delay: 1.2s;">
-                    <img src="images/cloudflare.svg" alt="Cloudflare">
+                <div class="logo-item" style="--delay: 1.2s; --logo-url: url('images/cloudflare.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 8. NBC News -->
-                <div class="logo-item" style="--delay: 1.4s;">
-                    <img src="images/nbcnews.svg" alt="NBC News">
+                <div class="logo-item" style="--delay: 1.4s; --logo-url: url('images/nbcnews.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 9. The Guardian -->
-                <div class="logo-item" style="--delay: 1.6s;">
-                    <img src="images/theguardian.svg" alt="The Guardian">
+                <div class="logo-item" style="--delay: 1.6s; --logo-url: url('images/theguardian.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 10. Michelin -->
-                <div class="logo-item" style="--delay: 1.8s;">
-                    <img src="images/michelin.svg" alt="Michelin">
+                <div class="logo-item" style="--delay: 1.8s; --logo-url: url('images/michelin.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 11. Proton -->
-                <div class="logo-item" style="--delay: 2.0s;">
-                    <img src="images/proton.svg" alt="Proton">
+                <div class="logo-item" style="--delay: 2.0s; --logo-url: url('images/proton.svg');">
+                    <div class="logo-mask"></div>
                 </div>
 
                 <!-- 12. Webflow -->
-                <div class="logo-item" style="--delay: 2.2s;">
-                    <img src="images/webflow.svg" alt="Webflow">
+                <div class="logo-item" style="--delay: 2.2s; --logo-url: url('images/webflow.svg');">
+                    <div class="logo-mask"></div>
                 </div>
             </div>
         </div>
