@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Lenis JS Script -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
+    <!-- Lenis JS Script (Updated Version) -->
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script> 
     
     <style>
         /* --- NETGAINS DIGITAL DESIGN SYSTEM --- */
@@ -57,8 +57,8 @@
         /* ------------------------------- */
 
         html {
-            background-color: var(--bg-dark); /* Hintergrundfarbe auf HTML statt Body, damit Blobs sichtbar bleiben */
-            overflow-x: hidden;
+            background-color: var(--bg-dark); /* Hintergrundfarbe */
+            scroll-behavior: auto; /* Wichtig: Natives Smooth Scroll deaktivieren für Lenis */
         }
 
         body {
@@ -66,7 +66,7 @@
             line-height: 1.6;
             color: var(--text-primary);
             background-color: transparent; /* Transparent, damit die Blobs durchscheinen */
-            overflow-x: hidden;
+            overflow-x: hidden; /* Nur hier, nicht auf HTML */
             width: 100%;
             position: relative;
         }
@@ -973,39 +973,82 @@
     </footer>
 
     <script>
-        // Initialize Lenis for smooth scrolling
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
+        // Init Lenis safely
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                    direction: 'vertical',
+                    gestureDirection: 'vertical',
+                    smooth: true,
+                    mouseMultiplier: 1,
+                    smoothTouch: false,
+                    touchMultiplier: 2,
+                });
 
-        // Request Animation Frame loop
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+
+                requestAnimationFrame(raf);
+
+                // Integrate with anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        const targetId = this.getAttribute('href');
+                        if (targetId === '#') return;
+                        
+                        const target = document.querySelector(targetId);
+                        if (target) {
+                            e.preventDefault();
+                            lenis.scrollTo(target);
+                        }
+                    });
+                });
+            } else {
+                console.warn("Lenis library not loaded");
+            }
+        });
+    </script>
+
+    <script>
+      (function() {
+        // Gib jeder deiner Seiten einen eindeutigen Namen
+        const WEBSITE_ID = 'netgains-landingpage'; 
+        const ANALYTICS_URL = 'https://analytics-collector.netgains-contact.workers.dev';
+
+        const startTime = Date.now();
+        let hasConverted = false;
+
+        window.trackConversion = function() {
+          hasConverted = true;
+        };
+
+        function sendAnalytics() {
+          const endTime = Date.now();
+          const durationInSeconds = Math.round((endTime - startTime) / 1000);
+          
+          if (durationInSeconds < 1) return;
+
+          const data = {
+            website: WEBSITE_ID,
+            duration: durationInSeconds,
+            converted: hasConverted,
+            referrer: document.referrer
+          };
+
+          const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+          navigator.sendBeacon(ANALYTICS_URL, blob);
         }
 
-        requestAnimationFrame(raf);
-
-        // Smooth Scroll für Links using Lenis
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const target = document.querySelector(targetId);
-                if (target) {
-                    e.preventDefault();
-                    lenis.scrollTo(target);
-                }
-            });
+        document.addEventListener('visibilitychange', function() {
+          if (document.visibilityState === 'hidden') {
+            sendAnalytics();
+          }
         });
+      })();
     </script>
 
 </body>
