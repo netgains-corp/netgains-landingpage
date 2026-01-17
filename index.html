@@ -57,18 +57,28 @@
         /* ------------------------------- */
 
         html {
-            background-color: var(--bg-dark); /* Hintergrundfarbe */
-            scroll-behavior: auto; /* Wichtig: Natives Smooth Scroll deaktivieren für Lenis */
+            background-color: var(--bg-dark); 
+            scroll-behavior: auto; 
+            /* overflow-x entfernt, damit mobile native scroll besser funktioniert */
         }
 
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
-            background-color: transparent; /* Transparent, damit die Blobs durchscheinen */
-            overflow-x: hidden; /* Nur hier, nicht auf HTML */
+            background-color: transparent; 
+            overflow-x: hidden; /* Hier behalten wir es zur Sicherheit */
             width: 100%;
             position: relative;
+            min-height: 100vh;
+        }
+
+        /* Content Wrapper für Rubber Banding Effekt */
+        #content-wrapper {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            will-change: transform; /* Performance Optimierung */
         }
 
         h1, h2, h3, h4 {
@@ -87,7 +97,7 @@
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
-            z-index: 10; /* Inhalt immer über den Blobs */
+            z-index: 10;
             width: 100%;
         }
 
@@ -97,7 +107,6 @@
         }
 
         /* --- BACKGROUND ANIMATION BLOBS --- */
-        /* Z-Index auf 0 gesetzt, damit sie sichtbar sind, aber hinter dem Content (z-index 10) liegen */
         .blob-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -212,12 +221,12 @@
 
         .logo-item {
             width: 100%;
-            height: 80px; /* Erhöht, damit das Padding passt und nichts abgeschnitten wird */
+            height: 80px; 
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            padding: 15px; /* Padding erhöht, damit Unterlängen (wie bei g) Platz haben */
+            padding: 15px; 
         }
 
         .logo-mask {
@@ -384,583 +393,588 @@
 </head>
 <body>
 
-    <!-- ANIMATED BACKGROUND BLOBS -->
+    <!-- ANIMATED BACKGROUND BLOBS (OUTSIDE content wrapper, FIXED) -->
     <div class="blob-container">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="container">
-            <div class="pre-headline">Was würden sie mit doppelt so vielen Kunden tun?</div>
-            
-            <h1>Wie Sie Ihre Firmen-Website in eine <span class="text-highlight">"Smart-Website"</span> verwandeln, die <span class="red-underline">automatisch Kunden gewinnt</span></h1>
-            
-            <p class="hero-sub">Egal ob Sie bei Null starten oder einen Relaunch brauchen: Ohne Technik-Frust, ohne 10.000 € Kosten und mit der <b>Sicherheits-Garantie</b> eines Cybersecurity-Experten.</p>
+    <!-- MAIN CONTENT WRAPPER FOR RUBBER BANDING -->
+    <main id="content-wrapper">
 
-            <div class="video-wrapper" style="overflow: hidden;"> <!-- Overflow hidden für abgerundete Ecken beim Iframe -->
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="container">
+                <div class="pre-headline">Was würden sie mit doppelt so vielen Kunden tun?</div>
                 
-                <!-- VIMEO EMBED -->
-                <iframe src="https://player.vimeo.com/video/1153171961?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
-                        frameborder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;" 
-                        title="NetGains System"
-                        loading="lazy">
-                </iframe>
-
-                <!-- PLATZHALTER (Liegt im Hintergrund auf z-index 1) -->
-                <div class="video-placeholder-text" style="z-index: 1; position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                    <div class="play-btn">
-                        <i class="fas fa-play" style="font-size: 24px;"></i>
-                    </div>
-                    <div style="margin-top: 20px; font-weight: 600; color: white;">David Leipi erklärt das System<br><span style="font-size: 0.8rem; font-weight: 300;">(Video wird geladen...)</span></div>
-                </div>
-
-            </div>
-
-            <!-- HERO CTA -->
-            <a href="https://smart-landingpage.pages.dev" class="btn-cta btn-cta-red hero-btn-compact">
-                JETZT ANGEBOT SICHERN & DEAL FIXIEREN
-                <span class="btn-subtext">Sofortiger Zugang zum Vorzugspreis • Limitiert • Sicherer Checkout</span>
-            </a>
-            
-            <p class="hero-scarcity">
-                <i class="fas fa-hourglass-half"></i> ACHTUNG: Nur noch begrenzte Kapazitäten für diesen Monat verfügbar!
-            </p>
-        </div>
-    </section>
-
-    <!-- NEW LOGO SECTION -->
-    <section class="logo-section">
-        <div class="container">
-            <!-- New Intro Text -->
-            <p class="text-center" style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem; letter-spacing: 0.5px; font-weight: 400; max-width: 800px; margin-left: auto; margin-right: auto;">
-                Wir entwickeln und sichern unsere Websites mit den selben High-Performance Tools ab wie:
-            </p>
-            
-            <div class="logo-grid">
-                <!-- 1. Google (Neues "G" Logo gegen Abschneiden) -->
-                <div class="logo-item" style="--delay: 0s; --logo-url: url('https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 2. Unilever -->
-                <div class="logo-item" style="--delay: 0.2s; --logo-url: url('images/unilever.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 3. Visa -->
-                <div class="logo-item" style="--delay: 0.4s; --logo-url: url('images/visa.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 4. Porsche -->
-                <div class="logo-item" style="--delay: 0.6s; --logo-url: url('images/porsche.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 5. OpenAI -->
-                <div class="logo-item" style="--delay: 0.8s; --logo-url: url('images/openai.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 6. NordVPN -->
-                <div class="logo-item" style="--delay: 1.0s; --logo-url: url('images/nordvpn.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 7. Cloudflare -->
-                <div class="logo-item" style="--delay: 1.2s; --logo-url: url('images/cloudflare.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 8. NBC News -->
-                <div class="logo-item" style="--delay: 1.4s; --logo-url: url('images/nbcnews.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 9. The Guardian -->
-                <div class="logo-item" style="--delay: 1.6s; --logo-url: url('images/theguardian.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 10. Michelin -->
-                <div class="logo-item" style="--delay: 1.8s; --logo-url: url('images/michelin.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 11. Proton -->
-                <div class="logo-item" style="--delay: 2.0s; --logo-url: url('images/proton.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-
-                <!-- 12. Webflow -->
-                <div class="logo-item" style="--delay: 2.2s; --logo-url: url('images/webflow.svg');">
-                    <div class="logo-mask"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROBLEM SECTION -->
-    <section class="problem-section">
-        <div class="container">
-            <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 10px;">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
-            <p class="text-center" style="color: var(--text-secondary);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
-            
-            <div class="problem-grid">
-                <div class="glass-panel problem-card">
-                    <i class="fas fa-history"></i>
-                    <h3>Der "2008"-Effekt</h3>
-                    <p>Ihre Website sieht aus wie aus der Zeit vor dem iPhone? Kunden schließen daraus leider sofort: <i>"Dieses Unternehmen ist veraltet und arbeitet langsam."</i> Sie verlieren Vertrauen in Sekunden.</p>
-                </div>
-                <div class="glass-panel problem-card">
-                    <i class="fas fa-store-slash"></i>
-                    <h3>Der "Unsichtbare"-Status</h3>
-                    <p><b>Sie haben noch gar keine Website?</b> Oder eine Seite, die niemand findet? Dann existieren Sie für Kunden unter 40 Jahren praktisch nicht. Konkurrenten ziehen an Ihnen vorbei.</p>
-                </div>
-                <div class="glass-panel problem-card">
-                    <i class="fas fa-cogs"></i>
-                    <h3>Die Technik-Falle</h3>
-                    <p>Haben Sie schon mal erlebt, dass eine Seite nicht lädt? Das passiert bei billigem Hosting ständig. Kunden kommen nie wieder, wenn die digitale Tür klemmt.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EPIPHANY SECTION (COMPARISON) -->
-    <section class="epiphany-section">
-        <div class="container">
-            <h2 class="text-center" style="font-size: 3.5rem;">Warum klassische Websites ausgedient haben</h2>
-            <p class="text-center" style="max-width: 700px; margin: 0 auto; color: var(--text-secondary);">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
-
-            <div class="comparison-grid">
-                <div class="old-way">
-                    <h3 style="color: #f87171; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
-                    <ul class="comparison-list">
-                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Statische "Visitenkarte":</b> Wartet passiv darauf, dass Kunden anrufen. Passiert aber nie.</span></li>
-                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Sicherheits-Risiko:</b> Veraltete Plugins machen die Seite zum leichten Ziel für Hacker.</span></li>
-                        <li><span class="icon-emoji">❌</span><span class="text-content"><b>Teure Abhängigkeit:</b> Jede kleine Textänderung kostet Geld bei der Agentur.</span></li>
-                    </ul>
-                </div>
-
-                <div class="new-way">
-                    <div class="new-way-badge">Das NetGains System</div>
-                    <h3 style="color: var(--accent-cyan); font-size: 1.5rem; border-bottom: 1px solid var(--accent-cyan); padding-bottom: 15px; margin-bottom: 20px;">Die "Smart-Website"</h3>
-                    <ul class="comparison-list">
-                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Digitaler Vertriebler:</b> Arbeitet 24/7 und konvertiert Besucher aktiv in echte Leads.</span></li>
-                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Fort Knox Sicherheit:</b> Cybersecurity auf Universitäts-Niveau.</span></li>
-                        <li><span class="icon-emoji">✅</span><span class="text-content"><b>Google Dominanz:</b> Automatische Anpassung von Keywords für Top-Rankings.</span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- NEUER CTA BUTTON -->
-            <div class="text-center" style="margin-top: 60px;">
-                <a href="https://smart-landingpage.pages.dev" class="btn-cta">
-                    JETZT ZUR SMART-WEBSITE WECHSELN
-                    <span class="btn-subtext">Schluss mit "Baukasten-Frust" • Starten Sie die Transformation</span>
-                </a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- SHOWCASE SECTION (PORTFOLIO) -->
-    <section class="showcase-section">
-        <div class="container">
-            <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 20px;">Übersichtlichkeit, die verkauft</h2>
-            <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary); margin-bottom: 50px;">
-                Unsere Design-Philosophie: Wichtige Informationen gehören nach ganz oben. Keine unnötigen Klicks – der Kunde findet sofort, was er sucht.
-            </p>
-
-            <div class="showcase-grid">
-                <div class="laptop-wrapper">
-                    <div class="laptop-mockup">
-                        <div class="laptop-screen">
-                            <img src="ex1.jpg" alt="[Website Beispiel A]" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
-                    <div class="showcase-caption">
-                        <h4>Beispiel A: KFZ-Meisterbetrieb</h4>
-                        <p>Integrierte Terminbuchung spart täglich 2 Stunden Telefonzeit.</p>
-                    </div>
-                </div>
-
-                <div class="laptop-wrapper">
-                    <div class="laptop-mockup">
-                        <div class="laptop-screen">
-                            <img src="ex2.jpg" alt="[Website Beispiel B]" onerror="this.src='https://images.unsplash.com/photo-1481487484168-9b930d55208d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
-                    <div class="showcase-caption">
-                        <h4>Beispiel B: Interne Plattform</h4>
-                        <p>Echtzeit-Dashboard für Mitarbeiter zur Verkaufsübersicht.</p>
-                    </div>
-                </div>
-
-                <div class="laptop-wrapper">
-                    <div class="laptop-mockup">
-                        <div class="laptop-screen">
-                            <img src="ex3.jpg" alt="[Website Beispiel C]" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
-                    <div class="showcase-caption">
-                        <h4>Beispiel C: Moderne Arztpraxis</h4>
-                        <p>Sprechzeiten und Notdienst direkt sichtbar ohne Klicks.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- STATUS SECTION -->
-    <section class="status-section">
-        <div class="container">
-            <h2 class="text-center" style="font-size: 4rem; margin-bottom: 20px;">Ihr digitales Aushängeschild: <br><span class="text-highlight">Zeigen Sie der Welt, dass Sie Champions-League spielen</span></h2>
-            <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
-                Status ist keine Eitelkeit – Status ist Währung. Ihre Website ist oft der erste (und einzige) Eindruck, den ein potenzieller Premium-Kunde von Ihnen bekommt.
-            </p>
-
-            <div class="status-grid">
-                <div class="glass-panel status-item">
-                    <h3><i class="fas fa-crown"></i> Der "Marktführer"-Effekt</h3>
-                    <p>Während Ihre Konkurrenz noch wie "Kleinbetrieb 2010" aussieht, präsentieren Sie sich optisch als das modernste Unternehmen Ihrer Branche. Wahrnehmung ist Realität.</p>
-                </div>
+                <h1>Wie Sie Ihre Firmen-Website in eine <span class="text-highlight">"Smart-Website"</span> verwandeln, die <span class="red-underline">automatisch Kunden gewinnt</span></h1>
                 
-                <div class="glass-panel status-item">
-                    <h3><i class="fas fa-magnet"></i> Sogwirkung für A-Kunden</h3>
-                    <p>Kunden mit Geld wollen bei Gewinnern kaufen. Ein High-End-Design signalisiert unterbewusst sofort: "Hier gibt es Qualität, und die hat ihren Preis."</p>
+                <p class="hero-sub">Egal ob Sie bei Null starten oder einen Relaunch brauchen: Ohne Technik-Frust, ohne 10.000 € Kosten und mit der <b>Sicherheits-Garantie</b> eines Cybersecurity-Experten.</p>
+
+                <div class="video-wrapper" style="overflow: hidden;"> <!-- Overflow hidden für abgerundete Ecken beim Iframe -->
+                    
+                    <!-- VIMEO EMBED -->
+                    <iframe src="https://player.vimeo.com/video/1153171961?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;" 
+                            title="NetGains System"
+                            loading="lazy">
+                    </iframe>
+
+                    <!-- PLATZHALTER (Liegt im Hintergrund auf z-index 1) -->
+                    <div class="video-placeholder-text" style="z-index: 1; position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <div class="play-btn">
+                            <i class="fas fa-play" style="font-size: 24px;"></i>
+                        </div>
+                        <div style="margin-top: 20px; font-weight: 600; color: white;">David Leipi erklärt das System<br><span style="font-size: 0.8rem; font-weight: 300;">(Video wird geladen...)</span></div>
+                    </div>
+
                 </div>
 
-                <div class="glass-panel status-item">
-                    <h3><i class="fas fa-mobile-alt"></i> Stolz statt Scham</h3>
-                    <p>Schämen Sie sich manchmal, Ihre aktuelle URL weiterzugeben? Ab jetzt zücken Sie Ihr Smartphone mit Stolz, um Partnern und Freunden Ihr Unternehmen zu präsentieren.</p>
-                </div>
-            </div>
-
-            <!-- NEUER CTA BUTTON -->
-            <div class="text-center" style="margin-top: 60px;">
-                <a href="https://smart-landingpage.pages.dev" class="btn-cta">
-                    JETZT STATUS UPGRADEN
-                    <span class="btn-subtext">Unverbindliche Anfrage • Bringen Sie Ihr Image auf Level 10</span>
+                <!-- HERO CTA -->
+                <a href="https://smart-landingpage.pages.dev" class="btn-cta btn-cta-red hero-btn-compact">
+                    JETZT ANGEBOT SICHERN & DEAL FIXIEREN
+                    <span class="btn-subtext">Sofortiger Zugang zum Vorzugspreis • Limitiert • Sicherer Checkout</span>
                 </a>
+                
+                <p class="hero-scarcity">
+                    <i class="fas fa-hourglass-half"></i> ACHTUNG: Nur noch begrenzte Kapazitäten für diesen Monat verfügbar!
+                </p>
             </div>
+        </section>
 
-        </div>
-    </section>
+        <!-- NEW LOGO SECTION -->
+        <section class="logo-section">
+            <div class="container">
+                <!-- New Intro Text -->
+                <p class="text-center" style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem; letter-spacing: 0.5px; font-weight: 400; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Wir entwickeln und sichern unsere Websites mit den selben High-Performance Tools ab wie:
+                </p>
+                
+                <div class="logo-grid">
+                    <!-- 1. Google (Neues "G" Logo gegen Abschneiden) -->
+                    <div class="logo-item" style="--delay: 0s; --logo-url: url('https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
 
-    <!-- AUTHORITY SECTION -->
-    <section class="authority-section">
-        <div class="container">
-            <h2 class="text-center" style="font-size: 3.5rem; text-align: center; margin-bottom: 60px;">Ihre Partner für digitale Dominanz: <br>Cansin Gülal & David Leipi</h2>
-            
-            <!-- Zeile 1: Cansin Gülal -->
-            <div class="authority-row">
-                <div class="authority-img">
-                    <img src="cansin.jpeg" alt="[Cansin Gülal]" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
-                </div>
-                <div class="authority-content-frame">
-                    <div class="profile-frame">
-                        <h3>Cansin Gülal</h3>
-                        <p>Durch sein Studium zur Lehrkraft bringt <b>Cansin Gülal</b> eine entscheidende Komponente ein: Die Fähigkeit, komplexe Informationen perfekt aufzubereiten und zu präsentieren. Auf einer Website zählt nicht nur der Code, sondern wie die Botschaft beim Kunden ankommt.</p>
-                        <p style="margin-top: 15px;">Cansins pädagogisches Wissen in der Wissensvermittlung sorgt dafür, dass Ihre Besucher innerhalb von Sekunden verstehen, warum Ihr Angebot die beste Lösung ist. Er verwandelt abstrakte Vorteile in klare, überzeugende Verkaufsargumente.</p>
+                    <!-- 2. Unilever -->
+                    <div class="logo-item" style="--delay: 0.2s; --logo-url: url('images/unilever.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 3. Visa -->
+                    <div class="logo-item" style="--delay: 0.4s; --logo-url: url('images/visa.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 4. Porsche -->
+                    <div class="logo-item" style="--delay: 0.6s; --logo-url: url('images/porsche.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 5. OpenAI -->
+                    <div class="logo-item" style="--delay: 0.8s; --logo-url: url('images/openai.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 6. NordVPN -->
+                    <div class="logo-item" style="--delay: 1.0s; --logo-url: url('images/nordvpn.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 7. Cloudflare -->
+                    <div class="logo-item" style="--delay: 1.2s; --logo-url: url('images/cloudflare.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 8. NBC News -->
+                    <div class="logo-item" style="--delay: 1.4s; --logo-url: url('images/nbcnews.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 9. The Guardian -->
+                    <div class="logo-item" style="--delay: 1.6s; --logo-url: url('images/theguardian.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 10. Michelin -->
+                    <div class="logo-item" style="--delay: 1.8s; --logo-url: url('images/michelin.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 11. Proton -->
+                    <div class="logo-item" style="--delay: 2.0s; --logo-url: url('images/proton.svg');">
+                        <div class="logo-mask"></div>
+                    </div>
+
+                    <!-- 12. Webflow -->
+                    <div class="logo-item" style="--delay: 2.2s; --logo-url: url('images/webflow.svg');">
+                        <div class="logo-mask"></div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Zeile 2: David Leipi -->
-            <div class="authority-row">
-                <div class="authority-img">
-                    <img src="dl.jpg" alt="[David Leipi]" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
+        <!-- PROBLEM SECTION -->
+        <section class="problem-section">
+            <div class="container">
+                <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 10px;">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
+                <p class="text-center" style="color: var(--text-secondary);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
+                
+                <div class="problem-grid">
+                    <div class="glass-panel problem-card">
+                        <i class="fas fa-history"></i>
+                        <h3>Der "2008"-Effekt</h3>
+                        <p>Ihre Website sieht aus wie aus der Zeit vor dem iPhone? Kunden schließen daraus leider sofort: <i>"Dieses Unternehmen ist veraltet und arbeitet langsam."</i> Sie verlieren Vertrauen in Sekunden.</p>
+                    </div>
+                    <div class="glass-panel problem-card">
+                        <i class="fas fa-store-slash"></i>
+                        <h3>Der "Unsichtbare"-Status</h3>
+                        <p><b>Sie haben noch gar keine Website?</b> Oder eine Seite, die niemand findet? Dann existieren Sie für Kunden unter 40 Jahren praktisch nicht. Konkurrenten ziehen an Ihnen vorbei.</p>
+                    </div>
+                    <div class="glass-panel problem-card">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Die Technik-Falle</h3>
+                        <p>Haben Sie schon mal erlebt, dass eine Seite nicht lädt? Das passiert bei billigem Hosting ständig. Kunden kommen nie wieder, wenn die digitale Tür klemmt.</p>
+                    </div>
                 </div>
-                <div class="authority-content-frame">
-                    <div class="profile-frame">
-                        <h3>David Leipi</h3>
-                        <p>Ich programmiere nicht erst seit gestern. Ich habe mit 10 Jahren angefangen, Code zu schreiben. Während andere "Webdesigner" bunte Baukästen zusammenklicken, habe ich die Infrastruktur einer Universität mit <b>5.000 Besuchern täglich</b> verwaltet.</p>
-                        
-                        <p style="margin-top: 15px;">Schon mit 15 Jahren war ich nach einer <b>strengen juristischen Prüfung voll geschäftsfähig</b>. Während Gleichaltrige Taschengeld bekamen, führte ich offiziell eigene Unternehmen in den Bereichen:</p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>🔧 <b>Handy-Reparaturen</b> (Technisches Verständnis)</li>
-                            <li>👕 <b>T-Shirt Design & E-Commerce</b> (Design & Vertrieb)</li>
-                            <li>⛏️ <b>Krypto-Mining</b> (High-Tech Hardware Infrastruktur)</li>
+            </div>
+        </section>
+
+        <!-- EPIPHANY SECTION (COMPARISON) -->
+        <section class="epiphany-section">
+            <div class="container">
+                <h2 class="text-center" style="font-size: 3.5rem;">Warum klassische Websites ausgedient haben</h2>
+                <p class="text-center" style="max-width: 700px; margin: 0 auto; color: var(--text-secondary);">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
+
+                <div class="comparison-grid">
+                    <div class="old-way">
+                        <h3 style="color: #f87171; font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">Der alte Weg (Die Mehrheit)</h3>
+                        <ul class="comparison-list">
+                            <li><span class="icon-emoji">❌</span><span class="text-content"><b>Statische "Visitenkarte":</b> Wartet passiv darauf, dass Kunden anrufen. Passiert aber nie.</span></li>
+                            <li><span class="icon-emoji">❌</span><span class="text-content"><b>Sicherheits-Risiko:</b> Veraltete Plugins machen die Seite zum leichten Ziel für Hacker.</span></li>
+                            <li><span class="icon-emoji">❌</span><span class="text-content"><b>Teure Abhängigkeit:</b> Jede kleine Textänderung kostet Geld bei der Agentur.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="new-way">
+                        <div class="new-way-badge">Das NetGains System</div>
+                        <h3 style="color: var(--accent-cyan); font-size: 1.5rem; border-bottom: 1px solid var(--accent-cyan); padding-bottom: 15px; margin-bottom: 20px;">Die "Smart-Website"</h3>
+                        <ul class="comparison-list">
+                            <li><span class="icon-emoji">✅</span><span class="text-content"><b>Digitaler Vertriebler:</b> Arbeitet 24/7 und konvertiert Besucher aktiv in echte Leads.</span></li>
+                            <li><span class="icon-emoji">✅</span><span class="text-content"><b>Fort Knox Sicherheit:</b> Cybersecurity auf Universitäts-Niveau.</span></li>
+                            <li><span class="icon-emoji">✅</span><span class="text-content"><b>Google Dominanz:</b> Automatische Anpassung von Keywords für Top-Rankings.</span></li>
                         </ul>
                     </div>
                 </div>
-            </div>
 
-            <div class="highlight-box">
-                <b style="color: var(--accent-indigo)">Warum ist das wichtig für Sie?</b><br>
-                Weil wir technische Perfektion mit einer pädagogisch klaren Präsentation verbinden, die Ihre Kunden emotional abholt und zum Kauf führt.
-            </div>
-        </div>
-    </section>
-
-    <!-- FEATURES DETAIL SECTION -->
-    <section class="features-detail-section">
-        <div class="container">
-            <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 80px;">Blick in den Maschinenraum:</h2>
-
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">1. "Smart-Architektur" Design</h3>
-                <div class="feature-value-large">WERT: 3.500 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Smart Architektur Design]" loading="lazy">
-                </div>
-                <div class="feature-description">
-                    <p>Wir bauen Ihnen eine digitale Architektur, die genau auf Ihre Kunden zugeschnitten ist. Das Design ist <b>"Mobile-First"</b> – es sieht auf dem Smartphone (wo 80% Ihrer Kunden sind) perfekt aus.</p>
-                </div>
-            </div>
-
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">2. Verkaufspsychologie</h3>
-                <div class="feature-value-large">WERT: 1.000 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Verkaufspsychologie]" loading="lazy">
-                </div>
-                <div class="feature-description">
-                    <p>Hübsche Bilder verkaufen nicht. <b>Worte verkaufen.</b> Wir schreiben Texte, die die tiefsten Bedürfnisse Ihrer Kunden ansprechen und Einwände vorwegnehmen.</p>
-                </div>
-            </div>
-
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">3. Hochsicherheits-Paket</h3>
-                <div class="feature-value-large">WERT: 500 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Cybersecurity Paket]" loading="lazy">
-                </div>
-                <div class="feature-description">
-                    <p>Ihre Website wird mit Firewalls, SSL-Verschlüsselung und Anti-Bot-Systemen ausgestattet, die sonst nur große Konzerne nutzen.</p>
-                </div>
-            </div>
-
-            <!-- Feature Card 4 -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">4. "Atomare Updates" Protokoll</h3>
-                <div class="feature-value-large">WERT: 400 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Server Updates]" loading="lazy">
-                </div>
-                <div class="feature-description">
-                    <p>Kennen Sie das: "Seite wird gewartet"? Das gibt es bei uns nicht. Wir nutzen atomare Deployments. Das bedeutet: Neue Versionen gehen erst live, wenn sie zu 100% geladen sind. Es gibt <b>keine Sekunde Ausfallzeit</b>.</p>
-                </div>
-            </div>
-
-            <!-- Feature Card 5 -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">5. Rechtstexte & DSGVO-Schutz</h3>
-                <div class="feature-value-large">WERT: 300 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Rechtstexte Vertrag]" loading="lazy">
-                </div>
-                <div class="feature-description">
-                    <p>Deutschland ist das Land der Abmahnungen. Wir integrieren für Sie **technische Lösungen etablierter Drittanbieter**, die Ihre Rechtstexte und Cookie-Banner automatisiert bereitstellen.</p>
-                </div>
-            </div>
-
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">6. Barrierefreie Optimierung (BFSG)</h3>
-                <div style="font-size: 1.2rem; color: var(--danger-red); font-weight: 800; margin-bottom: 10px; text-transform: uppercase;">⚠️ ACHTUNG: Abmahngefahr ab Juni 2025!</div>
-                <div class="feature-value-large">WERT: 2.500 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Barrierefreie Optimierung]" loading="lazy">
-                </div>
-                <div class="feature-description">
-                    <p>Ab Juni 2025 müssen Websites barrierefrei sein. Wer das ignoriert, riskiert hohe Bußgelder. Wir machen Sie rechtssicher.</p>
-                    <p style="margin-top: 15px; font-size: 0.9rem;">
-                        <a href="https://www.aktion-mensch.de/inklusion/barrierefreiheit/barrierefreie-website/kosten-barrierefreie-website" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">
-                            <i class="fas fa-external-link-alt"></i> Kostenschätzung laut Aktion Mensch ansehen
-                        </a>
-                    </p>
-                </div>
-            </div>
-
-            <!-- Feature Card 7 (Bonus) -->
-            <div class="glass-panel feature-card">
-                <h3 class="feature-title-large">BONUS: Buch "Dominanz auf Google"</h3>
-                <div class="feature-value-large">WERT: 97 €</div>
-                <div class="feature-img-container">
-                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Ebook Bonus]" loading="lazy">
-                </div>
-                <div class="feature-description">
-                    <p>Mein persönliches Playbook. Wie ich Universitäts-Websites auf Platz 1 gebracht habe. Sie erhalten die <b>exklusive digitale Edition</b>, da die gedruckte Version restlos vergriffen ist.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW SECTION: PEACE OF MIND -->
-    <section class="peace-section">
-        <div class="container text-center">
-            <div class="peace-icon">
-                <i class="fas fa-coffee" style="font-size: 40px; color: var(--accent-cyan);"></i>
-            </div>
-            <h2 style="font-size: 4rem; margin-bottom: 20px;">Heute kaufen, für immer Ruhe.</h2>
-            <p style="font-size: 1.3rem; line-height: 1.8; color: var(--text-secondary); max-width: 800px; margin: 0 auto;">
-                Die meisten Websites sind wie Haustiere: Sie brauchen ständig Pflege, Updates und Aufmerksamkeit. <br>
-                <b>Unsere Systeme sind wie Schweizer Uhren: Sie laufen einfach.</b> <br><br>
-                Sie investieren heute einmal in das Setup. Danach kümmert sich die Technik autonom um sich selbst. Keine Wartungsverträge, keine nächtlichen Server-Abstürze, kein Stress. <br>
-                <span style="color: var(--accent-cyan); font-weight: 700;">Konzentrieren Sie sich auf Ihr Geschäft, wir kümmern uns um den Rest.</span>
-            </p>
-        </div>
-    </section>
-
-    <!-- VALUE STACK SECTION -->
-    <section class="stack-section" id="offer">
-        <div class="container">
-            <div class="stack-visual-wrapper">
-                <div class="floating-icon icon-1"><i class="fas fa-shield-alt"></i></div>
-                <div class="floating-icon icon-2"><i class="fas fa-bolt"></i></div>
-                <div class="floating-icon icon-3"><i class="fas fa-file-contract"></i></div>
-                <div class="floating-icon icon-4"><i class="fab fa-google"></i></div>
-
-                <div class="stack-laptop">
-                    <div class="laptop-mockup">
-                        <div class="laptop-screen">
-                            <img src="ex1.jpg" alt="[Laptop Website Vorschau]" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
-                </div>
-
-                <div class="stack-phone">
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="[Smartphone Vorschau]" loading="lazy">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-panel stack-box">
-                <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 20px;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
-                
-                <div class="stack-item">
-                    <div>
-                        <div class="stack-name"><i class="fas fa-layer-group"></i> Maßgeschneidertes "Smart-Architektur" Design</div>
-                        <div class="stack-desc">Kein Template. 100% mobil-optimiert.</div>
-                    </div>
-                    <div class="stack-value">3.500 €</div>
-                </div>
-
-                <div class="stack-item">
-                    <div>
-                        <div class="stack-name"><i class="fas fa-pen-nib"></i> Verkaufspsychologische Texte</div>
-                        <div class="stack-desc">Worte, die Besucher in zahlende Kunden verwandeln.</div>
-                    </div>
-                    <div class="stack-value">1.000 €</div>
-                </div>
-
-                <div class="stack-item">
-                    <div>
-                        <div class="stack-name"><i class="fas fa-shield-alt"></i> Hochsicherheits-Paket</div>
-                        <div class="stack-desc">Sicherheit auf Universitäts-Niveau. SSL & Firewall.</div>
-                    </div>
-                    <div class="stack-value">500 €</div>
-                </div>
-
-                <div class="stack-item">
-                    <div>
-                        <div class="stack-name"><i class="fas fa-sync-alt"></i> Das "Atomare Updates" Protokoll</div>
-                        <div class="stack-desc">99,9% Ausfallsicherheit. Nie wieder peinliche Fehlerseiten.</div>
-                    </div>
-                    <div class="stack-value">400 €</div>
-                </div>
-
-                 <div class="stack-item">
-                    <div>
-                        <div class="stack-name"><i class="fas fa-file-contract"></i> Rechtstexte & DSGVO-Schutz</div>
-                        <div class="stack-desc">Abmahnsicheres Impressum & Datenschutz.</div>
-                    </div>
-                    <div class="stack-value">300 €</div>
-                </div>
-
-                <div class="stack-item">
-                    <div>
-                        <div class="stack-name"><i class="fas fa-universal-access"></i> Barrierefreie Optimierung (BFSG)</div>
-                        <div class="stack-desc">Schutz vor Abmahnungen durch neues Gesetz ab 2025.</div>
-                    </div>
-                    <div class="stack-value">2.500 €</div>
-                </div>
-
-                <div class="stack-item" style="background: rgba(255, 23, 68, 0.05);">
-                    <div>
-                        <div class="stack-name" style="color: var(--danger-red);"><i class="fas fa-gift"></i> BONUS: Buch "Dominanz auf Google"</div>
-                        <div class="stack-desc">Exklusive E-Book Edition. Playbook für Platz 1.</div>
-                    </div>
-                    <div class="stack-value">97 €</div>
-                </div>
-
-                <div class="total-value-row">
-                    <div class="total-value-label">GESAMTWERT PAKET:</div>
-                    <span class="total-value-amount">8.297 €</span>
-                </div>
-
-                <div class="real-price">
-                    Ihr Preis heute: <span class="main-price">1499 € + 49 € / mtl.</span>
-                </div>
-
-                <div class="text-center" style="margin-top: 30px;">
+                <!-- NEUER CTA BUTTON -->
+                <div class="text-center" style="margin-top: 60px;">
                     <a href="https://smart-landingpage.pages.dev" class="btn-cta">
-                        JETZT DEAL ABSCHLIESSEN
-                        <span class="btn-subtext">Angebot zum Sonderpreis von 1499 € sichern • Unverbindliche Anfrage</span>
+                        JETZT ZUR SMART-WEBSITE WECHSELN
+                        <span class="btn-subtext">Schluss mit "Baukasten-Frust" • Starten Sie die Transformation</span>
                     </a>
                 </div>
 
-                <!-- GUARANTEE ADDITION -->
-                <div class="guarantee-box">
-                    <div class="guarantee-badge"><i class="fas fa-shield-check"></i> Risikofrei</div>
-                    <h3 style="color: var(--price-green); font-size: 1.5rem; margin-bottom: 10px; font-family: 'Oswald', sans-serif; text-transform: uppercase;">
-                        Unsere "Kein-Kopfzerbrechen"-Garantie
-                    </h3>
-                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.6;">
-                        Wir wissen, dass es viele schwarze Schafe in der Branche gibt. Deshalb gilt bei uns eine einfache Regel:<br>
-                        <b style="color: #fff;">Sie sehen den vollständigen Entwurf, bevor wir final live gehen.</b><br>
-                        Wenn es Ihnen nicht gefällt, wird es angepasst, bis es perfekt ist. Sie kaufen nicht die Katze im Sack.
-                    </p>
-                </div>
-
             </div>
+        </section>
 
-            <div class="scarcity-box">
-                <i class="fas fa-exclamation-triangle"></i> 
-                <span>ACHTUNG: Da wir jeden Code persönlich prüfen, nehme ich maximal 3 Neukunden pro Monat an.</span>
-            </div>
+        <!-- SHOWCASE SECTION (PORTFOLIO) -->
+        <section class="showcase-section">
+            <div class="container">
+                <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 20px;">Übersichtlichkeit, die verkauft</h2>
+                <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary); margin-bottom: 50px;">
+                    Unsere Design-Philosophie: Wichtige Informationen gehören nach ganz oben. Keine unnötigen Klicks – der Kunde findet sofort, was er sucht.
+                </p>
 
-        </div>
-    </section>
+                <div class="showcase-grid">
+                    <div class="laptop-wrapper">
+                        <div class="laptop-mockup">
+                            <div class="laptop-screen">
+                                <img src="ex1.jpg" alt="[Website Beispiel A]" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="laptop-base"></div>
+                        <div class="showcase-caption">
+                            <h4>Beispiel A: KFZ-Meisterbetrieb</h4>
+                            <p>Integrierte Terminbuchung spart täglich 2 Stunden Telefonzeit.</p>
+                        </div>
+                    </div>
 
-    <!-- NEW: TRANSPARENCY SECTION -->
-    <section class="transparency-section" style="padding: 100px 0; background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(255,255,255,0.02) 50%, var(--bg-dark) 100%); border-top: 1px solid var(--glass-border);">
-        <div class="container">
-            <div class="glass-panel" style="max-width: 900px; margin: 0 auto;">
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <i class="fas fa-hand-holding-heart" style="font-size: 3rem; color: var(--accent-pink); margin-bottom: 20px;"></i>
-                    <h2 style="font-size: 3rem; margin-bottom: 20px;">Warum sind wir so günstig?</h2>
-                </div>
-                
-                <div style="font-size: 1.2rem; line-height: 1.8; color: var(--text-secondary); text-align: center;">
-                    <p style="margin-bottom: 20px;">
-                        Weil wir gerade am Anfang mit dem Unternehmen stehen und aus Erfahrung mit vielen erfolgreichen Firmen wissen, wie wichtig ein exzellenter Ruf ist. 
-                        <strong style="color: var(--text-primary);">Mit diesem Angebotspreis wollen wir uns erstmal einen Namen machen.</strong>
-                    </p>
-                    
-                    <div style="margin-top: 40px; background: rgba(16, 185, 129, 0.05); border: 1px solid var(--glass-border); padding: 30px; border-radius: 15px; text-align: left;">
-                        <p style="margin-bottom: 10px; font-weight: 700; color: var(--accent-cyan);"><i class="fas fa-comment-alt"></i> Offenes Wort:</p>
-                        <p style="font-style: italic; color: var(--text-primary);">
-                            "Falls Sie sich wundern: Bisher haben wir uns bewusst gegen eine eigene Website entschieden, damit Kunden nicht denken 'Aha, so wird dann meine Website aussehen'. Wir entwickeln für jeden Kunden ein Unikat, das dessen Identität widerspiegelt, nicht unsere."
-                        </p>
+                    <div class="laptop-wrapper">
+                        <div class="laptop-mockup">
+                            <div class="laptop-screen">
+                                <img src="ex2.jpg" alt="[Website Beispiel B]" onerror="this.src='https://images.unsplash.com/photo-1481487484168-9b930d55208d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="laptop-base"></div>
+                        <div class="showcase-caption">
+                            <h4>Beispiel B: Interne Plattform</h4>
+                            <p>Echtzeit-Dashboard für Mitarbeiter zur Verkaufsübersicht.</p>
+                        </div>
+                    </div>
+
+                    <div class="laptop-wrapper">
+                        <div class="laptop-mockup">
+                            <div class="laptop-screen">
+                                <img src="ex3.jpg" alt="[Website Beispiel C]" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="laptop-base"></div>
+                        <div class="showcase-caption">
+                            <h4>Beispiel C: Moderne Arztpraxis</h4>
+                            <p>Sprechzeiten und Notdienst direkt sichtbar ohne Klicks.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- STATUS SECTION -->
+        <section class="status-section">
+            <div class="container">
+                <h2 class="text-center" style="font-size: 4rem; margin-bottom: 20px;">Ihr digitales Aushängeschild: <br><span class="text-highlight">Zeigen Sie der Welt, dass Sie Champions-League spielen</span></h2>
+                <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
+                    Status ist keine Eitelkeit – Status ist Währung. Ihre Website ist oft der erste (und einzige) Eindruck, den ein potenzieller Premium-Kunde von Ihnen bekommt.
+                </p>
+
+                <div class="status-grid">
+                    <div class="glass-panel status-item">
+                        <h3><i class="fas fa-crown"></i> Der "Marktführer"-Effekt</h3>
+                        <p>Während Ihre Konkurrenz noch wie "Kleinbetrieb 2010" aussieht, präsentieren Sie sich optisch als das modernste Unternehmen Ihrer Branche. Wahrnehmung ist Realität.</p>
+                    </div>
+                    
+                    <div class="glass-panel status-item">
+                        <h3><i class="fas fa-magnet"></i> Sogwirkung für A-Kunden</h3>
+                        <p>Kunden mit Geld wollen bei Gewinnern kaufen. Ein High-End-Design signalisiert unterbewusst sofort: "Hier gibt es Qualität, und die hat ihren Preis."</p>
+                    </div>
+
+                    <div class="glass-panel status-item">
+                        <h3><i class="fas fa-mobile-alt"></i> Stolz statt Scham</h3>
+                        <p>Schämen Sie sich manchmal, Ihre aktuelle URL weiterzugeben? Ab jetzt zücken Sie Ihr Smartphone mit Stolz, um Partnern und Freunden Ihr Unternehmen zu präsentieren.</p>
+                    </div>
+                </div>
+
+                <!-- NEUER CTA BUTTON -->
+                <div class="text-center" style="margin-top: 60px;">
+                    <a href="https://smart-landingpage.pages.dev" class="btn-cta">
+                        JETZT STATUS UPGRADEN
+                        <span class="btn-subtext">Unverbindliche Anfrage • Bringen Sie Ihr Image auf Level 10</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AUTHORITY SECTION -->
+        <section class="authority-section">
+            <div class="container">
+                <h2 class="text-center" style="font-size: 3.5rem; text-align: center; margin-bottom: 60px;">Ihre Partner für digitale Dominanz: <br>Cansin Gülal & David Leipi</h2>
+                
+                <!-- Zeile 1: Cansin Gülal -->
+                <div class="authority-row">
+                    <div class="authority-img">
+                        <img src="cansin.jpeg" alt="[Cansin Gülal]" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
+                    </div>
+                    <div class="authority-content-frame">
+                        <div class="profile-frame">
+                            <h3>Cansin Gülal</h3>
+                            <p>Durch sein Studium zur Lehrkraft bringt <b>Cansin Gülal</b> eine entscheidende Komponente ein: Die Fähigkeit, komplexe Informationen perfekt aufzubereiten und zu präsentieren. Auf einer Website zählt nicht nur der Code, sondern wie die Botschaft beim Kunden ankommt.</p>
+                            <p style="margin-top: 15px;">Cansins pädagogisches Wissen in der Wissensvermittlung sorgt dafür, dass Ihre Besucher innerhalb von Sekunden verstehen, warum Ihr Angebot die beste Lösung ist. Er verwandelt abstrakte Vorteile in klare, überzeugende Verkaufsargumente.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zeile 2: David Leipi -->
+                <div class="authority-row">
+                    <div class="authority-img">
+                        <img src="dl.jpg" alt="[David Leipi]" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
+                    </div>
+                    <div class="authority-content-frame">
+                        <div class="profile-frame">
+                            <h3>David Leipi</h3>
+                            <p>Ich programmiere nicht erst seit gestern. Ich habe mit 10 Jahren angefangen, Code zu schreiben. Während andere "Webdesigner" bunte Baukästen zusammenklicken, habe ich die Infrastruktur einer Universität mit <b>5.000 Besuchern täglich</b> verwaltet.</p>
+                            
+                            <p style="margin-top: 15px;">Schon mit 15 Jahren war ich nach einer <b>strengen juristischen Prüfung voll geschäftsfähig</b>. Während Gleichaltrige Taschengeld bekamen, führte ich offiziell eigene Unternehmen in den Bereichen:</p>
+                            <ul style="margin-left: 20px; margin-top: 10px;">
+                                <li>🔧 <b>Handy-Reparaturen</b> (Technisches Verständnis)</li>
+                                <li>👕 <b>T-Shirt Design & E-Commerce</b> (Design & Vertrieb)</li>
+                                <li>⛏️ <b>Krypto-Mining</b> (High-Tech Hardware Infrastruktur)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <b style="color: var(--accent-indigo)">Warum ist das wichtig für Sie?</b><br>
+                    Weil wir technische Perfektion mit einer pädagogisch klaren Präsentation verbinden, die Ihre Kunden emotional abholt und zum Kauf führt.
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES DETAIL SECTION -->
+        <section class="features-detail-section">
+            <div class="container">
+                <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 80px;">Blick in den Maschinenraum:</h2>
+
+                <div class="glass-panel feature-card">
+                    <h3 class="feature-title-large">1. "Smart-Architektur" Design</h3>
+                    <div class="feature-value-large">WERT: 3.500 €</div>
+                    <div class="feature-img-container">
+                        <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Smart Architektur Design]" loading="lazy">
+                    </div>
+                    <div class="feature-description">
+                        <p>Wir bauen Ihnen eine digitale Architektur, die genau auf Ihre Kunden zugeschnitten ist. Das Design ist <b>"Mobile-First"</b> – es sieht auf dem Smartphone (wo 80% Ihrer Kunden sind) perfekt aus.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel feature-card">
+                    <h3 class="feature-title-large">2. Verkaufspsychologie</h3>
+                    <div class="feature-value-large">WERT: 1.000 €</div>
+                    <div class="feature-img-container">
+                        <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Verkaufspsychologie]" loading="lazy">
+                    </div>
+                    <div class="feature-description">
+                        <p>Hübsche Bilder verkaufen nicht. <b>Worte verkaufen.</b> Wir schreiben Texte, die die tiefsten Bedürfnisse Ihrer Kunden ansprechen und Einwände vorwegnehmen.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel feature-card">
+                    <h3 class="feature-title-large">3. Hochsicherheits-Paket</h3>
+                    <div class="feature-value-large">WERT: 500 €</div>
+                    <div class="feature-img-container">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Cybersecurity Paket]" loading="lazy">
+                    </div>
+                    <div class="feature-description">
+                        <p>Ihre Website wird mit Firewalls, SSL-Verschlüsselung und Anti-Bot-Systemen ausgestattet, die sonst nur große Konzerne nutzen.</p>
+                    </div>
+                </div>
+
+                <!-- Feature Card 4 -->
+                <div class="glass-panel feature-card">
+                    <h3 class="feature-title-large">4. "Atomare Updates" Protokoll</h3>
+                    <div class="feature-value-large">WERT: 400 €</div>
+                    <div class="feature-img-container">
+                        <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Server Updates]" loading="lazy">
+                    </div>
+                    <div class="feature-description">
+                        <p>Kennen Sie das: "Seite wird gewartet"? Das gibt es bei uns nicht. Wir nutzen atomare Deployments. Das bedeutet: Neue Versionen gehen erst live, wenn sie zu 100% geladen sind. Es gibt <b>keine Sekunde Ausfallzeit</b>.</p>
+                    </div>
+                </div>
+
+                <!-- Feature Card 5 -->
+                <div class="glass-panel feature-card">
+                    <h3 class="feature-title-large">5. Rechtstexte & DSGVO-Schutz</h3>
+                    <div class="feature-value-large">WERT: 300 €</div>
+                    <div class="feature-img-container">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Rechtstexte Vertrag]" loading="lazy">
+                    </div>
+                    <div class="feature-description">
+                        <p>Deutschland ist das Land der Abmahnungen. Wir integrieren für Sie **technische Lösungen etablierter Drittanbieter**, die Ihre Rechtstexte und Cookie-Banner automatisiert bereitstellen.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel feature-card">
+                    <h3 class="feature-title-large">6. Barrierefreie Optimierung (BFSG)</h3>
+                    <div style="font-size: 1.2rem; color: var(--danger-red); font-weight: 800; margin-bottom: 10px; text-transform: uppercase;">⚠️ ACHTUNG: Abmahngefahr ab Juni 2025!</div>
+                    <div class="feature-value-large">WERT: 2.500 €</div>
+                    <div class="feature-img-container">
+                        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Barrierefreie Optimierung]" loading="lazy">
+                    </div>
+                    <div class="feature-description">
+                        <p>Ab Juni 2025 müssen Websites barrierefrei sein. Wer das ignoriert, riskiert hohe Bußgelder. Wir machen Sie rechtssicher.</p>
+                        <p style="margin-top: 15px; font-size: 0.9rem;">
+                            <a href="https://www.aktion-mensch.de/inklusion/barrierefreiheit/barrierefreie-website/kosten-barrierefreie-website" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">
+                                <i class="fas fa-external-link-alt"></i> Kostenschätzung laut Aktion Mensch ansehen
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature Card 7 (Bonus) -->
+                <div class="glass-panel feature-card">
+                    <h3 class="feature-title-large">BONUS: Buch "Dominanz auf Google"</h3>
+                    <div class="feature-value-large">WERT: 97 €</div>
+                    <div class="feature-img-container">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Ebook Bonus]" loading="lazy">
+                    </div>
+                    <div class="feature-description">
+                        <p>Mein persönliches Playbook. Wie ich Universitäts-Websites auf Platz 1 gebracht habe. Sie erhalten die <b>exklusive digitale Edition</b>, da die gedruckte Version restlos vergriffen ist.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: PEACE OF MIND -->
+        <section class="peace-section">
+            <div class="container text-center">
+                <div class="peace-icon">
+                    <i class="fas fa-coffee" style="font-size: 40px; color: var(--accent-cyan);"></i>
+                </div>
+                <h2 style="font-size: 4rem; margin-bottom: 20px;">Heute kaufen, für immer Ruhe.</h2>
+                <p style="font-size: 1.3rem; line-height: 1.8; color: var(--text-secondary); max-width: 800px; margin: 0 auto;">
+                    Die meisten Websites sind wie Haustiere: Sie brauchen ständig Pflege, Updates und Aufmerksamkeit. <br>
+                    <b>Unsere Systeme sind wie Schweizer Uhren: Sie laufen einfach.</b> <br><br>
+                    Sie investieren heute einmal in das Setup. Danach kümmert sich die Technik autonom um sich selbst. Keine Wartungsverträge, keine nächtlichen Server-Abstürze, kein Stress. <br>
+                    <span style="color: var(--accent-cyan); font-weight: 700;">Konzentrieren Sie sich auf Ihr Geschäft, wir kümmern uns um den Rest.</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- VALUE STACK SECTION -->
+        <section class="stack-section" id="offer">
+            <div class="container">
+                <div class="stack-visual-wrapper">
+                    <div class="floating-icon icon-1"><i class="fas fa-shield-alt"></i></div>
+                    <div class="floating-icon icon-2"><i class="fas fa-bolt"></i></div>
+                    <div class="floating-icon icon-3"><i class="fas fa-file-contract"></i></div>
+                    <div class="floating-icon icon-4"><i class="fab fa-google"></i></div>
+
+                    <div class="stack-laptop">
+                        <div class="laptop-mockup">
+                            <div class="laptop-screen">
+                                <img src="ex1.jpg" alt="[Laptop Website Vorschau]" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="laptop-base"></div>
+                    </div>
+
+                    <div class="stack-phone">
+                        <div class="phone-mockup">
+                            <div class="phone-screen">
+                                <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="[Smartphone Vorschau]" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel stack-box">
+                    <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 20px;">Zusammenfassung: Ihr "Digital Dominance" Paket</h2>
+                    
+                    <div class="stack-item">
+                        <div>
+                            <div class="stack-name"><i class="fas fa-layer-group"></i> Maßgeschneidertes "Smart-Architektur" Design</div>
+                            <div class="stack-desc">Kein Template. 100% mobil-optimiert.</div>
+                        </div>
+                        <div class="stack-value">3.500 €</div>
+                    </div>
+
+                    <div class="stack-item">
+                        <div>
+                            <div class="stack-name"><i class="fas fa-pen-nib"></i> Verkaufspsychologische Texte</div>
+                            <div class="stack-desc">Worte, die Besucher in zahlende Kunden verwandeln.</div>
+                        </div>
+                        <div class="stack-value">1.000 €</div>
+                    </div>
+
+                    <div class="stack-item">
+                        <div>
+                            <div class="stack-name"><i class="fas fa-shield-alt"></i> Hochsicherheits-Paket</div>
+                            <div class="stack-desc">Sicherheit auf Universitäts-Niveau. SSL & Firewall.</div>
+                        </div>
+                        <div class="stack-value">500 €</div>
+                    </div>
+
+                    <div class="stack-item">
+                        <div>
+                            <div class="stack-name"><i class="fas fa-sync-alt"></i> Das "Atomare Updates" Protokoll</div>
+                            <div class="stack-desc">99,9% Ausfallsicherheit. Nie wieder peinliche Fehlerseiten.</div>
+                        </div>
+                        <div class="stack-value">400 €</div>
+                    </div>
+
+                    <div class="stack-item">
+                        <div>
+                            <div class="stack-name"><i class="fas fa-file-contract"></i> Rechtstexte & DSGVO-Schutz</div>
+                            <div class="stack-desc">Abmahnsicheres Impressum & Datenschutz.</div>
+                        </div>
+                        <div class="stack-value">300 €</div>
+                    </div>
+
+                    <div class="stack-item">
+                        <div>
+                            <div class="stack-name"><i class="fas fa-universal-access"></i> Barrierefreie Optimierung (BFSG)</div>
+                            <div class="stack-desc">Schutz vor Abmahnungen durch neues Gesetz ab 2025.</div>
+                        </div>
+                        <div class="stack-value">2.500 €</div>
+                    </div>
+
+                    <div class="stack-item" style="background: rgba(255, 23, 68, 0.05);">
+                        <div>
+                            <div class="stack-name" style="color: var(--danger-red);"><i class="fas fa-gift"></i> BONUS: Buch "Dominanz auf Google"</div>
+                            <div class="stack-desc">Exklusive E-Book Edition. Playbook für Platz 1.</div>
+                        </div>
+                        <div class="stack-value">97 €</div>
+                    </div>
+
+                    <div class="total-value-row">
+                        <div class="total-value-label">GESAMTWERT PAKET:</div>
+                        <span class="total-value-amount">8.297 €</span>
+                    </div>
+
+                    <div class="real-price">
+                        Ihr Preis heute: <span class="main-price">1499 € + 49 € / mtl.</span>
+                    </div>
+
+                    <div class="text-center" style="margin-top: 30px;">
+                        <a href="https://smart-landingpage.pages.dev" class="btn-cta">
+                            JETZT DEAL ABSCHLIESSEN
+                            <span class="btn-subtext">Angebot zum Sonderpreis von 1499 € sichern • Unverbindliche Anfrage</span>
+                        </a>
+                    </div>
+
+                    <!-- GUARANTEE ADDITION -->
+                    <div class="guarantee-box">
+                        <div class="guarantee-badge"><i class="fas fa-shield-check"></i> Risikofrei</div>
+                        <h3 style="color: var(--price-green); font-size: 1.5rem; margin-bottom: 10px; font-family: 'Oswald', sans-serif; text-transform: uppercase;">
+                            Unsere "Kein-Kopfzerbrechen"-Garantie
+                        </h3>
+                        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.6;">
+                            Wir wissen, dass es viele schwarze Schafe in der Branche gibt. Deshalb gilt bei uns eine einfache Regel:<br>
+                            <b style="color: #fff;">Sie sehen den vollständigen Entwurf, bevor wir final live gehen.</b><br>
+                            Wenn es Ihnen nicht gefällt, wird es angepasst, bis es perfekt ist. Sie kaufen nicht die Katze im Sack.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="scarcity-box">
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    <span>ACHTUNG: Da wir jeden Code persönlich prüfen, nehme ich maximal 3 Neukunden pro Monat an.</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- NEW: TRANSPARENCY SECTION -->
+        <section class="transparency-section" style="padding: 100px 0; background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(255,255,255,0.02) 50%, var(--bg-dark) 100%); border-top: 1px solid var(--glass-border);">
+            <div class="container">
+                <div class="glass-panel" style="max-width: 900px; margin: 0 auto;">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <i class="fas fa-hand-holding-heart" style="font-size: 3rem; color: var(--accent-pink); margin-bottom: 20px;"></i>
+                        <h2 style="font-size: 3rem; margin-bottom: 20px;">Warum sind wir so günstig?</h2>
+                    </div>
+                    
+                    <div style="font-size: 1.2rem; line-height: 1.8; color: var(--text-secondary); text-align: center;">
+                        <p style="margin-bottom: 20px;">
+                            Weil wir gerade am Anfang mit dem Unternehmen stehen und aus Erfahrung mit vielen erfolgreichen Firmen wissen, wie wichtig ein exzellenter Ruf ist. 
+                            <strong style="color: var(--text-primary);">Mit diesem Angebotspreis wollen wir uns erstmal einen Namen machen.</strong>
+                        </p>
+                        
+                        <div style="margin-top: 40px; background: rgba(16, 185, 129, 0.05); border: 1px solid var(--glass-border); padding: 30px; border-radius: 15px; text-align: left;">
+                            <p style="margin-bottom: 10px; font-weight: 700; color: var(--accent-cyan);"><i class="fas fa-comment-alt"></i> Offenes Wort:</p>
+                            <p style="font-style: italic; color: var(--text-primary);">
+                                "Falls Sie sich wundern: Bisher haben wir uns bewusst gegen eine eigene Website entschieden, damit Kunden nicht denken 'Aha, so wird dann meine Website aussehen'. Wir entwickeln für jeden Kunden ein Unikat, das dessen Identität widerspiegelt, nicht unsere."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main> <!-- END CONTENT WRAPPER -->
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -983,7 +997,7 @@
                     gestureDirection: 'vertical',
                     smooth: true,
                     mouseMultiplier: 1,
-                    smoothTouch: false,
+                    smoothTouch: false, // Wichtig für native iOS smooth scroll
                     touchMultiplier: 2,
                 });
 
@@ -993,6 +1007,52 @@
                 }
 
                 requestAnimationFrame(raf);
+
+                // --- RUBBER BANDING LOGIC ---
+                let rubberY = 0;
+                let rubberVelocity = 0;
+                const wrapper = document.getElementById('content-wrapper');
+                
+                // Wir nutzen das Wheel-Event, um zu erkennen, wenn der Nutzer über die Grenzen scrollen will
+                window.addEventListener('wheel', (e) => {
+                    const isTop = lenis.scroll <= 0; // Ganz oben
+                    const isBottom = lenis.scroll >= lenis.limit - 1; // Ganz unten (Buffer 1px)
+
+                    // Nur Bouncen, wenn wir wirklich am Ende sind
+                    if (isTop && e.deltaY < 0) {
+                        // Nutzer zieht nach unten am Top-Rand
+                        rubberVelocity -= e.deltaY * 0.03; // Faktor für Stärke
+                    } else if (isBottom && e.deltaY > 0) {
+                        // Nutzer zieht nach oben am Bottom-Rand
+                        rubberVelocity -= e.deltaY * 0.03;
+                    }
+                });
+
+                // Physics Loop in den RAF integrieren
+                function rubberLoop() {
+                    // Physik: Geschwindigkeit auf Position addieren
+                    rubberY += rubberVelocity;
+                    
+                    // Reibung (Damping) - bremst die Bewegung
+                    rubberVelocity *= 0.8; 
+                    
+                    // Rückstellkraft (Spring) - zieht zurück zur 0
+                    rubberY *= 0.8; 
+                    
+                    // Minimal-Werte ignorieren für Performance (Ruhezustand)
+                    if (Math.abs(rubberY) > 0.1) {
+                        wrapper.style.transform = `translate3d(0, ${-rubberY}px, 0)`;
+                    } else if (rubberY !== 0 && Math.abs(rubberY) <= 0.1) {
+                        rubberY = 0;
+                        wrapper.style.transform = '';
+                    }
+                    
+                    requestAnimationFrame(rubberLoop);
+                }
+                
+                // Start Loop
+                rubberLoop();
+
 
                 // Integrate with anchor links
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
