@@ -56,6 +56,36 @@
         }
         /* ------------------------------- */
 
+        /* --- SCROLL DRIVEN ANIMATIONS (NEU) --- */
+        @keyframes fade-out-scroll {
+            0% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+                filter: blur(0px); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translateY(-40px) scale(0.95); 
+                filter: blur(4px); 
+            }
+        }
+
+        .scroll-fade-out {
+            /* Fallback für Browser, die animation-timeline noch nicht unterstützen */
+            opacity: 1;
+        }
+
+        @supports (animation-timeline: view()) {
+            .scroll-fade-out {
+                animation: fade-out-scroll linear both;
+                animation-timeline: view();
+                /* Startet, wenn das Element den oberen Rand berührt (exit 0%) 
+                   und ist fertig, wenn 50% des Elements draußen sind (exit 50%) */
+                animation-range: exit 0% exit 50%;
+            }
+        }
+        /* ------------------------------- */
+
         html {
             background-color: var(--bg-dark); 
             scroll-behavior: auto; 
@@ -405,7 +435,7 @@
 
         <!-- HERO SECTION -->
         <section class="hero">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <div class="pre-headline">Was würden sie mit doppelt so vielen Kunden tun?</div>
                 
                 <h1>Wie Sie Ihre Firmen-Website in eine <span class="text-highlight">"Smart-Website"</span> verwandeln, die <span class="red-underline">automatisch Kunden gewinnt</span></h1>
@@ -447,7 +477,7 @@
 
         <!-- NEW LOGO SECTION -->
         <section class="logo-section">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <!-- New Intro Text -->
                 <p class="text-center" style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem; letter-spacing: 0.5px; font-weight: 400; max-width: 800px; margin-left: auto; margin-right: auto;">
                     Wir entwickeln und sichern unsere Websites mit den selben High-Performance Tools ab wie:
@@ -519,7 +549,7 @@
 
         <!-- PROBLEM SECTION -->
         <section class="problem-section">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 10px;">Hand aufs Herz: Erkennen Sie sich wieder?</h2>
                 <p class="text-center" style="color: var(--text-secondary);">Die meisten deutschen Unternehmen haben eines dieser 3 Probleme:</p>
                 
@@ -545,7 +575,7 @@
 
         <!-- EPIPHANY SECTION (COMPARISON) -->
         <section class="epiphany-section">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <h2 class="text-center" style="font-size: 3.5rem;">Warum klassische Websites ausgedient haben</h2>
                 <p class="text-center" style="max-width: 700px; margin: 0 auto; color: var(--text-secondary);">Das Internet hat sich verändert. Wer heute noch auf "Baukasten-Lösungen" setzt, verliert den Anschluss.</p>
 
@@ -583,7 +613,7 @@
 
         <!-- SHOWCASE SECTION (PORTFOLIO) -->
         <section class="showcase-section">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 20px;">Übersichtlichkeit, die verkauft</h2>
                 <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary); margin-bottom: 50px;">
                     Unsere Design-Philosophie: Wichtige Informationen gehören nach ganz oben. Keine unnötigen Klicks – der Kunde findet sofort, was er sucht.
@@ -634,7 +664,7 @@
 
         <!-- STATUS SECTION -->
         <section class="status-section">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <h2 class="text-center" style="font-size: 4rem; margin-bottom: 20px;">Ihr digitales Aushängeschild: <br><span class="text-highlight">Zeigen Sie der Welt, dass Sie Champions-League spielen</span></h2>
                 <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
                     Status ist keine Eitelkeit – Status ist Währung. Ihre Website ist oft der erste (und einzige) Eindruck, den ein potenzieller Premium-Kunde von Ihnen bekommt.
@@ -670,7 +700,7 @@
 
         <!-- AUTHORITY SECTION -->
         <section class="authority-section">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <h2 class="text-center" style="font-size: 3.5rem; text-align: center; margin-bottom: 60px;">Ihre Partner für digitale Dominanz: <br>Cansin Gülal & David Leipi</h2>
                 
                 <!-- Zeile 1: Cansin Gülal -->
@@ -716,7 +746,7 @@
 
         <!-- FEATURES DETAIL SECTION -->
         <section class="features-detail-section">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 80px;">Blick in den Maschinenraum:</h2>
 
                 <div class="glass-panel feature-card">
@@ -809,7 +839,7 @@
 
         <!-- NEW SECTION: PEACE OF MIND -->
         <section class="peace-section">
-            <div class="container text-center">
+            <div class="container text-center scroll-fade-out"> <!-- Added class -->
                 <div class="peace-icon">
                     <i class="fas fa-coffee" style="font-size: 40px; color: var(--accent-cyan);"></i>
                 </div>
@@ -825,7 +855,7 @@
 
         <!-- VALUE STACK SECTION -->
         <section class="stack-section" id="offer">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <div class="stack-visual-wrapper">
                     <div class="floating-icon icon-1"><i class="fas fa-shield-alt"></i></div>
                     <div class="floating-icon icon-2"><i class="fas fa-bolt"></i></div>
@@ -950,7 +980,7 @@
 
         <!-- NEW: TRANSPARENCY SECTION -->
         <section class="transparency-section" style="padding: 100px 0; background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(255,255,255,0.02) 50%, var(--bg-dark) 100%); border-top: 1px solid var(--glass-border);">
-            <div class="container">
+            <div class="container scroll-fade-out"> <!-- Added class -->
                 <div class="glass-panel" style="max-width: 900px; margin: 0 auto;">
                     <div style="text-align: center; margin-bottom: 30px;">
                         <i class="fas fa-hand-holding-heart" style="font-size: 3rem; color: var(--accent-pink); margin-bottom: 20px;"></i>
